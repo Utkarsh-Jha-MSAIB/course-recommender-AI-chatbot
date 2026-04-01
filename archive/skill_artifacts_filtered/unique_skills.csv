@@ -1,0 +1,1575 @@
+skill,count
+Generative AI,849
+Prompt Engineering,545
+Responsible AI,540
+Artificial Intelligence,503
+AI Enablement,360
+Data Ethics,301
+ChatGPT,268
+LLM Application,258
+Large Language Modeling,250
+AI Workflows,211
+Model Evaluation,190
+Machine Learning,177
+Automation,168
+AI Personalization,160
+AI Security,153
+Model Deployment,145
+Natural Language Processing,145
+Generative AI Agents,137
+AI Product Strategy,119
+Content Creation,119
+Data-Driven Decision-Making,114
+Data Analysis,106
+Ethical Standards And Conduct,104
+Retrieval-Augmented Generation,94
+Deep Learning,92
+Applied Machine Learning,91
+Business Ethics,91
+Microsoft Copilot,90
+Innovation,86
+Google Cloud Platform,84
+Python Programming,83
+Data Preprocessing,82
+OpenAI API,80
+Embeddings,78
+OpenAI,77
+Image Analysis,76
+Debugging,75
+Application Programming Interface (API),74
+MLOps (Machine Learning Operations),74
+Information Privacy,73
+Scalability,73
+Agentic systems,70
+Application Development,70
+Performance Tuning,69
+Google Gemini,66
+Workflow Management,65
+Artificial Neural Networks,60
+Governance,58
+Transfer Learning,58
+Business Process Automation,55
+AI Orchestration,54
+Development Environment,54
+Predictive Modeling,53
+Analytics,52
+Communication,52
+Decision Making,52
+Customer Insights,51
+Generative Model Architectures,51
+Cloud Deployment,50
+Multimodal Prompts,50
+Productivity Software,49
+Risk Management,49
+Application Deployment,47
+Computer Vision,47
+Customer Engagement,47
+Data Processing,47
+Data Security,47
+Compliance Management,46
+Customer experience improvement,46
+Analysis,45
+Data Pipelines,45
+Data Visualization,45
+LangChain,45
+Marketing Analytics,45
+Risk Analysis,45
+Creativity,44
+Operational Efficiency,43
+Predictive Analytics,43
+Target Audience,43
+Case Studies,42
+Data Governance,42
+Generative Adversarial Networks (GANs),42
+Performance Analysis,41
+User Interface (UI),41
+Convolutional Neural Networks,40
+Data Quality,40
+Real Time Data,40
+Business Transformation,39
+Data Science,39
+Leadership,39
+Tool Calling,39
+Code Review,38
+Forecasting,38
+Gemini,38
+Storytelling,38
+Vector Databases,38
+Data Integration,37
+Emerging Technologies,37
+Marketing Strategies,37
+Data Transformation,36
+Marketing,36
+Tensorflow,36
+Business Strategy,35
+Critical Thinking,35
+Data Manipulation,35
+Hugging Face,35
+SQL,35
+Data Management,34
+Digital Transformation,34
+Integrated Development Environments,34
+Presentations,34
+Text Mining,34
+Data Storytelling,33
+Email Automation,33
+Microsoft 365,33
+Microsoft Azure,33
+No-Code Development,33
+PyTorch (Machine Learning Library),33
+Strategic Decision-Making,33
+System Monitoring,33
+Agentic Workflows,32
+Customer Service,32
+Data Cleansing,32
+Software Development,32
+Software Development Tools,32
+Content Strategy,31
+Dashboard,31
+Strategic Thinking,31
+Business Leadership,30
+Cybersecurity,30
+Exploratory Data Analysis,30
+Sales Strategy,30
+Social Media Content,30
+Data Validation,29
+Data Visualization Software,29
+Machine Learning Methods,29
+Sales,29
+Software Documentation,29
+Web Applications,29
+Brainstorming,28
+Context Management,28
+Continuous Monitoring,28
+Feature Engineering,28
+Marketing Automation,28
+Organizational Leadership,28
+Project Management,28
+Technical Communication,28
+Unsupervised Learning,28
+Law,27
+Productivity,27
+Prompt Patterns,27
+Regulation,27
+and Compliance,27
+Content Marketing,26
+Employee Engagement,26
+Ideation,26
+Key Performance Indicators (KPIs),26
+Market Research,26
+Microsoft Excel,26
+Social Media Marketing,26
+Strategic Leadership,26
+Technology Strategies,26
+Algorithms,25
+Business Intelligence,25
+Cloud Computing,25
+Digital Marketing,25
+Performance Measurement,25
+Personalized Service,25
+Recurrent Neural Networks (RNNs),25
+Reinforcement Learning,25
+Supervised Learning,25
+Anthropic Claude,24
+Big Data,24
+Branding,24
+Customer Analysis,24
+Data Presentation,24
+Databases,24
+Document Management,24
+Healthcare Ethics,24
+Legal Technology,24
+Market Analysis,24
+Performance Metric,24
+Regulatory Compliance,24
+Sales Process,24
+Search Engine Optimization,24
+Social Impact,24
+Stakeholder Communications,24
+Team Management,24
+CI/CD,23
+Editing,23
+Health Informatics,23
+Problem Solving,23
+Product Management,23
+Risk Mitigation,23
+Unstructured Data,23
+Classification Algorithms,22
+Communication Strategies,22
+Excel Formulas,22
+Interactive Data Visualization,22
+Leadership and Management,22
+Maintainability,22
+Personally Identifiable Information,22
+Team Building,22
+Trend Analysis,22
+Writing,22
+Amazon Web Services,21
+Anomaly Detection,21
+Business Metrics,21
+Copywriting,21
+Data Import/Export,21
+Data Integrity,21
+Diversity and Inclusion,21
+Marketing Materials,21
+Process Optimization,21
+Query Languages,21
+Amazon Bedrock,20
+Autoencoders,20
+Business Analytics,20
+Change Management,20
+Customer Relationship Management,20
+Human Centered Design,20
+Jupyter,20
+Programming Principles,20
+Prompt Engineering Tools,20
+Social Media,20
+Accountability,19
+Business Analysis,19
+Collaborative Software,19
+Competitive Analysis,19
+Database Management,19
+Education Software and Technology,19
+Human Resource Strategy,19
+Image Quality,19
+Lead Generation,19
+Machine Learning Algorithms,19
+Organizational Change,19
+Prototyping,19
+Sales Enablement,19
+Threat Detection,19
+Threat Modeling,19
+User Feedback,19
+Workforce Development,19
+Agile Methodology,18
+Application Security,18
+Customer Relationship Management (CRM) Software,18
+Design Thinking,18
+HR Tech,18
+JSON,18
+Keras (Neural Network Library),18
+Performance Testing,18
+Regulation and Legal Compliance,18
+Restful API,18
+Risk Management Framework,18
+Sales Management,18
+Secure Coding,18
+Stakeholder Engagement,18
+Statistical Analysis,18
+API Design,17
+Constructive Feedback,17
+Cross-Functional Collaboration,17
+Database Design,17
+Design,17
+DevOps,17
+Emotional Intelligence,17
+File Management,17
+Financial Forecasting,17
+GitHub,17
+Goal Setting,17
+Graphic Design,17
+Human Resources,17
+Pandas (Python Package),17
+People Development,17
+Persona Development,17
+Professional Development,17
+Security Controls,17
+Social Media Campaigns,17
+Stakeholder Management,17
+Web Development,17
+Advanced Analytics,16
+Business Communication,16
+Business Writing,16
+Cloud Security,16
+Coaching,16
+Collaboration,16
+Computer Programming Tools,16
+Containerization,16
+Creative Design,16
+Employee Performance Management,16
+Health Technology,16
+Keyword Research,16
+Leadership Development,16
+Model Context Protocol,16
+Open Source Technology,16
+Product Lifecycle Management,16
+Program Development,16
+Recruitment,16
+Regulatory Requirements,16
+Social Media Strategy,16
+Team Leadership,16
+Verification And Validation,16
+Version Control,16
+Web Analytics and SEO,16
+Web Content,16
+Application Design,15
+Canva (Software),15
+Cloud API,15
+Continuous Improvement Process,15
+Data Synthesis,15
+Email Marketing,15
+Extract,15
+Financial Analysis,15
+Healthcare Industry Knowledge,15
+Kubernetes,15
+Legal Risk,15
+Load,15
+Organizational Strategy,15
+Regression Analysis,15
+Software Architecture,15
+Software Engineering,15
+Test Case,15
+Transform,15
+Unit Testing,15
+Adobe Firefly,14
+Back-End Web Development,14
+Blogs,14
+Brand Management,14
+Computer Programming,14
+Data Modeling,14
+General Data Protection Regulation (GDPR),14
+Graphic and Visual Design,14
+Marketing Design,14
+Marketing Effectiveness,14
+Microsoft Teams,14
+Network Security,14
+Performance Management,14
+Security Testing,14
+Self Service Technologies,14
+Spreadsheet Software,14
+Strategic Planning,14
+User Story,14
+Agile Product Development,13
+Calendar Management,13
+Cloud Applications,13
+Content Performance Analysis,13
+Continuous Deployment,13
+Creative Problem-Solving,13
+Creative Thinking,13
+Data Warehousing,13
+Docker (Software),13
+Google Sheets,13
+Google Workspace,13
+Human Computer Interaction,13
+Incident Response,13
+Intellectual Property,13
+Javascript,13
+New Product Development,13
+Organizational Skills,13
+Power BI,13
+Product Development,13
+Serverless Computing,13
+Strategic Communication,13
+Systems Integration,13
+User Experience Design,13
+User Interface (UI) Design,13
+User Interface and User Experience (UI/UX) Design,13
+Vulnerability Assessments,13
+AWS SageMaker,12
+Agile Project Management,12
+Analytical Skills,12
+Campaign Management,12
+Complex Problem Solving,12
+Consumer Behaviour,12
+Customer Communications Management,12
+Customer Support,12
+Data Strategy,12
+Digital pedagogy,12
+Financial Data,12
+Front-End Web Development,12
+Metadata Management,12
+Microsoft Office,12
+Microsoft PowerPoint,12
+Multimedia,12
+Performance Improvement,12
+Project Planning,12
+Self-Awareness,12
+Software Installation,12
+Talent Acquisition,12
+Time Series Analysis and Forecasting,12
+User Research,12
+Adaptability,11
+Advertising,11
+Auditing,11
+Benchmarking,11
+Brand Awareness,11
+Brand Strategy,11
+Business Risk Management,11
+Business Solutions,11
+Cloud Computing Architecture,11
+Configuration Management,11
+Culture Transformation,11
+Customer Data Management,11
+Customer experience strategy (CX),11
+Data Architecture,11
+Data Collection,11
+Data Structures,11
+Employee Coaching,11
+Gap Analysis,11
+Interviewing Skills,11
+Microsoft Power Platform,11
+Microsoft Visual Studio,11
+Microsoft Word,11
+Mitigation,11
+Object Oriented Programming (OOP),11
+Product Roadmaps,11
+Product Strategy,11
+Project Management Software,11
+Relational Databases,11
+Return On Investment,11
+Talent Management,11
+Team Performance Management,11
+Test Automation,11
+Video Editing,11
+Video Production,11
+Workforce Planning,11
+Writing and Editing,11
+A/B Testing,10
+Adobe Photoshop,10
+Apache Spark,10
+Application Performance Management,10
+Business Reporting,10
+Business Workflow Analysis,10
+Cloud Infrastructure,10
+Cloud Management,10
+Color Theory,10
+Command-Line Interface,10
+Cultural Diversity,10
+Customer Retention,10
+Design Elements And Principles,10
+Digital Content,10
+Digital Design,10
+Dimensionality Reduction,10
+Drive Engagement,10
+Employee Retention,10
+Figma (Design Software),10
+Fraud detection,10
+Health Care Procedure and Regulation,10
+Identity and Access Management,10
+Java,10
+Jira (Software),10
+Legal Strategy,10
+Matplotlib,10
+Microservices,10
+Personal Development,10
+Process Design,10
+Risking,10
+Sales Pipelines,10
+Scikit Learn (Machine Learning Library),10
+Scripting,10
+Semantic Web,10
+Software Design,10
+Software Design Patterns,10
+Solution Design,10
+Team Motivation,10
+Technical Documentation,10
+UI Components,10
+Verbal Communication Skills,10
+Vision Transformer (ViT),10
+Workforce Management,10
+Advertising Campaigns,9
+Augmented and Virtual Reality (AR/VR),9
+Backlogs,9
+Continuous Integration,9
+Cyber Threat Intelligence,9
+Data Literacy,9
+Data Storage,9
+Distributed Computing,9
+Empathy,9
+Employee Training,9
+HTML and CSS,9
+Meeting Facilitation,9
+Microsoft Windows,9
+Negotiation,9
+Photo Editing,9
+Prioritization,9
+Probability & Statistics,9
+Process Improvement,9
+Quality Assurance,9
+Sales Prospecting,9
+Scheduling,9
+Security Awareness,9
+Smart Goals,9
+Statistical Methods,9
+Technical Management,9
+Technology Roadmaps,9
+Visual Design,9
+Web Development Tools,9
+Account Management,8
+Adobe Creative Cloud,8
+Adobe Express,8
+Authentications,8
+Clinical Informatics,8
+Cloud Storage,8
+Conflict Management,8
+Cost Benefit Analysis,8
+Crisis Management,8
+Database Architecture and Administration,8
+Decision Support Systems,8
+Digital Media Strategy,8
+Encryption,8
+File I/O,8
+Finance,8
+Game Design,8
+Git (Version Control System),8
+Governance Risk Management and Compliance,8
+IBM Cloud,8
+Influencing,8
+Interactive Design,8
+LangGraph,8
+Market Intelligence,8
+Market Trend,8
+Medical Privacy,8
+Portfolio Management,8
+Product Improvement,8
+Project Implementation,8
+Project Risk Management,8
+Public Relations,8
+Report Writing,8
+Responsive Web Design,8
+Role-Based Access Control (RBAC),8
+Sales Presentation,8
+Sprint Planning,8
+Sprint Retrospectives,8
+Strategic Marketing,8
+System Configuration,8
+Time Management,8
+Usability Testing,8
+User Accounts,8
+Visualization (Computer Graphics),8
+digital literacy,8
+API Testing,7
+Active Listening,7
+Animations,7
+Business,7
+Business Consulting,7
+Business Correspondence,7
+Business Research,7
+Client Services,7
+Cognitive flexibility,7
+Content Development and Management,7
+Content Management,7
+CrewAI,7
+Cyber Security Strategy,7
+Database Systems,7
+Decision Tree Learning,7
+Diversity Awareness,7
+Enterprise Architecture,7
+Excel Macros,7
+Financial Management,7
+Financial Reporting,7
+Financial Services,7
+Full-Stack Web Development,7
+General Networking,7
+Hardware Architecture,7
+Health Care,7
+Healthcare Project Management,7
+HubSpot CRM,7
+Infographics,7
+Information Management,7
+Infrastructure as Code (IaC),7
+Instagram,7
+Legal Research,7
+LinkedIn,7
+Make.com,7
+MarTech,7
+Marketing Communications,7
+Microsoft Outlook,7
+Network Architecture,7
+NoSQL,7
+Node.JS,7
+NumPy,7
+Operating Systems,7
+Performance Review,7
+Product Knowledge,7
+Product Planning,7
+Project Documentation,7
+Recruitment Strategies,7
+Research,7
+Root Cause Analysis,7
+Sales Training,7
+Salesforce,7
+Scrum (Software Development),7
+Search Engine Marketing,7
+Social Justice,7
+Software Development Life Cycle,7
+Solution Architecture,7
+Stakeholder Analysis,7
+Technical Support,7
+Test Script Development,7
+Timelines,7
+Training Programs,7
+User Centered Design,7
+Vibe coding,7
+Wireframing,7
+Application Frameworks,6
+Business Planning,6
+Business Process,6
+Cascading Style Sheets (CSS),6
+Clinical Documentation,6
+Cloud Services,6
+Competitive Intelligence,6
+Compliance Training,6
+Computer Security Awareness Training,6
+Cost Management,6
+Customer Relationship Building,6
+Cyber Attacks,6
+Cyber Security Assessment,6
+Data Maintenance,6
+Data Storage Technologies,6
+Data Store,6
+Data Wrangling,6
+Dependency Analysis,6
+DevSecOps,6
+Digital Advertising,6
+Disaster Recovery,6
+E-Commerce,6
+Employee Onboarding,6
+Flask (Web Framework),6
+Hybrid Cloud Computing,6
+Information Architecture,6
+Java Programming,6
+Language Interpretation,6
+Logistic Regression,6
+MITRE ATT&CK Framework,6
+Market Data,6
+Marketing Management,6
+Marketing Planning,6
+Marketing Strategy and Techniques,6
+Mentorship,6
+Microsoft Power Automate/Flow,6
+Microsoft SQL Servers,6
+Mobile Development,6
+Non-Verbal Communication,6
+Organizational Effectiveness,6
+Patient Communication,6
+Penetration Testing,6
+Performance Reporting,6
+Persuasive Communication,6
+Policy Development,6
+Process Analysis,6
+Project Management Life Cycle,6
+Proofreading,6
+Relationship Building,6
+Release Management,6
+Requirements Analysis,6
+Robotic Process Automation,6
+Sales Presentations,6
+Security Management,6
+Security Strategy,6
+Selling Techniques,6
+Social Media Management,6
+Social Studies,6
+Software Development Methodologies,6
+Software Technical Review,6
+Software Testing,6
+Stored Procedure,6
+Storyboarding,6
+Systems Architecture,6
+Taking Meeting Minutes,6
+Talent Recruitment,6
+Technical Consulting,6
+Test Planning,6
+Thought Leadership,6
+Translation,6
+Vulnerability Scanning,6
+Web Analytics,6
+Web Content Accessibility Guidelines,6
+Workplace inclusivity,6
+and Studies,6
+Accounting,5
+Amazon CloudWatch,5
+B2B Sales,5
+Budgeting,5
+Business Logic,5
+Business Priorities,5
+Business Strategies,5
+Cloud Development,5
+Cloud Platforms,5
+Cloud Solutions,5
+Company,5
+Compensation Management,5
+Computational Thinking,5
+Computer Hardware,5
+Corporate Communications,5
+Cost Reduction,5
+Critical Thinking and Problem Solving,5
+Cyber Security Policies,5
+Data Access,5
+Data Analysis Expressions (DAX),5
+Data Loss Prevention,5
+Data Mining,5
+Data Persistence,5
+Database Application,5
+Discussion Facilitation,5
+Economics,5
+Empathy & Emotional Intelligence,5
+Employee Surveys,5
+Empowerment,5
+Engineering Management,5
+Enterprise Application Management,5
+Enterprise Security,5
+Entrepreneurship,5
+Estimation,5
+Event Monitoring,5
+Financial Modeling,5
+Growth Strategies,5
+Human Machine Interfaces,5
+Human Resource Policies,5
+Industrial and Organizational Psychology,5
+Information Technology,5
+Infrastructure Security,5
+Initiative and Leadership,5
+Instructional Design,5
+Integration Testing,5
+Interoperability,5
+Interpersonal Communications,5
+Learning Strategies,5
+Management Training And Development,5
+Market Opportunities,5
+Marketing and Public Relations,5
+Medical Imaging,5
+NOT TAGGED,5
+Needs Assessment,5
+Network Protocols,5
+Object Oriented Design,5
+Patient Flow,5
+People Management,5
+Pivot Tables And Charts,5
+Product,5
+Product Marketing,5
+Product Support,5
+Professional Networking,5
+Proposal Development,5
+Proposal Writing,5
+PySpark,5
+Quality Assessment,5
+Resilience,5
+Resource Management,5
+Robotics,5
+Rust (Programming Language),5
+Sales Development,5
+Salesforce Development,5
+Scenario Testing,5
+Security Information and Event Management (SIEM),5
+Star Schema,5
+Statistical Hypothesis Testing,5
+Style Guides,5
+Sustainable Business,5
+System Design and Implementation,5
+Systems Thinking,5
+Teamwork,5
+Technical Writing,5
+Test Data,5
+Threat Management,5
+TypeScript,5
+Typography,5
+UI/UX Research,5
+Value Propositions,5
+Virtual Machines,5
+Virtual Teams,5
+Web Design and Development,5
+Web Scraping,5
+Web Servers,5
+and Service Knowledge,5
+Administrative Support,4
+Agile Software Development,4
+Apache Airflow,4
+Apache Hadoop,4
+Applicant Tracking Systems,4
+Application Lifecycle Management,4
+Azure DevOps,4
+Brand Loyalty,4
+Budget Management,4
+Business Management,4
+Business Marketing,4
+Business Process Management,4
+Business Process Modeling,4
+Business Technologies,4
+C# (Programming Language),4
+Compensation Strategy,4
+Compliance Auditing,4
+Consulting,4
+Continuous Delivery,4
+Contract Management,4
+Corporate Strategy,4
+Corporate Sustainability,4
+Correlation Analysis,4
+Customer Acquisition Management,4
+Cyber Threat Hunting,4
+Data Infrastructure,4
+Data Lakes,4
+Database Development,4
+Delegation Skills,4
+Design Research,4
+Design Strategies,4
+Development Testing,4
+Devops Tools,4
+Diversity Equity and Inclusion Initiatives,4
+Due Diligence,4
+Engineering Software,4
+Environmental Issue,4
+Expense Management,4
+Exploitation techniques,4
+File Systems,4
+FinTech,4
+Financial Planning,4
+Firewall,4
+Frontend Integration,4
+Gmail,4
+Google Ads,4
+Google Docs,4
+Graphic and Visual Design Software,4
+Human Factors,4
+Human Resources Management and Planning,4
+IBM DB2,4
+Information Assurance,4
+Informed Consent,4
+Infrastructure Architecture,4
+Internal Communications,4
+Investment Management,4
+Issue Tracking,4
+Kanban Principles,4
+Key Management,4
+Layout Design,4
+Leadership Studies,4
+Lean Methodologies,4
+Learning Management Systems,4
+Legal Writing,4
+Logo Design,4
+Malware Protection,4
+Management Reporting,4
+Media Production,4
+Media Relations,4
+Microsoft Development Tools,4
+Middleware,4
+Milestones (Project Management),4
+Miro AI,4
+Mockups,4
+Model View Controller,4
+MongoDB,4
+MySQL,4
+Network Infrastructure,4
+Online Advertising,4
+Open Web Application Security Project (OWASP),4
+Organizational Development,4
+Organizational Structure,4
+Peer Review,4
+People Analytics,4
+Photography,4
+Planning,4
+PostgreSQL,4
+Process Improvement and Optimization,4
+Process Mapping,4
+Product Design,4
+Product Requirements,4
+Project Coordination,4
+Project Design,4
+Project Schedules,4
+Promotional Strategies,4
+React.js,4
+Risk Modeling,4
+Safety and Security,4
+Sampling (Statistics),4
+Setting Appointments,4
+Snowflake Schema,4
+Social Sciences,4
+Social Skills,4
+Socioeconomics,4
+System Support,4
+Team Oriented,4
+Technology Solutions,4
+Test Driven Development (TDD),4
+Training and Development,4
+Usability,4
+Virtual Environment,4
+Visionary,4
+.NET Framework,3
+AWS Identity and Access Management (IAM),3
+Accounting and Finance Software,3
+Adobe Illustrator,3
+Apache Kafka,3
+Art History,3
+Asset Management,3
+Authorization (Computing),3
+Blockchain,3
+Business Continuity,3
+Business Development,3
+Business Modeling,3
+Business Operations,3
+Business Process Improvement,3
+Business Requirements,3
+Business-To-Consumer,3
+C++ (Programming Language),3
+Capacity Management,3
+Claude Code,3
+Climate Change Mitigation,3
+Closing (Sales),3
+Cloud-Native Computing,3
+Communication Planning,3
+Compliance Reporting,3
+Computer Architecture,3
+Computer Graphics,3
+Computer Security Incident Management,3
+Computing Platforms,3
+Concision,3
+Cost Estimation,3
+Cross-Channel Marketing,3
+Cryptography,3
+Cultural Sensitivity,3
+Culture,3
+Cyber Governance,3
+Data Analysis Software,3
+Data Capture,3
+Data Centers,3
+Data Entry,3
+Data Mart,3
+Design Software,3
+Developing Training Materials,3
+Digital Assets,3
+Digital Forensics,3
+Education and Training,3
+Endpoint Detection and Response,3
+Enterprise Risk Management (ERM),3
+Environmental Social And Corporate Governance (ESG),3
+Expectation Management,3
+Experimentation,3
+Financial Regulation,3
+Financial Trading,3
+General Sales Practices,3
+Go To Market Strategy,3
+Google Analytics,3
+Graph Theory,3
+Graphics Software,3
+Health Equity,3
+Health Information Management,3
+Health Insurance Portability And Accountability Act (HIPAA) Compliance,3
+Healthcare 5.0,3
+Human Factors (Security),3
+Human Resources Software,3
+IT Automation,3
+Incident Management,3
+Infrastructure As A Service (IaaS),3
+Inside Sales,3
+Internet Of Things,3
+Intrusion Detection and Prevention,3
+Job Analysis,3
+Lifelong Learning,3
+Load Balancing,3
+Mac OS,3
+Management Consulting,3
+Market Dynamics,3
+Marketing Operations,3
+Media and Communications,3
+Music,3
+Network Monitoring,3
+Network Planning And Design,3
+Network Troubleshooting,3
+New Business Development,3
+Operations Management,3
+Oracle Cloud,3
+Oral Expression,3
+Paid media,3
+Patient-centered Care,3
+Pay Per Click Advertising,3
+Performance Appraisal,3
+Plot (Graphics),3
+Policy Analysis,3
+Portfolio Risk,3
+Postman API Platform,3
+Process Development,3
+Procurement,3
+Product Demonstration,3
+Product Testing,3
+Professionalism,3
+Program Evaluation,3
+Program Implementation,3
+Project Controls,3
+Project Estimation,3
+Project Scoping,3
+Prospecting and Qualification,3
+Public Cloud,3
+Public Health,3
+Quality Assurance and Control,3
+Quality Control,3
+R Programming,3
+Random Forest Algorithm,3
+Regional Sales,3
+Resource Allocation,3
+Resource Utilization,3
+Sales Operations,3
+Scatter Plots,3
+Servers,3
+Site Reliability Engineering,3
+Software As A Service,3
+Software Quality (SQA/SQC),3
+Software Quality Assurance,3
+Solution Selling,3
+Spring Boot,3
+Statistical Modeling,3
+Statistics,3
+Succession Planning,3
+Supply Chain Management,3
+Sustainable Development,3
+System Implementation,3
+TCP/IP,3
+Tactfulness,3
+Talent Pipelining,3
+Tax Compliance,3
+Tax Management,3
+Technical Design,3
+Telehealth,3
+Test Execution Engine,3
+Test Tools,3
+Transaction Processing,3
+Trustworthiness,3
+Unified Modeling Language,3
+User Experience,3
+User Flows,3
+Visual Basic (Programming Language),3
+Vulnerability Management,3
+Web Design,3
+3D Assets,2
+Acceptance Testing,2
+Account Strategy,2
+Accounts Payable and Receivable,2
+Adobe XD,2
+Aesthetics,2
+Amazon Elastic Compute Cloud,2
+Amazon S3,2
+Apache Hive,2
+Behavioral Economics,2
+Benefits Administration,2
+Brand Marketing,2
+Business Acumen,2
+Care Coordination,2
+Case Law,2
+Cash Flow Forecasting,2
+Cash Flows,2
+Classification And Regression Tree (CART),2
+Clinical Data Management,2
+Clinical Research Ethics,2
+Cloud-Based Integration,2
+Commercialization,2
+Compassion,2
+Compensation Analysis,2
+Compensation and Benefits,2
+Computational Logic,2
+Computer Literacy,2
+Computer Networking,2
+Computer Science,2
+Computer Systems,2
+Conceptual Design,2
+Consultative Selling,2
+Content Management Systems,2
+Contract Review,2
+Cooking,2
+Coordination,2
+Credit Risk,2
+Cross Selling,2
+Cross-Functional Team Leadership,2
+Customer Inquiries,2
+Customer Success Management,2
+Customer and Client Support,2
+Cyber Operations,2
+Cyber Risk,2
+Data Engineering,2
+Data Migration,2
+Database Management Systems,2
+Databricks,2
+De-escalation Techniques,2
+Deepseek,2
+Descriptive Analytics,2
+Design and Product,2
+Desktop Support,2
+Diagnostic Radiology,2
+Diagnostic Tests,2
+Digital Publishing,2
+Driving engagement,2
+Electronic Discovery,2
+Electronic Medical Record,2
+Email Security,2
+End User Training and Support,2
+Enterprise Resource Planning,2
+Environmental Monitoring,2
+Environmental Science,2
+Event-Driven Programming,2
+Expense Reports,2
+Experience Design,2
+Facebook,2
+Failure Analysis,2
+Federated Learning,2
+Financial Auditing,2
+Financial Controls,2
+Financial Market,2
+Financial Statements,2
+Game Theory,2
+Geospatial Information and Technology,2
+Grammar,2
+Growth Mindedness,2
+Hardening,2
+Hardware Troubleshooting,2
+Health Information Management and Medical Records,2
+Health Systems,2
+Help Desk Support,2
+Human Learning,2
+IBM Cognos Analytics,2
+ISO/IEC 27001,2
+Information Systems Security,2
+Information Systems Security Assessment Framework (ISSAF),2
+Information Technology Operations,2
+Interaction Design,2
+Intercultural Competence,2
+JavaScript Frameworks,2
+Jenkins,2
+Jest (JavaScript Testing Framework),2
+Job Evaluation,2
+Learning Theory,2
+Lending and Underwriting,2
+Linux,2
+Linux Administration,2
+Linux Commands,2
+Local Area Networks,2
+Logical Reasoning,2
+Marketing Channel,2
+Marketing Collateral,2
+Marketing Psychology,2
+Matlab,2
+Mediation,2
+Medical Coding,2
+Medical History Documentation,2
+Medical Records,2
+Multi-Cloud,2
+Multi-Factor Authentication,2
+Network Analysis,2
+Networking Hardware,2
+Open Mindset,2
+Operating System Administration,2
+Operational Analysis,2
+Operational Databases,2
+Operational Excellence,2
+Operational Risk,2
+Operations,2
+Oracle Cloud Applications,2
+Outbound Calls,2
+Overcoming Obstacles,2
+Patient Education and Support,2
+Payment Card Industry (PCI) Data Security Standards,2
+Payment Systems,2
+Performance marketing,2
+Peripheral Devices,2
+Persona (User Experience),2
+Photo/Video Production and Technology,2
+Plan Execution,2
+Platform As A Service (PaaS),2
+Plotly,2
+Podcasting,2
+Precision Medicine,2
+Press Releases,2
+Probability Distribution,2
+Problem Management,2
+Process Management,2
+Product Automation,2
+Program Management,2
+Project Closure,2
+Project Performance,2
+Promotions and Campaigns,2
+Pseudocode,2
+Public Affairs,2
+Public Speaking,2
+Quality Improvement,2
+Quality Management,2
+Quantitative Research,2
+Rapport Building,2
+Record Keeping,2
+Regression Testing,2
+Regulatory Affairs,2
+Requirements Elicitation,2
+Research Methodologies,2
+Revenue Forecasting,2
+Revenue Management,2
+Risk Control,2
+SAS (Software),2
+Sales Territory Management,2
+Scaled Agile Framework,2
+Seaborn,2
+Security Engineering,2
+Server Side,2
+Shell Script,2
+Shiny (R Package),2
+Slack (Software),2
+Social Determinants Of Health,2
+Software Configuration Management,2
+Software Design Documents,2
+Software Engineering Tools,2
+Software Versioning,2
+Software Visualization,2
+Spatial Data Analysis,2
+Sports Medicine,2
+Spring Framework,2
+Staff Management,2
+Standard Operating Procedure,2
+Statistical Inference,2
+Statistical Reporting,2
+Student Engagement,2
+Supervision,2
+Supply Chain,2
+Surveys,2
+Sustainability Reporting,2
+Sustainable Engineering,2
+Sustainable Technologies,2
+System Programming,2
+System Testing,2
+Systems Analysis,2
+Talent Sourcing,2
+Technical Analysis,2
+Technical Sales,2
+Technical Support and Services,2
+Telecommuting,2
+Telephone Skills,2
+Terraform,2
+Theoretical Computer Science,2
+Transact-SQL,2
+Travel Arrangements,2
+Treatment Planning,2
+Underwriting,2
+Unix,2
+Unix Shell,2
+Upselling,2
+Variance Analysis,2
+Vendor Management,2
+Virtual Networking,2
+Virtual Reality,2
+Wireless Networks,2
+3D Modeling,1
+API Gateway,1
+ASP.NET,1
+AWS CloudFormation,1
+Accounting Records,1
+Accounting Software,1
+Action Oriented,1
+Active Directory,1
+Acute Care,1
+Adobe Acrobat,1
+Advocacy,1
+Alteryx,1
+Android Jetpack,1
+Animation and Game Design,1
+Apache Cassandra,1
+Apache Maven,1
+Apple iOS,1
+Applied Mathematics,1
+Athletic Training,1
+Audit Planning,1
+Azure Active Directory,1
+Azure Synapse Analytics,1
+Balance Sheet,1
+Bash (Scripting Language),1
+Basic Patient Care,1
+Bayesian Network,1
+Bayesian Statistics,1
+Behavior-Driven Development,1
+Benefits Enrollment Processes,1
+Billing & Invoicing,1
+Bioinformatics,1
+Booking (Sales),1
+Bootstrap (Front-End Framework),1
+Box Plots,1
+Browser Compatibility,1
+Build Tools,1
+Business Administration,1
+Business Economics,1
+Business Intelligence Software,1
+Business Mathematics,1
+Business Software,1
+Business Valuation,1
+Capital Budgeting,1
+Case Management,1
+Cash Management,1
+Childhood Education and Development,1
+Civil Engineering,1
+Claims Processing,1
+Clinical Assessment,1
+Clinical Research,1
+Clinical Trials,1
+Cloud Engineering,1
+Cloud Hosting,1
+Code Coverage,1
+Cold Calling,1
+Commercial Lending,1
+Computer Security,1
+Consumer Lending,1
+Continuous Quality Improvement (CQI),1
+Contract Compliance,1
+Contract Negotiation,1
+Control Objectives for Information and Related Technology (COBIT),1
+Control Panels,1
+Corrective and Preventive Action (CAPA),1
+Courage,1
+Criminal Investigation and Forensics,1
+Cross Platform Development,1
+Cultural Responsiveness,1
+Curiosity,1
+Curriculum Development,1
+Customer Advocacy,1
+Customer Demand Planning,1
+Cycle Counting,1
+Data Compilation,1
+Data Encryption Standard,1
+Data Flow Diagramsâ€¯(DFDs),1
+Data Sharing,1
+Data-oriented programming,1
+Database Administration,1
+Dataflow,1
+Datamaps,1
+Dealing With Ambiguity,1
+Demand Generation,1
+Dental Care,1
+Dental Informatics,1
+Depreciation,1
+Descriptive Statistics,1
+Design Reviews,1
+Digital Communications,1
+Disciplinary Procedures,1
+Diversity Programs,1
+Diversity Training,1
+Django (Web Framework),1
+Document Control,1
+Dynamic Host Configuration Protocol (DHCP),1
+Electric Power Systems,1
+Electrical Engineering,1
+Electrical Substation,1
+Electronic Medical Record System,1
+Embedded Software,1
+Embedded Systems,1
+Emergency Response,1
+Endpoint Security,1
+Energy and Utilities,1
+Engineering,1
+Engineering Practices,1
+English Language,1
+Enterprise Sales,1
+Environment,1
+Environment Health And Safety,1
+Environmental Regulations,1
+Environmental Resource Management,1
+Exercise Science,1
+Feasibility Studies,1
+Financial Accounting,1
+Financial Acumen,1
+Financial Inclusion,1
+Financial Regulations,1
+Fiscal Management,1
+Flutter (Software),1
+Focus Group,1
+Frontend Performance,1
+Functional Design,1
+Functional Testing,1
+General Ledger,1
+Geographic Information Systems,1
+Geospatial Mapping,1
+Ggplot2,1
+GitLab,1
+Global Marketing,1
+Governmental Accounting,1
+Grafana,1
+Grant Writing,1
+Graphing,1
+Greeting Customers,1
+Health Administration,1
+Health Disparities,1
+Health Policy,1
+Hibernate (Java),1
+Higher Education,1
+Home Health Care,1
+Human Resources Information System (HRIS),1
+Hypertext Markup Language (HTML),1
+IT Infrastructure,1
+IT Management,1
+IT Service Management,1
+Income Statement,1
+Income Tax,1
+Information Technology Architecture,1
+Information Technology Infrastructure Library,1
+Injury Prevention,1
+Instructional Strategies,1
+Insurance,1
+Integrated Marketing Communications,1
+IntelliJ IDEA,1
+Interactive Learning,1
+Intranet,1
+Inventory Management System,1
+Investments,1
+Journalism,1
+Journals,1
+Labor Compliance,1
+Labor Law,1
+Labor Relations,1
+Language Competency,1
+Language Learning,1
+Learning Styles,1
+Ledgers (Accounting),1
+Linear Algebra,1
+Linux Servers,1
+Litigation Support,1
+Loan Documentation,1
+Loan Origination,1
+Logistics Management,1
+Looker (Software),1
+Loyalty Programs,1
+Management Accounting,1
+Manufacturing Operations,1
+Markov Model,1
+Mathematical Modeling,1
+Meal Planning And Preparation,1
+Mechanical Engineering,1
+Media Buying,1
+Media Planning,1
+Medical Billing and Coding,1
+Medical Devices,1
+Medical Equipment and Technology,1
+Medical Science and Research,1
+Medical Terminology,1
+Mental Concentration,1
+Mental Health,1
+Mental Health Counseling,1
+Mental Health Diseases and Disorders,1
+Microsoft Access,1
+Microsoft Project,1
+Mindfulness,1
+Mobile Banking,1
+Model Based Systems Engineering,1
+Month End Closing,1
+Motion Graphics,1
+Music History,1
+Music Performance,1
+Musical Composition,1
+NIST 800-53,1
+Network Administration,1
+Network Engineering,1
+Network Model,1
+Network Routing,1
+Neurology,1
+Nurse Education,1
+Nursing,1
+Nursing Care,1
+Nursing Practices,1
+Nursing Process,1
+OS Process Management,1
+OSI Models,1
+Object-Relational Mapping,1
+Oil and Gas,1
+Operating Cost,1
+Operating Expense,1
+Operational Performance Management,1
+Oral Comprehension,1
+Order Fulfillment,1
+Overcoming Objections,1
+PHP (Scripting Language),1
+Package and Software Management,1
+Packaging and Labeling,1
+Patch Management,1
+Patient Coordination,1
+Patient Safety,1
+Patient Treatment,1
+Payroll,1
+Payroll Processing,1
+Payroll Systems,1
+Personal Attributes,1
+Phone Sales,1
+Physiology,1
+Policy,1
+Power Apps Component Framework,1
+Power Electronics,1
+Practice Management,1
+Practice Management Software,1
+Price Negotiation,1
+Proactivity,1
+Process Flow Diagrams,1
+Process Validation,1
+Product Flow Diagram,1
+Product Quality (QA/QC),1
+Project Accounting,1
+Project Management Institute (PMI) Methodology,1
+Prometheus (Software),1
+Promotional Materials,1
+Psychiatry,1
+Psychology,1
+Public Administration,1
+Public Policies,1
+Qualitative Research,1
+Radiology,1
+React Native,1
+Recognizing Others,1
+Reconciliation,1
+Redis,1
+Registration,1
+Rehabilitation,1
+Reliability,1
+Remote Access Systems,1
+Research Design,1
+Research Reports,1
+Resource Planning,1
+Retail Banking,1
+Revenue Cycle Management,1
+Safety Assurance,1
+Sales Support,1
+Sample Size Determination,1
+Scientific Methods,1
+Scope Management,1
+Scripting Languages,1
+Securities (Finance),1
+Security Requirements Analysis,1
+Server Administration,1
+Service Design,1
+Service Improvement,1
+Service Level,1
+Service Level Agreement,1
+Service Management,1
+Service Recovery,1
+Simulation and Simulation Software,1
+Simulations,1
+Six Sigma Methodology,1
+Small Business Accounting,1
+Small Data,1
+Social Network Analysis,1
+Strategic Partnership,1
+Strategic Prioritization,1
+Strategic Sourcing,1
+Stress First Aid,1
+Stress Management,1
+Survey Creation,1
+Sustainability Standards,1
+Sustainable Design,1
+Sustainable Systems,1
+System Requirements,1
+System Software,1
+Systems Design,1
+Systems Development,1
+Systems Engineering,1
+Tableau Software,1
+Target Market,1
+Tax Planning,1
+Taxonomy,1
+Teaching,1
+Technical Product Management,1
+TikTok,1
+UI/UX Strategy,1
+USB,1
+Ubuntu,1
+Unix Commands,1
+User Acceptance Testing (UAT),1
+Video Game Development,1
+Virtualization,1
+Virtualization and Virtual Machines,1
+Waterfall Methodology,1
+Wealth Management,1
+Web Services,1
+Wide Area Networks,1
+Windows PowerShell,1
+Windows Servers,1
+WordPress,1
+Work Breakdown Structure,1
+Workplace Bullying Intervention,1
+and Social Studies,1
+iOS Development,1

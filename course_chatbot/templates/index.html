@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fordham AI Course Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="fordham-mark">
+                    <div class="mark-circle">F</div>
+                    <div>
+                        <div class="brand-eyebrow">Fordham University</div>
+                        <h1>AI Course Recommender</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-card muted-card">
+                <h3>How it works</h3>
+                <p>
+                    This assistant asks 5 quick questions about your background,
+                    interests, time availability, provider preference, and preferred
+                    level, then recommends courses that best fit your profile.
+                </p>
+            </div>
+        </aside>
+
+        <main class="main-stage">
+            <section class="hero-banner">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <span class="hero-tag">Fordham AI Assistant</span>
+                        <h2>Find the right courses for your goals</h2>
+                        <p>
+                            Get course recommendations tailored to your background,
+                            interests, and time commitment.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="chat-window">
+                <div class="chat-header">
+                    <div class="chat-title-wrap">
+                        <div class="chat-avatar">AI</div>
+                        <div>
+                            <h2>Course Assistant</h2>
+                        </div>
+                    </div>
+                    <button id="clear-button" class="secondary-button">Clear Chat</button>
+                </div>
+
+                <div id="chat-messages" class="chat-messages"></div>
+
+                <div id="typing-indicator" class="typing-indicator">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="input-container">
+                    <input
+                        type="text"
+                        id="user-input"
+                        placeholder="Start by saying hi or answer the current question..."
+                        autocomplete="off"
+                    />
+                    <button id="send-button" class="primary-button">Send</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        let currentSessionId = null;
+
+        function escapeHtml(text) {
+            const div = document.createElement("div");
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function extractOptionsMarker(content) {
+            const match = content.match(/\[\[OPTIONS:(.*?)\]\]/s);
+            if (!match) return null;
+            return match[1].split("||").map(x => x.trim()).filter(Boolean);
+        }
+
+        function stripOptionsMarker(content) {
+            return content.replace(/\n?\[\[OPTIONS:.*?\]\]/s, "").trim();
+        }
+
+        function buildMessageHtml(content) {
+            const cleaned = stripOptionsMarker(content);
+            const escaped = escapeHtml(cleaned);
+            return escaped.replace(/\n/g, "<br>");
+        }
+
+        function addMessage(content, isUser = false) {
+            const messagesDiv = document.getElementById("chat-messages");
+            const wrapper = document.createElement("div");
+            wrapper.className = `message-row ${isUser ? "user-row" : "bot-row"}`;
+
+            const block = document.createElement("div");
+            block.className = "message-block";
+
+            const bubble = document.createElement("div");
+            bubble.className = `message-bubble ${isUser ? "user-message" : "bot-message"}`;
+            bubble.innerHTML = buildMessageHtml(content);
+
+            block.appendChild(bubble);
+
+            if (!isUser) {
+                const options = extractOptionsMarker(content);
+                if (options && options.length) {
+                    const optionGroup = document.createElement("div");
+                    optionGroup.className = "option-group";
+
+                    options.forEach(optionText => {
+                        const btn = document.createElement("button");
+                        btn.className = "option-chip";
+                        btn.type = "button";
+                        btn.textContent = optionText;
+                        btn.onclick = () => {
+                            disableOptionGroup(optionGroup);
+                            sendMessage(optionText);
+                        };
+                        optionGroup.appendChild(btn);
+                    });
+
+                    block.appendChild(optionGroup);
+                }
+            }
+
+            wrapper.appendChild(block);
+            messagesDiv.appendChild(wrapper);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function disableOptionGroup(optionGroup) {
+            const buttons = optionGroup.querySelectorAll("button");
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                btn.classList.add("option-chip-disabled");
+            });
+        }
+
+        function showTyping(show = true) {
+            const indicator = document.getElementById("typing-indicator");
+            indicator.style.display = show ? "flex" : "none";
+        }
+
+        async function sendMessage(customMessage = null) {
+            const input = document.getElementById("user-input");
+            const message = (customMessage || input.value).trim();
+
+            if (!message) return;
+
+            addMessage(message, true);
+            input.value = "";
+            showTyping(true);
+
+            try {
+                const response = await fetch("/chat", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        session_id: currentSessionId
+                    })
+                });
+
+                const data = await response.json();
+                showTyping(false);
+
+                if (data.session_id) {
+                    currentSessionId = data.session_id;
+                }
+
+                if (data.response) {
+                    addMessage(data.response, false);
+                } else {
+                    addMessage("Sorry, something went wrong. Please try again.", false);
+                }
+            } catch (error) {
+                showTyping(false);
+                addMessage("Sorry, there was an error connecting to the chatbot.", false);
+                console.error(error);
+            }
+        }
+
+        async function clearChat() {
+            try {
+                await fetch("/clear_history", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        session_id: currentSessionId
+                    })
+                });
+
+                currentSessionId = null;
+                const messagesDiv = document.getElementById("chat-messages");
+                messagesDiv.innerHTML = "";
+                addWelcomeMessage();
+            } catch (error) {
+                console.error(error);
+                addMessage("Unable to clear chat right now.", false);
+            }
+        }
+
+        function addWelcomeMessage() {
+            addMessage(
+                "Hi! I’m your Fordham AI Course Recommendation Assistant.\n\nI’ll ask you 5 quick questions and then recommend courses that fit your goals.",
+                false
+            );
+        }
+
+        document.getElementById("send-button").addEventListener("click", () => sendMessage());
+
+        document.getElementById("user-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+
+        document.getElementById("clear-button").addEventListener("click", clearChat);
+
+        window.onload = function() {
+            addWelcomeMessage();
+        };
+    </script>
+</body>
+</html>

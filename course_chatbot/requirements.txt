@@ -1,0 +1,11 @@
+flask
+flask-cors
+python-dotenv
+google-generativeai
+faiss-cpu
+sentence-transformers
+torch
+transformers
+openpyxl
+pandas
+numpy
