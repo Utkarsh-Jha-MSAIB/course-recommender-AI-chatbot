@@ -16,12 +16,16 @@ from sentence_transformers import SentenceTransformer
 # =========================================================
 load_dotenv()
 
-INPUT_FILE = os.getenv("INPUT_FILE", "./data/courses.xlsx")
+INPUT_FILE = "./data/courses_with_images.xlsx"
 SHEET_NAME = os.getenv("SHEET_NAME", "Catalog_Python")
 OUTPUT_DIR = Path(os.getenv("OUTPUT_DIR", "course_artifacts"))
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "all-MiniLM-L6-v2")
 
 OUTPUT_DIR.mkdir(exist_ok=True)
+
+print(f"Using input file: {INPUT_FILE}")
+print(f"Using sheet name: {SHEET_NAME}")
+print(f"Using output dir: {OUTPUT_DIR}")
 
 # =========================================================
 # EXPECTED COLUMNS
@@ -49,6 +53,10 @@ EXPECTED_COLUMNS = [
     "Course ID",
     "Specialization Ids",
     "New Course",
+]
+
+OPTIONAL_COLUMNS = [
+    "Course Image URL",
 ]
 
 # =========================================================
@@ -174,7 +182,7 @@ def hierarchical_group_median_impute(
     return result.fillna(global_median)
 
 
-def build_course_text(row: pd.Series) -> str:  #Updated the final list
+def build_course_text(row: pd.Series) -> str:
     parts = [
         f"course name: {row['Course Name']}",
         f"partner: {row['University / Industry Partner Name']}",
@@ -201,6 +209,11 @@ if missing_cols:
 
 df = df.copy()
 
+# Ensure optional columns exist so downstream code stays stable
+for col in OPTIONAL_COLUMNS:
+    if col not in df.columns:
+        df[col] = ""
+
 # =========================================================
 # BASIC CLEANING
 # =========================================================
@@ -210,6 +223,7 @@ text_columns = [
     "Type of Content",
     "Difficulty Level",
     "Course URL",
+    "Course Image URL",
     "Course Description",
     "Skills Learned",
     "Scorable Skills",
@@ -243,6 +257,7 @@ df["Sub-Domain_Clean"] = df["Sub-Domain"].apply(clean_text_title)
 df["Course Language_Clean"] = df["Course Language"].apply(clean_text)
 df["Subtitle Language_Clean"] = df["Subtitle Language"].apply(clean_text)
 df["Course Description_Clean"] = df["Course Description"].apply(clean_text)
+df["Course Image URL_Clean"] = df["Course Image URL"].apply(clean_text)
 
 df["Avg Total Learning Hours_Clean"] = df["Avg Total Learning Hours"].apply(clean_numeric)
 df["Learning Hours_By_Instructor_Clean"] = df["Learning Hours-by instructor"].apply(clean_numeric)
@@ -260,7 +275,9 @@ grouping_hierarchy = [
     ["Domain_Clean"],
 ]
 
-df["Hours_Final"] = df["Avg Total Learning Hours_Clean"].fillna(df["Learning Hours_By_Instructor_Clean"])
+# Use only instructor hours for consistency
+df["Hours_Final"] = df["Learning Hours_By_Instructor_Clean"]
+
 df["Hours_Final"] = hierarchical_group_median_impute(
     df=df,
     target_col="Hours_Final",
@@ -312,6 +329,7 @@ print(f"Total rows after deduplication: {len(df)}")
 print(f"Hours_Final missing: {df['Hours_Final'].isna().sum()}")
 print(f"Course Rating_Clean missing: {df['Course Rating_Clean'].isna().sum()}")
 print(f"Enrollment_Count_Clean missing: {df['Enrollment_Count_Clean'].isna().sum()}")
+print(f"Course Image URL_Clean missing/blank: {(df['Course Image URL_Clean'] == '').sum()}")
 
 # =========================================================
 # GENERATE EMBEDDINGS
@@ -365,12 +383,15 @@ metadata_cols = [
     "Course Language_Clean",
     "Unified Skills Text",
     "Course URL",
+    "Course Image URL_Clean",
     "Course ID",
     "Specialization",
     "New Course Flag",
 ]
 
-metadata = df[metadata_cols].to_dict(orient="records")
+metadata = df[metadata_cols].rename(
+    columns={"Course Image URL_Clean": "Course Image URL"}
+).to_dict(orient="records")
 
 with open(metadata_path, "wb") as f:
     pickle.dump(metadata, f)

@@ -50,13 +50,22 @@ def chat():
     })
 
     try:
-        assistant_response = get_chatbot_response(message, chat_histories[session_id])
+        assistant_payload = get_chatbot_response(message, chat_histories[session_id])
+
+        if isinstance(assistant_payload, dict):
+            assistant_response = assistant_payload.get("text", "")
+            recommended_courses = assistant_payload.get("courses", [])
+        else:
+            assistant_response = str(assistant_payload)
+            recommended_courses = []
+
     except Exception as e:
         print(f"[CHAT ERROR] {e}")
         assistant_response = (
             "Sorry, something went wrong while generating recommendations. "
             "Please try again."
         )
+        recommended_courses = []
 
     chat_histories[session_id].append({
         "role": "assistant",
@@ -75,7 +84,8 @@ def chat():
 
     return jsonify({
         "session_id": session_id,
-        "response": assistant_response
+        "response": assistant_response,
+        "courses": recommended_courses
     })
 
 

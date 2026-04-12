@@ -203,6 +203,13 @@ class CourseRecommender:
 
         results = []
         for course in reranked[:top_k_final]:
+            unified_skills = (
+                course.get("Unified Skills List")
+                or course.get("Unified Skills Text")
+                or course.get("skills")
+                or ""
+            )
+
             results.append({
                 "course_name": course.get("Course Name", ""),
                 "partner": course.get("University / Industry Partner Name", ""),
@@ -215,9 +222,10 @@ class CourseRecommender:
                 "enrollment_count": course.get("Enrollment_Count_Clean", None),
                 "has_enrollment": int(course.get("Has_Enrollment", 0) or 0),
                 "enrollment_log1p": course.get("Enrollment_Count_Log1p", 0.0),
-                "skills": course.get("Unified Skills Text", ""),
+                "skills": unified_skills,
                 "specialization": course.get("Specialization", ""),
-                "url": course.get("Course URL", ""),
+                "url": course.get("Course URL", "") or "",
+                "image_url": course.get("Course Image URL", "") or course.get("image_url", "") or "",
                 "semantic_score": float(course.get("semantic_score", 0.0)),
                 "final_score": float(course.get("final_score", 0.0)),
             })

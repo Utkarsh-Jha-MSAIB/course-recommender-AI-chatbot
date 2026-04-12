@@ -19,13 +19,24 @@
                 </div>
             </div>
 
-            <div class="panel-card muted-card">
-                <h3>How it works</h3>
-                <p>
-                    This assistant asks 5 quick questions about your background,
-                    interests, time availability, provider preference, and preferred
-                    level, then recommends courses that best fit your profile.
-                </p>
+            <div class="panel-card reco-panel">
+                <div class="reco-panel-header">
+                    <div class="reco-panel-title-wrap">
+                        <h3>Recommended for You</h3>
+                        <span id="reco-count" class="reco-count">0</span>
+                    </div>
+
+                    <div class="reco-nav">
+                        <button id="reco-prev" class="reco-nav-btn" type="button" aria-label="Previous recommendation">&#8249;</button>
+                        <button id="reco-next" class="reco-nav-btn" type="button" aria-label="Next recommendation">&#8250;</button>
+                    </div>
+                </div>
+
+                <div id="recommendation-rail" class="recommendation-rail">
+                    <div class="empty-reco-state">
+                        Your recommendations will appear here after the questionnaire.
+                    </div>
+                </div>
             </div>
         </aside>
 
@@ -76,10 +87,13 @@
 
     <script>
         let currentSessionId = null;
+        let allRecommendations = [];
+        let recommendationPage = 0;
+        const RECO_PER_PAGE = 1;
 
         function escapeHtml(text) {
             const div = document.createElement("div");
-            div.textContent = text;
+            div.textContent = text ?? "";
             return div.innerHTML;
         }
 
@@ -89,18 +103,49 @@
             return match[1].split("||").map(x => x.trim()).filter(Boolean);
         }
 
-        function stripOptionsMarker(content) {
-            return content.replace(/\n?\[\[OPTIONS:.*?\]\]/s, "").trim();
+        function extractSkillDropdownMarker(content) {
+            const match = content.match(/\[\[SKILL_DROPDOWN:(.*?)\]\]/s);
+            if (!match) return null;
+            return match[1].split("||").map(x => x.trim()).filter(Boolean);
+        }
+
+        function hasAwaitCustomSkill(content) {
+            return /\[\[AWAIT_CUSTOM_SKILL\]\]/.test(content || "");
+        }
+
+        function stripMarkers(content) {
+            return (content || "")
+                .replace(/\n?\[\[OPTIONS:.*?\]\]/s, "")
+                .replace(/\n?\[\[SKILL_DROPDOWN:.*?\]\]/s, "")
+                .replace(/\n?\[\[AWAIT_CUSTOM_SKILL\]\]/g, "")
+                .replace(/\n?\[\[STATE:.*?\]\]/g, "")
+                .trim();
         }
 
         function buildMessageHtml(content) {
-            const cleaned = stripOptionsMarker(content);
+            const cleaned = stripMarkers(content);
             const escaped = escapeHtml(cleaned);
             return escaped.replace(/\n/g, "<br>");
         }
 
+        function setInputMode(mode = "default") {
+            const input = document.getElementById("user-input");
+            if (!input) return;
+
+            if (mode === "custom-skill") {
+                input.placeholder = "Type your custom skill focus here...";
+                input.dataset.mode = "custom-skill";
+                input.focus();
+            } else {
+                input.placeholder = "Start by saying hi or answer the current question...";
+                input.dataset.mode = "default";
+            }
+        }
+
         function addMessage(content, isUser = false) {
             const messagesDiv = document.getElementById("chat-messages");
+            if (!messagesDiv) return;
+
             const wrapper = document.createElement("div");
             wrapper.className = `message-row ${isUser ? "user-row" : "bot-row"}`;
 
@@ -114,24 +159,74 @@
             block.appendChild(bubble);
 
             if (!isUser) {
-                const options = extractOptionsMarker(content);
-                if (options && options.length) {
+                const skillOptions = extractSkillDropdownMarker(content);
+                const regularOptions = extractOptionsMarker(content);
+
+                if (skillOptions && skillOptions.length) {
+                    const skillWrap = document.createElement("div");
+                    skillWrap.className = "skill-picker-wrap";
+
+                    const row = document.createElement("div");
+                    row.className = "skill-picker-row";
+
+                    const select = document.createElement("select");
+                    select.className = "skill-select";
+
+                    const defaultOption = document.createElement("option");
+                    defaultOption.value = "";
+                    defaultOption.textContent = "Choose a focus area";
+                    defaultOption.selected = true;
+                    defaultOption.disabled = true;
+                    select.appendChild(defaultOption);
+
+                    skillOptions.forEach(optionText => {
+                        const opt = document.createElement("option");
+                        opt.value = optionText;
+                        opt.textContent = optionText;
+                        select.appendChild(opt);
+                    });
+
+                    const continueBtn = document.createElement("button");
+                    continueBtn.type = "button";
+                    continueBtn.className = "skill-select-button";
+                    continueBtn.textContent = "Continue";
+
+                    continueBtn.onclick = () => {
+                        const selected = select.value;
+                        if (!selected) return;
+                        select.disabled = true;
+                        continueBtn.disabled = true;
+                        continueBtn.classList.add("option-chip-disabled");
+                        sendMessage(selected);
+                    };
+
+                    row.appendChild(select);
+                    row.appendChild(continueBtn);
+                    skillWrap.appendChild(row);
+                    block.appendChild(skillWrap);
+                } else if (regularOptions && regularOptions.length) {
                     const optionGroup = document.createElement("div");
                     optionGroup.className = "option-group";
 
-                    options.forEach(optionText => {
+                    regularOptions.forEach(optionText => {
                         const btn = document.createElement("button");
                         btn.className = "option-chip";
                         btn.type = "button";
                         btn.textContent = optionText;
                         btn.onclick = () => {
-                            disableOptionGroup(optionGroup);
+                            disableOptionGroup(optionGroup, btn);
                             sendMessage(optionText);
                         };
                         optionGroup.appendChild(btn);
                     });
 
                     block.appendChild(optionGroup);
+                }
+
+                if (hasAwaitCustomSkill(content)) {
+                    setInputMode("custom-skill");
+                } else {
+                    setInputMode("default");
                 }
             }
 
@@ -140,27 +235,212 @@
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
 
-        function disableOptionGroup(optionGroup) {
+        function disableOptionGroup(optionGroup, selectedButton = null) {
             const buttons = optionGroup.querySelectorAll("button");
             buttons.forEach(btn => {
                 btn.disabled = true;
                 btn.classList.add("option-chip-disabled");
+                if (selectedButton && btn === selectedButton) {
+                    btn.classList.add("option-chip-selected");
+                }
             });
         }
 
         function showTyping(show = true) {
             const indicator = document.getElementById("typing-indicator");
+            if (!indicator) return;
             indicator.style.display = show ? "flex" : "none";
+        }
+
+        function createSkillPill(skill) {
+            const pill = document.createElement("span");
+            pill.className = "flash-skill-pill";
+            pill.textContent = skill;
+            return pill;
+        }
+
+        function formatOneDecimal(value) {
+            if (value === null || value === undefined || value === "") return "N/A";
+            const num = Number(value);
+            return Number.isFinite(num) ? `${num.toFixed(1)} hours` : String(value);
+        }
+
+        function formatScore(value) {
+            if (value === null || value === undefined || value === "") return "N/A";
+            const num = Number(value);
+            return Number.isFinite(num) ? num.toFixed(2) : String(value);
+        }
+
+        function renderRecommendationRail(courses = allRecommendations) {
+            const rail = document.getElementById("recommendation-rail");
+            const count = document.getElementById("reco-count");
+            const prevBtn = document.getElementById("reco-prev");
+            const nextBtn = document.getElementById("reco-next");
+
+            if (!rail || !count) return;
+
+            rail.innerHTML = "";
+
+            if (!courses || !Array.isArray(courses) || !courses.length) {
+                allRecommendations = [];
+                recommendationPage = 0;
+                count.textContent = "0";
+                rail.innerHTML = '<div class="empty-reco-state">Your recommendations will appear here after the questionnaire.</div>';
+                if (prevBtn) prevBtn.disabled = true;
+                if (nextBtn) nextBtn.disabled = true;
+                return;
+            }
+
+            allRecommendations = courses;
+
+            const totalPages = Math.ceil(courses.length / RECO_PER_PAGE);
+            if (recommendationPage >= totalPages) {
+                recommendationPage = 0;
+            }
+
+            count.textContent = String(recommendationPage + 1);
+
+            const start = recommendationPage * RECO_PER_PAGE;
+            const visibleCourses = courses.slice(start, start + RECO_PER_PAGE);
+
+            visibleCourses.forEach(course => {
+                const card = document.createElement("article");
+                card.className = "reco-flashcard";
+
+                const media = document.createElement("div");
+                media.className = "reco-flashcard-media";
+
+                if (course.image_url) {
+                    const img = document.createElement("img");
+                    img.className = "reco-flashcard-image";
+                    img.src = course.image_url;
+                    img.alt = "Course image";
+                    img.loading = "lazy";
+                    img.onerror = function () {
+                        media.classList.add("no-image");
+                        media.innerHTML = `
+                            <div class="image-fallback">
+                                <span>Fordham AI</span>
+                            </div>
+                        `;
+                    };
+                    media.appendChild(img);
+                } else {
+                    media.classList.add("no-image");
+                    media.innerHTML = `
+                        <div class="image-fallback">
+                            <span>Fordham AI</span>
+                        </div>
+                    `;
+                }
+
+                const content = document.createElement("div");
+                content.className = "reco-flashcard-content";
+
+                const metaGrid = document.createElement("div");
+                metaGrid.className = "reco-meta-grid";
+
+                const domainItem = document.createElement("div");
+                domainItem.className = "meta-chip";
+                domainItem.innerHTML = `<span class="meta-label">Domain</span><span class="meta-value">${escapeHtml(course.domain_partner || course.domain || "General")}</span>`;
+
+                const hoursItem = document.createElement("div");
+                hoursItem.className = "meta-chip";
+                hoursItem.innerHTML = `<span class="meta-label">Duration</span><span class="meta-value">${escapeHtml(formatOneDecimal(course.hours || course.hours_value || course.hours_rating))}</span>`;
+
+                metaGrid.appendChild(domainItem);
+                metaGrid.appendChild(hoursItem);
+
+                const skillsWrap = document.createElement("div");
+                skillsWrap.className = "reco-skills-wrap";
+
+                const skillsLabel = document.createElement("div");
+                skillsLabel.className = "reco-section-label";
+                skillsLabel.textContent = "Top Skills";
+
+                const skillsList = document.createElement("div");
+                skillsList.className = "reco-skills-list";
+
+                const skills = Array.isArray(course.skills) ? course.skills.slice(0, 3) : [];
+                if (skills.length) {
+                    skills.forEach(skill => skillsList.appendChild(createSkillPill(skill)));
+                } else {
+                    skillsList.appendChild(createSkillPill("General Learning"));
+                }
+
+                skillsWrap.appendChild(skillsLabel);
+                skillsWrap.appendChild(skillsList);
+
+                const scoreWrap = document.createElement("div");
+                scoreWrap.className = "score-wrap";
+
+                const scoreList = document.createElement("div");
+                scoreList.className = "score-list";
+
+                const semanticScore = document.createElement("div");
+                semanticScore.className = "score-pill";
+                semanticScore.textContent = `Match Score: ${formatScore(course.semantic_score)}`;
+
+                const finalScore = document.createElement("div");
+                finalScore.className = "score-pill";
+                finalScore.textContent = `Overall Fit: ${formatScore(course.final_score)}`;
+
+                scoreList.appendChild(semanticScore);
+                scoreList.appendChild(finalScore);
+                scoreWrap.appendChild(scoreList);
+
+                const footer = document.createElement("div");
+                footer.className = "reco-flashcard-footer";
+
+                if (course.url) {
+                    const link = document.createElement("a");
+                    link.className = "course-link-button";
+                    link.href = course.url;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    link.textContent = "View Course";
+                    footer.appendChild(link);
+                }
+
+                content.appendChild(metaGrid);
+                content.appendChild(skillsWrap);
+                content.appendChild(scoreWrap);
+                content.appendChild(footer);
+
+                card.appendChild(media);
+                card.appendChild(content);
+                rail.appendChild(card);
+            });
+
+            if (prevBtn) prevBtn.disabled = recommendationPage === 0;
+            if (nextBtn) nextBtn.disabled = recommendationPage >= totalPages - 1;
+        }
+
+        function goToPreviousRecommendations() {
+            if (recommendationPage > 0) {
+                recommendationPage -= 1;
+                renderRecommendationRail(allRecommendations);
+            }
+        }
+
+        function goToNextRecommendations() {
+            const totalPages = Math.ceil(allRecommendations.length / RECO_PER_PAGE);
+            if (recommendationPage < totalPages - 1) {
+                recommendationPage += 1;
+                renderRecommendationRail(allRecommendations);
+            }
         }
 
         async function sendMessage(customMessage = null) {
             const input = document.getElementById("user-input");
-            const message = (customMessage || input.value).trim();
+            if (!input) return;
 
+            const message = (customMessage || input.value).trim();
             if (!message) return;
 
             addMessage(message, true);
             input.value = "";
+            setInputMode("default");
             showTyping(true);
 
             try {
@@ -178,15 +458,19 @@
                 const data = await response.json();
                 showTyping(false);
 
-                if (data.session_id) {
-                    currentSessionId = data.session_id;
-                }
+                if (data.session_id) currentSessionId = data.session_id;
 
                 if (data.response) {
                     addMessage(data.response, false);
+                } else if (data.text) {
+                    addMessage(data.text, false);
                 } else {
                     addMessage("Sorry, something went wrong. Please try again.", false);
                 }
+
+                const returnedCourses = Array.isArray(data.courses) ? data.courses : [];
+                recommendationPage = 0;
+                renderRecommendationRail(returnedCourses);
             } catch (error) {
                 showTyping(false);
                 addMessage("Sorry, there was an error connecting to the chatbot.", false);
@@ -207,8 +491,14 @@
                 });
 
                 currentSessionId = null;
+
                 const messagesDiv = document.getElementById("chat-messages");
-                messagesDiv.innerHTML = "";
+                if (messagesDiv) messagesDiv.innerHTML = "";
+
+                allRecommendations = [];
+                recommendationPage = 0;
+                renderRecommendationRail([]);
+                setInputMode("default");
                 addWelcomeMessage();
             } catch (error) {
                 console.error(error);
@@ -218,24 +508,33 @@
 
         function addWelcomeMessage() {
             addMessage(
-                "Hi! I’m your Fordham AI Course Recommendation Assistant.\n\nI’ll ask you 5 quick questions and then recommend courses that fit your goals.",
+                "Hi! I’m your Fordham AI Course Recommendation Assistant.\n\nI’ll ask you a few quick questions and then recommend courses that fit your goals.",
                 false
             );
         }
 
-        document.getElementById("send-button").addEventListener("click", () => sendMessage());
+        document.addEventListener("DOMContentLoaded", function () {
+            const sendButton = document.getElementById("send-button");
+            const userInput = document.getElementById("user-input");
+            const clearButton = document.getElementById("clear-button");
+            const prevReco = document.getElementById("reco-prev");
+            const nextReco = document.getElementById("reco-next");
 
-        document.getElementById("user-input").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                sendMessage();
+            if (sendButton) sendButton.addEventListener("click", () => sendMessage());
+
+            if (userInput) {
+                userInput.addEventListener("keypress", function(event) {
+                    if (event.key === "Enter") sendMessage();
+                });
             }
-        });
 
-        document.getElementById("clear-button").addEventListener("click", clearChat);
+            if (clearButton) clearButton.addEventListener("click", clearChat);
+            if (prevReco) prevReco.addEventListener("click", goToPreviousRecommendations);
+            if (nextReco) nextReco.addEventListener("click", goToNextRecommendations);
 
-        window.onload = function() {
+            renderRecommendationRail([]);
             addWelcomeMessage();
-        };
+        });
     </script>
 </body>
 </html>
