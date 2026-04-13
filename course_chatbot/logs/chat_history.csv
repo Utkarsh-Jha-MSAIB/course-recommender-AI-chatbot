@@ -2365,3 +2365,1071 @@ What level are you looking for?
 - **AI Basics and Tools for Creativity**: A solid option because it touches on Artificial Intelligence, Creative Design, it’s about 4 hours, and it looks beginner. Tradeoff: It looks relevant, though learner feedback appears slightly weaker than some alternatives.
 - **Leading Creative Projects with AI**: A solid option because it touches on AI Workflows, Adaptability, it’s about 4 hours, and it looks beginner. Tradeoff: It looks balanced overall, though the main tradeoff is breadth versus specialization.
 - **AI Foundations for Creativity**: A solid option because it touches on AI Enablement, AI Workflows, it’s about 3 hours, and it looks beginner. Tradeoff: It fits your schedule well, though it may work better as a quick practical introduction than a deep dive."
+2026-04-12T22:55:45,test_001,"Hi, I am Alice","Hi Alice! I’m your AI Course Recommendation Assistant.
+
+I’ll ask you a few quick questions and then recommend courses that fit your goals.
+
+What is your major or background?
+Type your answer.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=background]]"
+2026-04-12T22:55:50,test_001,Computer Science,"Thanks — that gives me a good starting point.
+
+Which area are you most interested in right now?
+[[OPTIONS:AI / Machine Learning||Data Analysis / Visualization||Cloud / Deployment||Business / Analytics]]
+[[STATE:background=Computer Science]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=topic]]"
+2026-04-12T22:55:55,test_001,AI / Machine Learning,"Great choice — AI / Machine Learning can branch into a few useful directions.
+
+I’ve narrowed this into a curated set of focus areas for you. Pick one from the dropdown below, or choose Type your own if you want something more specific.
+[[SKILL_DROPDOWN:Generative AI||Prompt Engineering||LLM Application||Natural Language Processing||Deep Learning||Model Evaluation||Retrieval-Augmented Generation||Generative AI Agents||Type your own]]
+[[STATE:background=Computer Science]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=subskill_select]]"
+2026-04-12T22:56:02,test_001,Prompt Engineering,"Perfect — I’ll use Prompt Engineering as your main focus within this area.
+
+How much time can you realistically spend on this course?
+[[OPTIONS:Up to 2 hours||2 to 5 hours||5 to 10 hours||10 to 20 hours||20+ hours]]
+[[STATE:background=Computer Science]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=Prompt Engineering]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=time]]"
+2026-04-12T22:56:03,test_001,5 to 15 hours,"Got it — that helps me balance speed versus depth.
+
+Do you have any preference for the course provider?
+[[OPTIONS:Coursera||Google Cloud||IBM||Microsoft||Packt||No preference]]
+[[STATE:background=Computer Science]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=Prompt Engineering]]
+[[STATE:time=5 to 15 hours]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=provider]]"
+2026-04-12T22:56:04,test_001,No preference,"Nice — I’ll factor that into the ranking.
+
+What level are you looking for?
+[[OPTIONS:Beginner||Intermediate||Advanced||No preference]]
+[[STATE:background=Computer Science]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=Prompt Engineering]]
+[[STATE:time=5 to 15 hours]]
+[[STATE:provider=No preference]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=level]]"
+2026-04-12T22:56:30,test_001,Intermediate,"I focused on courses that align with AI / Machine Learning, especially Prompt Engineering, while staying realistic for 5 to 15 hours, and leaning toward a intermediate fit.
+- **Advanced Prompt Engineering for Everyone**: A solid option because it touches on AI Personalization, Anthropic Claude, it’s about 8 hours, and it looks intermediate. Tradeoff: It looks balanced overall, though the main tradeoff is breadth versus specialization.
+- **Learn AI Agents**: A solid option because it touches on Agentic systems, Artificial Intelligence, it’s about 3 hours, and it looks intermediate. Tradeoff: It fits your schedule well, though it may work better as a quick practical introduction than a deep dive.
+- **AI for Education (Intermediate)**: A solid option because it touches on AI Enablement, ChatGPT, it’s about 5 hours, and it looks intermediate. Tradeoff: It looks balanced overall, though the main tradeoff is breadth versus specialization.
+- **Practical AI and prompting for marketing professionals**: A solid option because it touches on AI Enablement, Artificial Intelligence, it’s about 10 hours, and it looks intermediate. Tradeoff: It looks balanced overall, though the main tradeoff is breadth versus specialization.
+- **GenAI Foundations and Prompt Engineering**: A solid option because it touches on AI Workflows, ChatGPT, it’s about 6 hours, and it looks intermediate. Tradeoff: It looks relevant, though learner feedback appears slightly weaker than some alternatives."
+2026-04-12T22:56:42,test_002_check,Hi,"Hi! I’m your AI Course Recommendation Assistant.
+
+I’ll ask you a few quick questions and then recommend courses that fit your goals.
+
+What is your major or background?
+Type your answer.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=background]]"
+2026-04-12T22:56:42,test_002_check,Intermediate,"Thanks — that gives me a good starting point.
+
+Which area are you most interested in right now?
+[[OPTIONS:AI / Machine Learning||Data Analysis / Visualization||Cloud / Deployment||Business / Analytics]]
+[[STATE:background=Intermediate]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=topic]]"
+2026-04-12T22:56:43,test_002_check,Computer Science,"Thanks — that gives me a good starting point.
+
+Which area are you most interested in right now?
+[[OPTIONS:AI / Machine Learning||Data Analysis / Visualization||Cloud / Deployment||Business / Analytics]]
+[[STATE:background=Computer Science]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=topic]]"
+2026-04-12T22:56:44,test_002_check,AI / Machine Learning,"Great choice — AI / Machine Learning can branch into a few useful directions.
+
+I’ve narrowed this into a curated set of focus areas for you. Pick one from the dropdown below, or choose Type your own if you want something more specific.
+[[SKILL_DROPDOWN:Generative AI||Prompt Engineering||LLM Application||Natural Language Processing||Deep Learning||Model Evaluation||Retrieval-Augmented Generation||Generative AI Agents||Type your own]]
+[[STATE:background=Computer Science]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=subskill_select]]"
+2026-04-12T22:56:45,test_002_check,Prompt Engineering,"Perfect — I’ll use Prompt Engineering as your main focus within this area.
+
+How much time can you realistically spend on this course?
+[[OPTIONS:Up to 2 hours||2 to 5 hours||5 to 10 hours||10 to 20 hours||20+ hours]]
+[[STATE:background=Computer Science]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=Prompt Engineering]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=time]]"
+2026-04-12T22:56:46,test_002_check,5 to 15 hours,"Got it — that helps me balance speed versus depth.
+
+Do you have any preference for the course provider?
+[[OPTIONS:Coursera||Google Cloud||IBM||Microsoft||Packt||No preference]]
+[[STATE:background=Computer Science]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=Prompt Engineering]]
+[[STATE:time=5 to 15 hours]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=provider]]"
+2026-04-12T22:56:47,test_002_check,No preference,"Nice — I’ll factor that into the ranking.
+
+What level are you looking for?
+[[OPTIONS:Beginner||Intermediate||Advanced||No preference]]
+[[STATE:background=Computer Science]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=Prompt Engineering]]
+[[STATE:time=5 to 15 hours]]
+[[STATE:provider=No preference]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=level]]"
+2026-04-12T22:56:49,test_002_check,Intermediate,"I focused on courses that align with AI / Machine Learning, especially Prompt Engineering, while staying realistic for 5 to 15 hours, and leaning toward a intermediate fit.
+- **Advanced Prompt Engineering for Everyone**: A solid option because it touches on AI Personalization, Anthropic Claude, it’s about 8 hours, and it looks intermediate. Tradeoff: It looks balanced overall, though the main tradeoff is breadth versus specialization.
+- **Learn AI Agents**: A solid option because it touches on Agentic systems, Artificial Intelligence, it’s about 3 hours, and it looks intermediate. Tradeoff: It fits your schedule well, though it may work better as a quick practical introduction than a deep dive.
+- **AI for Education (Intermediate)**: A solid option because it touches on AI Enablement, ChatGPT, it’s about 5 hours, and it looks intermediate. Tradeoff: It looks balanced overall, though the main tradeoff is breadth versus specialization.
+- **Practical AI and prompting for marketing professionals**: A solid option because it touches on AI Enablement, Artificial Intelligence, it’s about 10 hours, and it looks intermediate. Tradeoff: It looks balanced overall, though the main tradeoff is breadth versus specialization.
+- **GenAI Foundations and Prompt Engineering**: A solid option because it touches on AI Workflows, ChatGPT, it’s about 6 hours, and it looks intermediate. Tradeoff: It looks relevant, though learner feedback appears slightly weaker than some alternatives."
+2026-04-12T22:57:21,session_906017c48a03,"hello, who are you","Hi! I’m your AI Course Recommendation Assistant.
+
+I’ll ask you a few quick questions and then recommend courses that fit your goals.
+
+What is your major or background?
+Type your answer.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=background]]"
+2026-04-12T22:57:56,session_906017c48a03,I major is electrical engineering,"Thanks — that gives me a good starting point.
+
+Which area are you most interested in right now?
+[[OPTIONS:AI / Machine Learning||Data Analysis / Visualization||Cloud / Deployment||Business / Analytics]]
+[[STATE:background=I major is electrical engineering]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=topic]]"
+2026-04-12T22:58:05,session_906017c48a03,AI / Machine Learning,"Great choice — AI / Machine Learning can branch into a few useful directions.
+
+I’ve narrowed this into a curated set of focus areas for you. Pick one from the dropdown below, or choose Type your own if you want something more specific.
+[[SKILL_DROPDOWN:Generative AI||Prompt Engineering||LLM Application||Natural Language Processing||Deep Learning||Model Evaluation||Retrieval-Augmented Generation||Generative AI Agents||Type your own]]
+[[STATE:background=I major is electrical engineering]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=subskill_select]]"
+2026-04-12T22:58:13,session_906017c48a03,Prompt Engineering,"Perfect — I’ll use Prompt Engineering as your main focus within this area.
+
+How much time can you realistically spend on this course?
+[[OPTIONS:Up to 2 hours||2 to 5 hours||5 to 10 hours||10 to 20 hours||20+ hours]]
+[[STATE:background=I major is electrical engineering]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=Prompt Engineering]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=time]]"
+2026-04-12T22:58:18,session_906017c48a03,Up to 2 hours,"Got it — that helps me balance speed versus depth.
+
+Do you have any preference for the course provider?
+[[OPTIONS:Coursera||Google Cloud||IBM||Microsoft||Packt||No preference]]
+[[STATE:background=I major is electrical engineering]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=Prompt Engineering]]
+[[STATE:time=Up to 2 hours]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=provider]]"
+2026-04-12T22:58:23,session_906017c48a03,Coursera,"Nice — I’ll factor that into the ranking.
+
+What level are you looking for?
+[[OPTIONS:Beginner||Intermediate||Advanced||No preference]]
+[[STATE:background=I major is electrical engineering]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=Prompt Engineering]]
+[[STATE:time=Up to 2 hours]]
+[[STATE:provider=Coursera]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=level]]"
+2026-04-12T22:58:44,session_906017c48a03,Intermediate,"I focused on courses that align with AI / Machine Learning, especially Prompt Engineering, while staying realistic for up to 2 hours, and leaning toward a intermediate fit.
+- **Intro to AI Engineering**: A solid option because it touches on AI Security, Application Programming Interface (API), it’s about 2 hours, and it looks intermediate. Tradeoff: It fits your schedule well, though it may work better as a quick practical introduction than a deep dive."
+2026-04-12T23:17:50,test_skip_001,"Hi, I am Alice","Hi Alice! I’m your AI Course Recommendation Assistant.
+
+To get you the best recommendations, you can **paste your resume below** — or type **Skip** to answer a few quick questions instead.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=resume]]
+[[STATE:resume_status=pending]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:17:55,test_skip_001,Skip,"No problem — let's go through a few quick questions.
+
+What is your major or background?
+Type your answer.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=background]]
+[[STATE:resume_status=skipped]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:18:05,test_resume_001,Hi,"Hi! I’m your AI Course Recommendation Assistant.
+
+To get you the best recommendations, you can **paste your resume below** — or type **Skip** to answer a few quick questions instead.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=resume]]
+[[STATE:resume_status=pending]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:18:14,test_resume_001,"Yuxi Wang
+Electrical Engineering student at Fordham University
+Skills: Python, MATLAB, TensorFlow, circuit design, signal processing
+Experience: Research assistant in AI lab, intern at hardware startup
+Interests: machine learning, embedded systems, edge AI
+Goal: ML engineer at a hardware company","Thanks! I couldn't pull a clear background from that — let me ask you directly.
+
+What is your major or background?
+Type your answer.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=background]]
+[[STATE:resume_status=provided]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:20:07,test_r2,Hi,"Hi! I’m your AI Course Recommendation Assistant.
+
+To get you the best recommendations, you can **paste your resume below** — or type **Skip** to answer a few quick questions instead.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=resume]]
+[[STATE:resume_status=pending]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:20:13,test_r2,"Yuxi Wang
+Electrical Engineering student at Fordham University
+Skills: Python, MATLAB, TensorFlow, circuit design, signal processing
+Experience: Research assistant in AI lab, intern at hardware startup
+Interests: machine learning, embedded systems, edge AI
+Goal: ML engineer at a hardware company","Thanks for sharing your resume! Here's what I found:
+
+**Background:** Electrical Engineering student at Fordham University
+**Skills:** Python, MATLAB, TensorFlow, circuit design, signal processing
+**Career goal:** ML engineer at a hardware company
+
+Does your background look right? Type **Yes** to confirm, or type a correction.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=background_confirm]]
+[[STATE:resume_status=provided]]
+[[STATE:resume_background=Electrical Engineering student at Fordham University]]
+[[STATE:resume_skills=Python, MATLAB, TensorFlow, circuit design, signal processing]]
+[[STATE:resume_level=Intermediate]]
+[[STATE:resume_interests=machine learning, embedded systems, edge AI]]
+[[STATE:resume_goal=ML engineer at a hardware company]]"
+2026-04-12T23:20:21,test_r2,Yes,"Got it.
+
+Which area are you most interested in right now?
+[[OPTIONS:AI / Machine Learning||Data Analysis / Visualization||Cloud / Deployment||Business / Analytics]]
+[[STATE:background=Electrical Engineering student at Fordham University]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=topic]]
+[[STATE:resume_status=provided]]
+[[STATE:resume_background=Electrical Engineering student at Fordham University]]
+[[STATE:resume_skills=Python, MATLAB, TensorFlow, circuit design, signal processing]]
+[[STATE:resume_level=Intermediate]]
+[[STATE:resume_interests=machine learning, embedded systems, edge AI]]
+[[STATE:resume_goal=ML engineer at a hardware company]]"
+2026-04-12T23:20:22,test_r2,AI / Machine Learning,"Great choice — AI / Machine Learning can branch into a few useful directions.
+
+I’ve narrowed this into a curated set of focus areas for you. Pick one from the dropdown below, or choose Type your own if you want something more specific.
+[[SKILL_DROPDOWN:Generative AI||Prompt Engineering||LLM Application||Natural Language Processing||Deep Learning||Model Evaluation||Retrieval-Augmented Generation||Generative AI Agents||Type your own]]
+[[STATE:background=Electrical Engineering student at Fordham University]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=subskill_select]]
+[[STATE:resume_status=provided]]
+[[STATE:resume_background=Electrical Engineering student at Fordham University]]
+[[STATE:resume_skills=Python, MATLAB, TensorFlow, circuit design, signal processing]]
+[[STATE:resume_level=Intermediate]]
+[[STATE:resume_interests=machine learning, embedded systems, edge AI]]
+[[STATE:resume_goal=ML engineer at a hardware company]]"
+2026-04-12T23:20:40,test_r2,Deep Learning,"Perfect — I’ll use Deep Learning as your main focus within this area.
+
+How much time can you realistically spend on this course?
+[[OPTIONS:Up to 2 hours||2 to 5 hours||5 to 10 hours||10 to 20 hours||20+ hours]]
+[[STATE:background=Electrical Engineering student at Fordham University]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=Deep Learning]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=time]]
+[[STATE:resume_status=provided]]
+[[STATE:resume_background=Electrical Engineering student at Fordham University]]
+[[STATE:resume_skills=Python, MATLAB, TensorFlow, circuit design, signal processing]]
+[[STATE:resume_level=Intermediate]]
+[[STATE:resume_interests=machine learning, embedded systems, edge AI]]
+[[STATE:resume_goal=ML engineer at a hardware company]]"
+2026-04-12T23:20:41,test_r2,5 to 10 hours,"Got it — that helps me balance speed versus depth.
+
+Do you have any preference for the course provider?
+[[OPTIONS:Coursera||Google Cloud||IBM||Microsoft||Packt||No preference]]
+[[STATE:background=Electrical Engineering student at Fordham University]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=Deep Learning]]
+[[STATE:time=5 to 10 hours]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=provider]]
+[[STATE:resume_status=provided]]
+[[STATE:resume_background=Electrical Engineering student at Fordham University]]
+[[STATE:resume_skills=Python, MATLAB, TensorFlow, circuit design, signal processing]]
+[[STATE:resume_level=Intermediate]]
+[[STATE:resume_interests=machine learning, embedded systems, edge AI]]
+[[STATE:resume_goal=ML engineer at a hardware company]]"
+2026-04-12T23:20:42,test_r2,No preference,"Nice — I’ll factor that into the ranking.
+
+What level are you looking for?
+[[OPTIONS:Beginner||Intermediate||Advanced||No preference]]
+[[STATE:background=Electrical Engineering student at Fordham University]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=Deep Learning]]
+[[STATE:time=5 to 10 hours]]
+[[STATE:provider=No preference]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=level]]
+[[STATE:resume_status=provided]]
+[[STATE:resume_background=Electrical Engineering student at Fordham University]]
+[[STATE:resume_skills=Python, MATLAB, TensorFlow, circuit design, signal processing]]
+[[STATE:resume_level=Intermediate]]
+[[STATE:resume_interests=machine learning, embedded systems, edge AI]]
+[[STATE:resume_goal=ML engineer at a hardware company]]"
+2026-04-12T23:20:47,test_r2,Intermediate,"I focused on courses that align with AI / Machine Learning, especially Deep Learning, while staying realistic for 5 to 10 hours, and leaning toward a intermediate fit.
+- **Introduction to Deep Learning & Neural Networks with Keras**: A solid option because it touches on Applied Machine Learning, Artificial Neural Networks, it’s about 10 hours, and it looks intermediate. Tradeoff: It looks balanced overall, though the main tradeoff is breadth versus specialization."
+2026-04-12T23:20:48,test_r2_final,Intermediate,"Hi! I’m your AI Course Recommendation Assistant.
+
+To get you the best recommendations, you can **paste your resume below** — or type **Skip** to answer a few quick questions instead.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=resume]]
+[[STATE:resume_status=pending]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:20:57,test_r2,Advanced,"I focused on courses that align with AI / Machine Learning, especially Deep Learning, while staying realistic for 5 to 10 hours, and leaning toward a advanced fit.
+- **Advanced Machine Learning and Deep Learning**: A solid option because it touches on Applied Machine Learning, Artificial Intelligence and Machine Learning (AI/ML), it’s about 9 hours, and it looks advanced. Tradeoff: It looks balanced overall, though the main tradeoff is breadth versus specialization."
+2026-04-12T23:24:14,session_349e5e24af75,"Jane Smith
+Computer Science, Fordham University
+Skills: Python, Java, React, SQL, machine learning
+Experience: Software intern at Google, research assistant
+Interests: AI, backend development, cloud computing
+Goal: Software engineer at a tech company","Hi! I’m your AI Course Recommendation Assistant.
+
+To get you the best recommendations, you can **paste your resume below** — or type **Skip** to answer a few quick questions instead.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=resume]]
+[[STATE:resume_status=pending]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:24:21,session_349e5e24af75,"Jane Smith
+Computer Science, Fordham University
+Skills: Python, Java, React, SQL, machine learning
+Experience: Software intern at Google, research assistant
+Interests: AI, backend development, cloud computing
+Goal: Software engineer at a tech company","Thanks! I couldn't pull a clear background from that — let me ask you directly.
+
+What is your major or background?
+Type your answer.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=background]]
+[[STATE:resume_status=provided]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:34:18,model_test,Hi,"Hi! I’m your AI Course Recommendation Assistant.
+
+To get you the best recommendations, you can **paste your resume below** — or type **Skip** to answer a few quick questions instead.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=resume]]
+[[STATE:resume_status=pending]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:34:27,model_test,Skip,"No problem — let's go through a few quick questions.
+
+What is your major or background?
+Type your answer.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=background]]
+[[STATE:resume_status=skipped]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:34:28,model_test,Computer Science,"Thanks — that gives me a good starting point.
+
+Which area are you most interested in right now?
+[[OPTIONS:AI / Machine Learning||Data Analysis / Visualization||Cloud / Deployment||Business / Analytics]]
+[[STATE:background=Computer Science]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=topic]]
+[[STATE:resume_status=skipped]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:34:29,model_test,AI / Machine Learning,"Great choice — AI / Machine Learning can branch into a few useful directions.
+
+I’ve narrowed this into a curated set of focus areas for you. Pick one from the dropdown below, or choose Type your own if you want something more specific.
+[[SKILL_DROPDOWN:Generative AI||Prompt Engineering||LLM Application||Natural Language Processing||Deep Learning||Model Evaluation||Retrieval-Augmented Generation||Generative AI Agents||Type your own]]
+[[STATE:background=Computer Science]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=subskill_select]]
+[[STATE:resume_status=skipped]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:34:30,model_test,Prompt Engineering,"Perfect — I’ll use Prompt Engineering as your main focus within this area.
+
+How much time can you realistically spend on this course?
+[[OPTIONS:Up to 2 hours||2 to 5 hours||5 to 10 hours||10 to 20 hours||20+ hours]]
+[[STATE:background=Computer Science]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=Prompt Engineering]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=time]]
+[[STATE:resume_status=skipped]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:34:31,model_test,5 to 10 hours,"Got it — that helps me balance speed versus depth.
+
+Do you have any preference for the course provider?
+[[OPTIONS:Coursera||Google Cloud||IBM||Microsoft||Packt||No preference]]
+[[STATE:background=Computer Science]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=Prompt Engineering]]
+[[STATE:time=5 to 10 hours]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=provider]]
+[[STATE:resume_status=skipped]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:34:33,model_test,No preference,"Nice — I’ll factor that into the ranking.
+
+What level are you looking for?
+[[OPTIONS:Beginner||Intermediate||Advanced||No preference]]
+[[STATE:background=Computer Science]]
+[[STATE:topic=AI / Machine Learning]]
+[[STATE:subskill=Prompt Engineering]]
+[[STATE:time=5 to 10 hours]]
+[[STATE:provider=No preference]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=level]]
+[[STATE:resume_status=skipped]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:34:34,model_test,Beginner,"I focused on courses that align with AI / Machine Learning, especially Prompt Engineering, while staying realistic for 5 to 10 hours, and leaning toward a beginner fit.
+- **Discover the Art of Prompting**: A solid option because it touches on Content Creation, LLM Application, it’s about 2 hours, and it looks beginner. Tradeoff: It fits your schedule well, though it may work better as a quick practical introduction than a deep dive.
+- **Use AI as a Creative or Expert Partner**: A solid option because it touches on AI Enablement, AI Personalization, it’s about 2 hours, and it looks beginner. Tradeoff: It fits your schedule well, though it may work better as a quick practical introduction than a deep dive.
+- **Start Writing Prompts like a Pro**: A solid option because it touches on Context Management, Multimodal Prompts, it’s about 2 hours, and it looks beginner. Tradeoff: It fits your schedule well, though it may work better as a quick practical introduction than a deep dive.
+- **Speed Up Data Analysis and Presentation Building**: A solid option because it touches on AI Enablement, Data Analysis, it’s about 1 hours, and it looks beginner. Tradeoff: It fits your schedule well, though it may work better as a quick practical introduction than a deep dive.
+- **Generative AI: Prompt Engineering Basics**: A solid option because it touches on AI Workflows, ChatGPT, it’s about 9 hours, and it looks beginner. Tradeoff: It looks balanced overall, though the main tradeoff is breadth versus specialization."
+2026-04-12T23:36:35,session_e100d5c91ce7,hi,"Hi! I’m your AI Course Recommendation Assistant.
+
+To get you the best recommendations, you can **paste your resume below** — or type **Skip** to answer a few quick questions instead.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=resume]]
+[[STATE:resume_status=pending]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:36:56,session_e100d5c91ce7,"Jane Smith
+Computer Science, Fordham University
+Skills: Python, Java, React, SQL, machine learning
+Experience: Software intern at Google, research assistant
+Interests: AI, backend development, cloud computing
+Goal: Software engineer at a tech company","Thanks! I couldn't pull a clear background from that — let me ask you directly.
+
+What is your major or background?
+Type your answer.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=background]]
+[[STATE:resume_status=provided]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:38:38,test_20,Hi,"Hi! I’m your AI Course Recommendation Assistant.
+
+To get you the best recommendations, you can **paste your resume below** — or type **Skip** to answer a few quick questions instead.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=resume]]
+[[STATE:resume_status=pending]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:44:47,session_8a13397c47e4,hi,"Hi! I’m your AI Course Recommendation Assistant.
+
+To get you the best recommendations, you can **paste your resume below** — or type **Skip** to answer a few quick questions instead.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=resume]]
+[[STATE:resume_status=pending]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:44:53,session_8a13397c47e4,"Jane Smith
+Computer Science, Fordham University
+Skills: Python, Java, React, SQL, machine learning
+Experience: Software intern at Google, research assistant
+Interests: AI, backend development, cloud computing
+Goal: Software engineer at a tech company","Thanks for sharing your resume! Here's what I found:
+
+**Background:** Computer Science
+**Skills:** Python, Java, React, SQL, machine learning
+**Career goal:** Software engineer at a tech company
+
+Does your background look right? Type **Yes** to confirm, or type a correction.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=background_confirm]]
+[[STATE:resume_status=provided]]
+[[STATE:resume_background=Computer Science]]
+[[STATE:resume_skills=Python, Java, React, SQL, machine learning]]
+[[STATE:resume_level=Intermediate]]
+[[STATE:resume_interests=AI, backend development, cloud computing]]
+[[STATE:resume_goal=Software engineer at a tech company]]"
+2026-04-12T23:47:03,session_c0828c32a83c,hi,"Hi! I’m your AI Course Recommendation Assistant.
+
+To get you the best recommendations, you can **paste your resume below** — or type **Skip** to answer a few quick questions instead.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=resume]]
+[[STATE:resume_status=pending]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:47:55,session_c0828c32a83c,"Yuxi Wang
+JERSEY CITY, JC 07310 · 9172154930 · yuxiw0301@gmail.com
+EDUCATION
+Fordham University New York, U.S.
+Master of Science in Artificial Intelligence (AI Product Manager Track) Aug 2025 - Dec 2026
+Columbia University New York, U.S.
+Master of Arts in Management Sep 2023 - May 2025
+PROFESSIONAL EXPERIENCE
+Convoloo, Technical Solutions Intern San Francisco, CA
+Designed a large-scale adaptive learning system serving a nationwide platform with 50M+ MAU Jul 2025 - Sep 2025
+● Partnered with business stakeholders and end users to gather requirements for an adaptive learning platform (50M+
+MAU), supporting system implementation and ensuring alignment between user needs and technical solutions
+● Coordinated API integrations between front-end applications and backend services (including GPT-3.5 APIs), ensuring
+accurate data flow and troubleshooting response and data mapping issues across systems
+● Acted as a key liaison between users and engineering teams, supporting UAT testing, collecting feedback, and resolving
+system issues to improve product functionality and reduce repeated mistakes by 20%
+● Diagnosed system and data issues using logs and query analysis, collaborating with engineers to optimize MySQL
+and Redis performance, improving system scalability (5M+ records) and reducing latency by 30%
+● Supported user onboarding and system adoption by developing web modules and authentication workflows (OAuth
+2.0), resolving user access issues and improving overall user experience and engagement by 15%
+Micropay Company, Product Manager Intern New York, NY
+Improved product reliability reduced costs by 20% and cut review time by 90% May 2024 - Aug 2024
+● Developed user documentation and system usage guides, and led onboarding and training sessions for internal users,
+improving system adoption and reducing repeated support requests
+● Analyzed system performance and trading data using SQL (AWS RDS) to identify bottlenecks and support
+improvements in dashboards and reporting, increasing response efficiency by 25%
+● Coordinated system and API-related integrations on AWS, working with engineering teams to troubleshoot
+transaction failures, data inconsistencies, and request/response issues, improving first-attempt success rate to 95%
+across 2,000+ daily trades
+● Acted as a liaison between users, banking partners, and engineering teams, rapidly diagnosing issues reported
+by external partners and driving timely fixes through log analysis and monitoring tools (CloudWatch), reducing
+MTTR by 15%
+ISPA, IT Support Intern New York, NY
+Resolved ticketing payment and CRM issues improving user experience Feb 2024 - May 2024
+● Provided front-line technical support to 20,000+ users, resolving issues related to ticket purchases, payment failures, and
+website functionality, achieving a 95%+ issue resolution rate
+● Diagnosed and troubleshot website and payment system issues, identifying root causes and coordinating fixes,
+reducing average resolution time by 30%
+● Managed CRM data in Salesforce, supporting customer issue tracking and resolution workflows and ensuring data
+accuracy
+● Collaborated with cross-functional teams to optimize website performance and user experience, improving
+ticket purchase flows
+PROJECTS
+Trade Capturing System, Team-Leader New York, NY
+A banking middle-office solution focused on automating trade result validation and storage Mar 2025 - Jun 2025
+● Implemented a distributed microservices ecosystem utilizing Spring Boot, Spring Cloud, and Kafka, which improved
+system uptime by 25%, facilitated horizontal scalability, and ensured fault tolerance across all banking services.
+● Spearheaded the design of the Allocation Engine with Spring Data JPA, QuickFIX/J, and Spring Security;
+enabled high-throughput FIX message processing with execution validation, reducing latency by 60%
+● Orchestrated the transition to event-driven, asynchronous workflows utilizing Kafka and Spring Cloud Stream, thereby
+automating error detection, slashing manual intervention needs by 90%, and accelerating overall processing speed.
+● Engineered robust security architecture utilizing OAuth 2.0 via Spring Cloud Gateway for 80+ APIs and internal
+microservices, providing granular access control and real-time compliance monitoring, exceeding regulatory requirements
+TECHNICAL SKILLS
+● Programming Languages: Python, Java, C++, C#, JavaScript
+● Frameworks & Tools: SQL, HTTP, JSON, Salesforce CRM, SQL, MySQL, Data Analysis, System Integration, UAT,
+AWS (EC2, Lambda, RDS, CloudWatch), Linux, Troubleshooting, Logging, Monitoring, Postman","Thanks! I couldn't pull a clear background from that — let me ask you directly.
+
+What is your major or background?
+Type your answer.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=background]]
+[[STATE:resume_status=provided]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:52:40,session_6786944af826,hi,"Hi! I’m your AI Course Recommendation Assistant.
+
+To get you the best recommendations, you can **paste your resume below** — or type **Skip** to answer a few quick questions instead.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=resume]]
+[[STATE:resume_status=pending]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:52:49,session_6786944af826,"Yuxi Wang
+JERSEY CITY, JC 07310 · 9172154930 · yuxiw0301@gmail.com
+EDUCATION
+Fordham University New York, U.S.
+Master of Science in Artificial Intelligence (AI Product Manager Track) Aug 2025 - Dec 2026
+Columbia University New York, U.S.
+Master of Arts in Management Sep 2023 - May 2025
+PROFESSIONAL EXPERIENCE
+Convoloo, Technical Solutions Intern San Francisco, CA
+Designed a large-scale adaptive learning system serving a nationwide platform with 50M+ MAU Jul 2025 - Sep 2025
+● Partnered with business stakeholders and end users to gather requirements for an adaptive learning platform (50M+
+MAU), supporting system implementation and ensuring alignment between user needs and technical solutions
+● Coordinated API integrations between front-end applications and backend services (including GPT-3.5 APIs), ensuring
+accurate data flow and troubleshooting response and data mapping issues across systems
+● Acted as a key liaison between users and engineering teams, supporting UAT testing, collecting feedback, and resolving
+system issues to improve product functionality and reduce repeated mistakes by 20%
+● Diagnosed system and data issues using logs and query analysis, collaborating with engineers to optimize MySQL
+and Redis performance, improving system scalability (5M+ records) and reducing latency by 30%
+● Supported user onboarding and system adoption by developing web modules and authentication workflows (OAuth
+2.0), resolving user access issues and improving overall user experience and engagement by 15%
+Micropay Company, Product Manager Intern New York, NY
+Improved product reliability reduced costs by 20% and cut review time by 90% May 2024 - Aug 2024
+● Developed user documentation and system usage guides, and led onboarding and training sessions for internal users,
+improving system adoption and reducing repeated support requests
+● Analyzed system performance and trading data using SQL (AWS RDS) to identify bottlenecks and support
+improvements in dashboards and reporting, increasing response efficiency by 25%
+● Coordinated system and API-related integrations on AWS, working with engineering teams to troubleshoot
+transaction failures, data inconsistencies, and request/response issues, improving first-attempt success rate to 95%
+across 2,000+ daily trades
+● Acted as a liaison between users, banking partners, and engineering teams, rapidly diagnosing issues reported
+by external partners and driving timely fixes through log analysis and monitoring tools (CloudWatch), reducing
+MTTR by 15%
+ISPA, IT Support Intern New York, NY
+Resolved ticketing payment and CRM issues improving user experience Feb 2024 - May 2024
+● Provided front-line technical support to 20,000+ users, resolving issues related to ticket purchases, payment failures, and
+website functionality, achieving a 95%+ issue resolution rate
+● Diagnosed and troubleshot website and payment system issues, identifying root causes and coordinating fixes,
+reducing average resolution time by 30%
+● Managed CRM data in Salesforce, supporting customer issue tracking and resolution workflows and ensuring data
+accuracy
+● Collaborated with cross-functional teams to optimize website performance and user experience, improving
+ticket purchase flows
+PROJECTS
+Trade Capturing System, Team-Leader New York, NY
+A banking middle-office solution focused on automating trade result validation and storage Mar 2025 - Jun 2025
+● Implemented a distributed microservices ecosystem utilizing Spring Boot, Spring Cloud, and Kafka, which improved
+system uptime by 25%, facilitated horizontal scalability, and ensured fault tolerance across all banking services.
+● Spearheaded the design of the Allocation Engine with Spring Data JPA, QuickFIX/J, and Spring Security;
+enabled high-throughput FIX message processing with execution validation, reducing latency by 60%
+● Orchestrated the transition to event-driven, asynchronous workflows utilizing Kafka and Spring Cloud Stream, thereby
+automating error detection, slashing manual intervention needs by 90%, and accelerating overall processing speed.
+● Engineered robust security architecture utilizing OAuth 2.0 via Spring Cloud Gateway for 80+ APIs and internal
+microservices, providing granular access control and real-time compliance monitoring, exceeding regulatory requirements
+TECHNICAL SKILLS
+● Programming Languages: Python, Java, C++, C#, JavaScript
+● Frameworks & Tools: SQL, HTTP, JSON, Salesforce CRM, SQL, MySQL, Data Analysis, System Integration, UAT,
+AWS (EC2, Lambda, RDS, CloudWatch), Linux, Troubleshooting, Logging, Monitoring, Postman","Thanks for sharing your resume! Here's what I found:
+
+**Background:** Artificial Intelligence
+**Skills:** API integrations, SQL, AWS, MySQL, Redis
+**Career goal:** AI Product Manager
+
+Does your background look right? Type **Yes** to confirm, or type a correction.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=background_confirm]]
+[[STATE:resume_status=provided]]
+[[STATE:resume_background=Artificial Intelligence]]
+[[STATE:resume_skills=API integrations, SQL, AWS, MySQL, Redis]]
+[[STATE:resume_level=Intermediate]]
+[[STATE:resume_interests=Artificial Intelligence, Product Management, Cloud Computing]]
+[[STATE:resume_goal=AI Product Manager]]"
+2026-04-12T23:52:54,session_6786944af826,yes,"Got it.
+
+Which area are you most interested in right now?
+[[OPTIONS:AI / Machine Learning||Data Analysis / Visualization||Cloud / Deployment||Business / Analytics]]
+[[STATE:background=Artificial Intelligence]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=topic]]
+[[STATE:resume_status=provided]]
+[[STATE:resume_background=Artificial Intelligence]]
+[[STATE:resume_skills=API integrations, SQL, AWS, MySQL, Redis]]
+[[STATE:resume_level=Intermediate]]
+[[STATE:resume_interests=Artificial Intelligence, Product Management, Cloud Computing]]
+[[STATE:resume_goal=AI Product Manager]]"
+2026-04-12T23:56:29,session_80e50656e349,hi,"Hi! I’m your AI Course Recommendation Assistant.
+
+To get you the best recommendations, you can **paste your resume below** — or type **Skip** to answer a few quick questions instead.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=resume]]
+[[STATE:resume_status=pending]]
+[[STATE:resume_background=]]
+[[STATE:resume_skills=]]
+[[STATE:resume_level=]]
+[[STATE:resume_interests=]]
+[[STATE:resume_goal=]]"
+2026-04-12T23:56:37,session_80e50656e349,"Yuxi Wang
+JERSEY CITY, JC 07310 · 9172154930 · yuxiw0301@gmail.com
+EDUCATION
+Fordham University New York, U.S.
+Master of Science in Artificial Intelligence (AI Product Manager Track) Aug 2025 - Dec 2026
+Columbia University New York, U.S.
+Master of Arts in Management Sep 2023 - May 2025
+PROFESSIONAL EXPERIENCE
+Convoloo, Technical Solutions Intern San Francisco, CA
+Designed a large-scale adaptive learning system serving a nationwide platform with 50M+ MAU Jul 2025 - Sep 2025
+● Partnered with business stakeholders and end users to gather requirements for an adaptive learning platform (50M+
+MAU), supporting system implementation and ensuring alignment between user needs and technical solutions
+● Coordinated API integrations between front-end applications and backend services (including GPT-3.5 APIs), ensuring
+accurate data flow and troubleshooting response and data mapping issues across systems
+● Acted as a key liaison between users and engineering teams, supporting UAT testing, collecting feedback, and resolving
+system issues to improve product functionality and reduce repeated mistakes by 20%
+● Diagnosed system and data issues using logs and query analysis, collaborating with engineers to optimize MySQL
+and Redis performance, improving system scalability (5M+ records) and reducing latency by 30%
+● Supported user onboarding and system adoption by developing web modules and authentication workflows (OAuth
+2.0), resolving user access issues and improving overall user experience and engagement by 15%
+Micropay Company, Product Manager Intern New York, NY
+Improved product reliability reduced costs by 20% and cut review time by 90% May 2024 - Aug 2024
+● Developed user documentation and system usage guides, and led onboarding and training sessions for internal users,
+improving system adoption and reducing repeated support requests
+● Analyzed system performance and trading data using SQL (AWS RDS) to identify bottlenecks and support
+improvements in dashboards and reporting, increasing response efficiency by 25%
+● Coordinated system and API-related integrations on AWS, working with engineering teams to troubleshoot
+transaction failures, data inconsistencies, and request/response issues, improving first-attempt success rate to 95%
+across 2,000+ daily trades
+● Acted as a liaison between users, banking partners, and engineering teams, rapidly diagnosing issues reported
+by external partners and driving timely fixes through log analysis and monitoring tools (CloudWatch), reducing
+MTTR by 15%
+ISPA, IT Support Intern New York, NY
+Resolved ticketing payment and CRM issues improving user experience Feb 2024 - May 2024
+● Provided front-line technical support to 20,000+ users, resolving issues related to ticket purchases, payment failures, and
+website functionality, achieving a 95%+ issue resolution rate
+● Diagnosed and troubleshot website and payment system issues, identifying root causes and coordinating fixes,
+reducing average resolution time by 30%
+● Managed CRM data in Salesforce, supporting customer issue tracking and resolution workflows and ensuring data
+accuracy
+● Collaborated with cross-functional teams to optimize website performance and user experience, improving
+ticket purchase flows
+PROJECTS
+Trade Capturing System, Team-Leader New York, NY
+A banking middle-office solution focused on automating trade result validation and storage Mar 2025 - Jun 2025
+● Implemented a distributed microservices ecosystem utilizing Spring Boot, Spring Cloud, and Kafka, which improved
+system uptime by 25%, facilitated horizontal scalability, and ensured fault tolerance across all banking services.
+● Spearheaded the design of the Allocation Engine with Spring Data JPA, QuickFIX/J, and Spring Security;
+enabled high-throughput FIX message processing with execution validation, reducing latency by 60%
+● Orchestrated the transition to event-driven, asynchronous workflows utilizing Kafka and Spring Cloud Stream, thereby
+automating error detection, slashing manual intervention needs by 90%, and accelerating overall processing speed.
+● Engineered robust security architecture utilizing OAuth 2.0 via Spring Cloud Gateway for 80+ APIs and internal
+microservices, providing granular access control and real-time compliance monitoring, exceeding regulatory requirements
+TECHNICAL SKILLS
+● Programming Languages: Python, Java, C++, C#, JavaScript
+● Frameworks & Tools: SQL, HTTP, JSON, Salesforce CRM, SQL, MySQL, Data Analysis, System Integration, UAT,
+AWS (EC2, Lambda, RDS, CloudWatch), Linux, Troubleshooting, Logging, Monitoring, Postman","Thanks for sharing your resume! Here's what I found:
+
+**Background:** Artificial Intelligence
+**Skills:** API Integrations, SQL, AWS, GPT-3.5, MySQL
+**Career goal:** AI Product Manager
+
+Does your background look right? Type **Yes** to confirm, or type a correction.
+[[STATE:background=]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=background_confirm]]
+[[STATE:resume_status=provided]]
+[[STATE:resume_background=Artificial Intelligence]]
+[[STATE:resume_skills=API Integrations, SQL, AWS, GPT-3.5, MySQL]]
+[[STATE:resume_level=Advanced]]
+[[STATE:resume_interests=AI, Product Management, System Design]]
+[[STATE:resume_goal=AI Product Manager]]"
+2026-04-12T23:56:41,session_80e50656e349,yes,"Got it.
+
+Which area are you most interested in right now?
+[[OPTIONS:AI / Machine Learning||Data Analysis / Visualization||Cloud / Deployment||Business / Analytics]]
+[[STATE:background=Artificial Intelligence]]
+[[STATE:topic=]]
+[[STATE:subskill=]]
+[[STATE:time=]]
+[[STATE:provider=]]
+[[STATE:level=]]
+[[STATE:awaiting_custom_skill=false]]
+[[STATE:step=topic]]
+[[STATE:resume_status=provided]]
+[[STATE:resume_background=Artificial Intelligence]]
+[[STATE:resume_skills=API Integrations, SQL, AWS, GPT-3.5, MySQL]]
+[[STATE:resume_level=Advanced]]
+[[STATE:resume_interests=AI, Product Management, System Design]]
+[[STATE:resume_goal=AI Product Manager]]"

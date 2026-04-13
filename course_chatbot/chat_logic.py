@@ -1,3 +1,4 @@
+import json
 import os
 import re
 import time
@@ -8,7 +9,7 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 
 from recommender import CourseRecommender
-from utils import is_greeting, format_course_block
+from utils import format_course_block
 
 
 load_dotenv()
@@ -215,8 +216,7 @@ def extract_name_from_history(chat_history: List[Dict]) -> Optional[str]:
 def questionnaire_started(chat_history: List[Dict]) -> bool:
     for msg in chat_history:
         if msg.get("role") == "assistant":
-            cleaned = strip_markers(msg.get("content", ""))
-            if "What is your major or background?" in cleaned:
+            if "[[STATE:step=" in msg.get("content", ""):
                 return True
     return False
 
@@ -505,7 +505,13 @@ def get_state(chat_history: List[Dict]) -> Dict[str, str]:
         "provider": "",
         "level": "",
         "awaiting_custom_skill": "false",
-        "step": "background",
+        "step": "resume",
+        "resume_status": "pending",
+        "resume_background": "",
+        "resume_skills": "",
+        "resume_level": "",
+        "resume_interests": "",
+        "resume_goal": "",
     }
 
     for msg in chat_history:
@@ -520,7 +526,12 @@ def get_state(chat_history: List[Dict]) -> Dict[str, str]:
 
 
 def build_state_markers(state: Dict[str, str]) -> str:
-    allowed_keys = ["background", "topic", "subskill", "time", "provider", "level", "awaiting_custom_skill", "step"]
+    allowed_keys = [
+        "background", "topic", "subskill", "time", "provider", "level",
+        "awaiting_custom_skill", "step",
+        "resume_status", "resume_background", "resume_skills",
+        "resume_level", "resume_interests", "resume_goal",
+    ]
     return "".join([f"\n[[STATE:{k}={state.get(k, '')}]]" for k in allowed_keys])
 
 
@@ -533,36 +544,96 @@ def build_profile_summary(profile: Dict[str, str]) -> str:
         f"- Provider preference: {normalize_provider_answer(profile.get('provider', 'Not provided'))}",
         f"- Preferred level: {normalize_level_answer(profile.get('level', 'Not provided'))}",
     ]
+
+    if profile.get("resume_status") == "provided":
+        resume_parts = []
+        if profile.get("resume_skills"):
+            resume_parts.append(f"  - Skills from resume: {profile['resume_skills']}")
+        if profile.get("resume_interests"):
+            resume_parts.append(f"  - Interests from resume: {profile['resume_interests']}")
+        if profile.get("resume_goal"):
+            resume_parts.append(f"  - Career goal from resume: {profile['resume_goal']}")
+        if resume_parts:
+            lines.append("- Resume context:\n" + "\n".join(resume_parts))
+
     return "\n".join(lines)
 
 
 def generate_intro_message(user_name: Optional[str]) -> str:
-    first_question = attach_options("background", "What is your major or background?\nType your answer.")
     base_state = {
-        "background": "",
-        "topic": "",
-        "subskill": "",
-        "time": "",
-        "provider": "",
-        "level": "",
-        "awaiting_custom_skill": "false",
-        "step": "background",
+        "background": "", "topic": "", "subskill": "", "time": "", "provider": "", "level": "",
+        "awaiting_custom_skill": "false", "step": "resume",
+        "resume_status": "pending", "resume_background": "", "resume_skills": "",
+        "resume_level": "", "resume_interests": "", "resume_goal": "",
     }
 
-    if user_name:
-        return (
-            f"Hi {user_name}! I’m your AI Course Recommendation Assistant.\n\n"
-            "I’ll ask you a few quick questions and then recommend courses that fit your goals.\n\n"
-            f"{first_question}"
-            f"{build_state_markers(base_state)}"
-        )
+    greeting = f"Hi {user_name}!" if user_name else "Hi!"
 
     return (
-        "Hi! I’m your AI Course Recommendation Assistant.\n\n"
-        "I’ll ask you a few quick questions and then recommend courses that fit your goals.\n\n"
-        f"{first_question}"
+        f"{greeting} I’m your AI Course Recommendation Assistant.\n\n"
+        "To get you the best recommendations, you can **paste your resume below** — "
+        "or type **Skip** to answer a few quick questions instead."
         f"{build_state_markers(base_state)}"
     )
+
+
+resume_extraction_model = genai.GenerativeModel(
+    MODEL_NAME,
+    generation_config={
+        "temperature": 0.1,
+        "max_output_tokens": 1024,
+    }
+)
+
+
+def extract_resume_info(resume_text: str) -> Dict[str, str]:
+    prompt = f"""Extract information from the resume below. Return ONLY a compact JSON object on a SINGLE LINE.
+Use an empty string "" for any field you cannot find.
+Keep ALL values short (under 10 words each).
+For background: just the main academic major or field, NOT work experience (e.g. "Computer Science", "Artificial Intelligence").
+For skills: top 5 technical skills as a comma-separated STRING (not a list).
+For interests: 2-3 interest areas as a comma-separated STRING.
+For level, return exactly one of: "Beginner", "Intermediate", or "Advanced".
+For goal: one short phrase (e.g. "AI Product Manager", "Software Engineer").
+
+Keys: background, skills, level, interests, goal
+
+Resume:
+{resume_text[:2500]}
+
+Return only compact JSON on one line. Example:
+{{"background": "Computer Science", "skills": "Python, TensorFlow", "level": "Intermediate", "interests": "machine learning", "goal": "ML engineer"}}"""
+
+    try:
+        response = resume_extraction_model.generate_content(prompt)
+        text = (response.text or "").strip()
+        # Strip markdown code blocks
+        text = re.sub(r"```(?:json)?", "", text).strip().strip("`").strip()
+        # Find the JSON object even if multi-line
+        match = re.search(r'\{.*\}', text, re.DOTALL)
+        if not match:
+            return {}
+        data = json.loads(match.group(0))
+        # Normalize list fields to comma-separated strings
+        for key in ("skills", "interests"):
+            if isinstance(data.get(key), list):
+                data[key] = ", ".join(str(x) for x in data[key])
+        # Normalize level to one of our three valid values
+        raw_level = str(data.get("level", "")).lower()
+        if any(w in raw_level for w in ("advanced", "senior", "expert", "lead")):
+            data["level"] = "Advanced"
+        elif any(w in raw_level for w in ("beginner", "student", "entry", "junior", "fresh")):
+            data["level"] = "Beginner"
+        else:
+            data["level"] = "Intermediate"
+        return data
+    except Exception as e:
+        err_str = str(e).lower()
+        if "quota" in err_str or "resource_exhausted" in err_str or "429" in err_str:
+            print(f"[RESUME EXTRACTION RATE LIMIT] {e}")
+            return {"_rate_limited": True}
+        print(f"[RESUME EXTRACTION ERROR] {e}")
+        return {}
 
 
 def format_hours(hours_value) -> str:
@@ -624,6 +695,9 @@ def build_combined_query(profile: Dict[str, str], extra_request: Optional[str] =
     subskill = normalize_subskill_answer(profile.get("subskill", "")).strip()
     provider = normalize_provider_answer(profile.get("provider", "")).strip()
     level = normalize_level_answer(profile.get("level", "")).strip()
+    resume_skills = profile.get("resume_skills", "").strip()
+    resume_interests = profile.get("resume_interests", "").strip()
+    resume_goal = profile.get("resume_goal", "").strip()
 
     pieces = []
 
@@ -633,10 +707,16 @@ def build_combined_query(profile: Dict[str, str], extra_request: Optional[str] =
         pieces.append(topic)
     if subskill:
         pieces.append(subskill)
+    elif resume_skills:
+        pieces.append(f"with skills in {resume_skills}")
     if provider and "no preference" not in provider.lower():
         pieces.append(f"from {provider}")
     if background:
         pieces.append(f"for someone with background in {background}")
+    if resume_interests and not topic:
+        pieces.append(f"interested in {resume_interests}")
+    if resume_goal:
+        pieces.append(f"targeting a role as {resume_goal}")
     if extra_request:
         pieces.append(extra_request.strip())
 
@@ -905,7 +985,7 @@ def get_chatbot_response(message: str, chat_history: List[Dict]):
 
     started = questionnaire_started(prior_history)
 
-    if not started and (is_greeting(stripped) or current_name is not None):
+    if not started:
         response = {
             "text": generate_intro_message(known_name),
             "courses": []
@@ -913,11 +993,75 @@ def get_chatbot_response(message: str, chat_history: List[Dict]):
         ensure_min_delay(start_time, MIN_TRANSITION_SECONDS)
         return response
 
-    if not started:
-        state["background"] = stripped
+    # --- Resume step ---
+    if state.get("step") == "resume" or state.get("resume_status") == "pending":
+        if stripped.lower() in ("skip", "skip resume", "no resume", "no", "no thanks"):
+            state["resume_status"] = "skipped"
+            state["step"] = "background"
+            response_text = (
+                "No problem — let's go through a few quick questions.\n\n"
+                "What is your major or background?\nType your answer."
+                + build_state_markers(state)
+            )
+            ensure_min_delay(start_time, MIN_TRANSITION_SECONDS)
+            return {"text": response_text, "courses": []}
+
+        extracted = extract_resume_info(stripped)
+
+        if extracted.get("_rate_limited"):
+            state["resume_status"] = "skipped"
+            state["step"] = "background"
+            response_text = (
+                "The AI is temporarily unavailable due to API rate limits. "
+                "Let's continue with a few quick questions instead.\n\n"
+                "What is your major or background?\nType your answer."
+                + build_state_markers(state)
+            )
+            ensure_min_delay(start_time, MIN_TRANSITION_SECONDS)
+            return {"text": response_text, "courses": []}
+
+        state["resume_status"] = "provided"
+        state["resume_background"] = extracted.get("background", "")
+        state["resume_skills"] = extracted.get("skills", "")
+        state["resume_level"] = extracted.get("level", "")
+        state["resume_interests"] = extracted.get("interests", "")
+        state["resume_goal"] = extracted.get("goal", "")
+
+        extracted_bg = state.get("resume_background", "").strip()
+
+        if extracted_bg:
+            state["step"] = "background_confirm"
+            summary_lines = [f"**Background:** {extracted_bg}"]
+            if state.get("resume_skills"):
+                summary_lines.append(f"**Skills:** {state['resume_skills']}")
+            if state.get("resume_goal"):
+                summary_lines.append(f"**Career goal:** {state['resume_goal']}")
+            summary = "\n".join(summary_lines)
+            response_text = (
+                "Thanks for sharing your resume! Here's what I found:\n\n"
+                f"{summary}\n\n"
+                "Does your background look right? Type **Yes** to confirm, or type a correction."
+                + build_state_markers(state)
+            )
+        else:
+            state["step"] = "background"
+            response_text = (
+                "Thanks! I couldn't pull a clear background from that — let me ask you directly.\n\n"
+                "What is your major or background?\nType your answer."
+                + build_state_markers(state)
+            )
+        ensure_min_delay(start_time, MIN_TRANSITION_SECONDS)
+        return {"text": response_text, "courses": []}
+
+    # --- Background confirmation step ---
+    if state.get("step") == "background_confirm":
+        if stripped.lower() in ("yes", "yeah", "correct", "looks good", "that's right", "yep", "yup", "right", "ok", "okay"):
+            state["background"] = state.get("resume_background", "")
+        else:
+            state["background"] = stripped
         state["step"] = "topic"
         response_text = (
-            "Thanks — that gives me a good starting point.\n\n"
+            "Got it.\n\n"
             + attach_options("topic", "Which area are you most interested in right now?")
             + build_state_markers(state)
         )
@@ -1014,6 +1158,11 @@ def get_chatbot_response(message: str, chat_history: List[Dict]):
             "time": state.get("time", ""),
             "provider": state.get("provider", ""),
             "level": state.get("level", ""),
+            "resume_status": state.get("resume_status", ""),
+            "resume_skills": state.get("resume_skills", ""),
+            "resume_interests": state.get("resume_interests", ""),
+            "resume_goal": state.get("resume_goal", ""),
+            "resume_level": state.get("resume_level", ""),
         }
         return recommend_from_profile(profile)
 
@@ -1024,5 +1173,10 @@ def get_chatbot_response(message: str, chat_history: List[Dict]):
         "time": state.get("time", ""),
         "provider": state.get("provider", ""),
         "level": state.get("level", ""),
+        "resume_status": state.get("resume_status", ""),
+        "resume_skills": state.get("resume_skills", ""),
+        "resume_interests": state.get("resume_interests", ""),
+        "resume_goal": state.get("resume_goal", ""),
+        "resume_level": state.get("resume_level", ""),
     }
     return recommend_from_profile(profile, extra_request=message)
