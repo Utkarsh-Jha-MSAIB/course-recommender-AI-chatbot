@@ -9,7 +9,16 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 
 from recommender import CourseRecommender
+<<<<<<< HEAD
 from utils import format_course_block
+=======
+from utils import is_greeting, format_course_block
+from analytics_utils import (
+    update_session_profile,
+    save_recommendation_event,
+    save_recommended_courses,
+)
+>>>>>>> 23abb52 (analytics webpage)
 
 
 load_dotenv()
@@ -878,7 +887,11 @@ def choose_dynamic_course_count(retrieved_courses: List[Dict]) -> int:
     return max(MIN_RECOMMENDATION_COUNT, min(chosen, total))
 
 
-def recommend_from_profile(profile: Dict[str, str], extra_request: Optional[str] = None) -> Dict:
+def recommend_from_profile(
+    profile: Dict[str, str],
+    extra_request: Optional[str] = None,
+    session_id: Optional[str] = None
+) -> Dict:
     start_time = time.perf_counter()
 
     combined_query = build_combined_query(profile, extra_request=extra_request)
@@ -905,6 +918,26 @@ def recommend_from_profile(profile: Dict[str, str], extra_request: Optional[str]
 
     chosen_count = choose_dynamic_course_count(retrieved_courses)
     selected_courses = retrieved_courses[:chosen_count]
+
+    if session_id:
+        try:
+            update_session_profile(
+                session_id=session_id,
+                profile=profile,
+                questionnaire_completed=True,
+                recommendation_generated=True,
+            )
+            save_recommendation_event(
+                session_id=session_id,
+                query_used=combined_query,
+                courses=selected_courses,
+            )
+            save_recommended_courses(
+                session_id=session_id,
+                courses=selected_courses,
+            )
+        except Exception as e:
+            print(f"[ANALYTICS ERROR] {e}")
 
     course_context = build_course_context(selected_courses)
     profile_summary = build_profile_summary(profile)
@@ -973,7 +1006,7 @@ Requirements:
     }
 
 
-def get_chatbot_response(message: str, chat_history: List[Dict]):
+def get_chatbot_response(message: str, chat_history: List[Dict], session_id: Optional[str] = None):
     start_time = time.perf_counter()
     stripped = message.strip()
 
@@ -1164,7 +1197,7 @@ def get_chatbot_response(message: str, chat_history: List[Dict]):
             "resume_goal": state.get("resume_goal", ""),
             "resume_level": state.get("resume_level", ""),
         }
-        return recommend_from_profile(profile)
+        return recommend_from_profile(profile, session_id=session_id)
 
     profile = {
         "background": state.get("background", ""),
@@ -1179,4 +1212,4 @@ def get_chatbot_response(message: str, chat_history: List[Dict]):
         "resume_goal": state.get("resume_goal", ""),
         "resume_level": state.get("resume_level", ""),
     }
-    return recommend_from_profile(profile, extra_request=message)
+    return recommend_from_profile(profile, extra_request=message, session_id=session_id)

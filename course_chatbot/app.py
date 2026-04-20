@@ -6,16 +6,26 @@ from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 
 from chat_logic import get_chatbot_response
-from utils import ensure_dir, generate_session_id, save_chat_log
+from utils import ensure_dir, save_chat_log
+from analytics_utils import (
+    ensure_dir as ensure_analytics_dir,
+    generate_session_id,
+    save_session_start,
+    save_chat_message,
+    load_analytics_summary,
+)
 
 MAX_UPLOAD_BYTES = 5 * 1024 * 1024  # 5 MB
 
 
 BASE_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = BASE_DIR.parent
 LOG_DIR = BASE_DIR / "logs"
 LOG_FILE = LOG_DIR / "chat_history.csv"
+ANALYTICS_DIR = PROJECT_ROOT / "analytics_data"
 
 ensure_dir(LOG_DIR)
+ensure_analytics_dir(ANALYTICS_DIR)
 
 app = Flask(
     __name__,
@@ -32,6 +42,12 @@ def home():
     return render_template("index.html")
 
 
+@app.route("/analytics")
+def analytics():
+    summary = load_analytics_summary()
+    return render_template("analytics.html", summary=summary)
+
+
 @app.route("/chat", methods=["POST"])
 def chat():
     data = request.get_json(force=True)
@@ -46,6 +62,7 @@ def chat():
 
     if session_id not in chat_histories:
         chat_histories[session_id] = []
+        save_session_start(session_id=session_id)
 
     chat_histories[session_id].append({
         "role": "user",
@@ -53,7 +70,11 @@ def chat():
     })
 
     try:
-        assistant_payload = get_chatbot_response(message, chat_histories[session_id])
+        assistant_payload = get_chatbot_response(
+            message,
+            chat_histories[session_id],
+            session_id=session_id
+        )
 
         if isinstance(assistant_payload, dict):
             assistant_response = assistant_payload.get("text", "")
@@ -83,6 +104,20 @@ def chat():
         session_id=session_id,
         user_message=message,
         assistant_message=assistant_response
+    )
+
+    save_chat_message(
+        session_id=session_id,
+        role="user",
+        step="",
+        message_text=message
+    )
+
+    save_chat_message(
+        session_id=session_id,
+        role="assistant",
+        step="",
+        message_text=assistant_response
     )
 
     return jsonify({

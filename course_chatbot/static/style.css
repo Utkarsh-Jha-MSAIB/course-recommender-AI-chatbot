@@ -949,3 +949,335 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav-link-button {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.analytics-shell {
+    grid-template-columns: 320px minmax(0, 1fr);
+}
+
+.analytics-side-card {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.side-card-header h3 {
+    font-size: 1.08rem;
+    color: var(--fordham-black);
+}
+
+.side-stat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.side-stat-item {
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #fffefe 0%, #f8f4f5 100%);
+    border: 1px solid #e7dde0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.side-stat-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.side-stat-value {
+    font-size: 1.1rem;
+    color: var(--fordham-maroon);
+    font-weight: 700;
+}
+
+.side-card-footer {
+    margin-top: auto;
+}
+
+.analytics-back-button {
+    width: 100%;
+}
+
+.analytics-hero {
+    min-height: 170px;
+}
+
+.analytics-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.analytics-metric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.analytics-metric-card {
+    background: linear-gradient(180deg, #fffefe 0%, #faf7f8 100%);
+    border: 1px solid #ddd5d7;
+    border-radius: 22px;
+    box-shadow: var(--shadow-soft);
+    padding: 20px;
+}
+
+.metric-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.metric-value {
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--fordham-maroon);
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.metric-subtext {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.analytics-grid-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.analytics-card {
+    padding: 20px;
+}
+
+.analytics-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.analytics-card-header h3 {
+    font-size: 1.08rem;
+    color: var(--fordham-black);
+}
+
+.analytics-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(111, 29, 43, 0.08);
+    color: var(--fordham-maroon);
+    font-size: 0.76rem;
+    font-weight: 700;
+    border: 1px solid rgba(111, 29, 43, 0.12);
+    white-space: nowrap;
+}
+
+.analytics-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.analytics-list-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #f8f4f5;
+    border: 1px solid #e7dde0;
+    border-radius: 14px;
+}
+
+.analytics-list-key {
+    color: var(--text-main);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.analytics-list-value {
+    min-width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    background: rgba(111, 29, 43, 0.10);
+    color: var(--fordham-maroon);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 0 10px;
+}
+
+.analytics-table-card {
+    overflow: hidden;
+}
+
+.analytics-table-wrap {
+    overflow-x: auto;
+    border: 1px solid #e4dadd;
+    border-radius: 16px;
+}
+
+.analytics-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 860px;
+    background: white;
+}
+
+.analytics-table thead {
+    background: linear-gradient(180deg, #f8f4f5 0%, #f3edef 100%);
+}
+
+.analytics-table th,
+.analytics-table td {
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid #ece3e6;
+    font-size: 0.92rem;
+}
+
+.analytics-table th {
+    color: var(--fordham-black);
+    font-weight: 700;
+}
+
+.analytics-table td {
+    color: var(--text-muted);
+}
+
+.analytics-table tbody tr:hover {
+    background: #fcf9fa;
+}
+
+.empty-analytics-state {
+    color: var(--text-muted);
+    font-size: 0.94rem;
+    line-height: 1.6;
+    padding: 4px 2px;
+}
+
+@media (max-width: 1180px) {
+    .analytics-metric-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 980px) {
+    .analytics-grid-two,
+    .analytics-metric-grid,
+    .analytics-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .header-actions {
+        width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .analytics-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .metric-value {
+        font-size: 1.7rem;
+    }
+
+    .side-stat-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.analytics-top-course-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.analytics-reco-panel-header {
+    margin-bottom: 14px;
+}
+
+.analytics-reco-flashcard {
+    min-height: 430px;
+    height: 430px;
+}
+
+.analytics-course-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.analytics-course-title {
+    font-size: 1rem;
+    line-height: 1.35;
+    font-weight: 700;
+    color: var(--fordham-black);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.analytics-course-count-pill {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(111, 29, 43, 0.10);
+    color: var(--fordham-maroon);
+    border: 1px solid rgba(111, 29, 43, 0.12);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.analytics-score-list-single {
+    grid-template-columns: 1fr;
+}
+
+.analytics-shell .sidebar {
+    min-height: 100vh;
+}
+
+@media (max-width: 980px) {
+    .analytics-reco-flashcard {
+        height: 500px;
+        min-height: 500px;
+    }
+}

@@ -1,0 +1,46 @@
+recommendation_event_id,session_id,timestamp,query_used,num_courses_shown
+rec_c4e26a70152b,session_1cb02615d23e,2026-04-14T17:53:15,Data Analysis / Visualization Microsoft Excel from Coursera for someone with background in Finance,5
+rec_f3ed74ef8c8e,session_ea38485e0c61,2026-04-14T17:55:35,Business / Analytics Business Strategy for someone with background in Finance,5
+rec_5e750810b37c,session_c5a940762e65,2026-04-14T17:56:17,Cloud / Deployment Kubernetes from Google Cloud for someone with background in AI,5
+rec_24023b419120,session_e108c12b78eb,2026-04-14T17:56:45,Cloud / Deployment Kubernetes for someone with background in AI,5
+rec_22581b34592d,session_68219096e177,2026-04-14T17:57:23,Business / Analytics Marketing Analytics for someone with background in Marketing,5
+rec_b4b67de00473,session_c4eef1812cad,2026-04-14T17:58:17,Advanced AI / Machine Learning Natural Language Processing for someone with background in AI,2
+rec_c8f6e9fa70ce,session_4d5bbe69ed9f,2026-04-14T17:59:22,Cloud / Deployment Amazon Web Services for someone with background in AI,5
+rec_69d824ee1ade,session_6f1392641dfd,2026-04-14T18:00:05,Business / Analytics Forecasting for someone with background in Finance,5
+rec_64eb2b4086f1,session_d3003a5d2541,2026-04-14T18:00:43,AI / Machine Learning Generative AI for someone with background in Law,5
+rec_345d82d5fae4,session_9e0b0408d924,2026-04-14T18:01:54,Data Analysis / Visualization Data Visualization for someone with background in Analytics,5
+rec_eb34a35f77f0,session_8c85c306c7fd,2026-04-14T18:02:53,Data Analysis / Visualization Microsoft Excel for someone with background in Finace,5
+rec_157255cef06c,session_4ef3011d7315,2026-04-14T18:03:54,AI / Machine Learning Deep Learning for someone with background in Computer Science,5
+rec_45587263c646,session_8dcb191cd452,2026-04-14T18:14:16,Intermediate Business / Analytics Project Management for someone with background in Accounting,5
+rec_47a0910bf408,session_40d8435174ba,2026-04-14T18:15:48,Advanced AI / Machine Learning Model Evaluation from IBM for someone with background in AI,2
+rec_01b20dcc111e,session_ed0038138927,2026-04-14T18:17:28,Data Analysis / Visualization Data Visualization for someone with background in Finance,5
+rec_add0ecd6b92b,session_39ead40638ad,2026-04-14T18:18:22,Cloud / Deployment Amazon Web Services for someone with background in Marketing,5
+rec_18864d84714d,session_0f6a3273c2c7,2026-04-14T18:25:13,Data Analysis / Visualization Microsoft Excel for someone with background in Finance,5
+rec_d8fcb01775cb,session_3ba1b84fd102,2026-04-14T18:26:49,AI / Machine Learning Deep Learning for someone with background in AI,5
+rec_0165af943faa,session_5861ad56b305,2026-04-14T18:27:55,Data Analysis / Visualization Data Visualization from Microsoft for someone with background in Marketing,5
+rec_09729f84a6b3,session_3f37fc200467,2026-04-14T18:29:09,Advanced Cloud / Deployment Kubernetes for someone with background in AI,1
+rec_86449e1d2be1,session_564ac208dc07,2026-04-14T18:29:59,AI / Machine Learning Prompt Engineering for someone with background in Finance,5
+rec_a63820be3b2d,session_9a2731ee2ad5,2026-04-14T18:31:17,AI / Machine Learning Generative AI for someone with background in Law,5
+rec_94b0b402788a,session_86add3d0393b,2026-04-14T18:32:46,Data Analysis / Visualization Data Visualization for someone with background in Analytics,5
+rec_5166fc5b05cf,session_86add3d0393b,2026-04-14T18:32:59,Hi I am Supriya Data Analysis / Visualization Data Visualization for someone with background in Analytics,5
+rec_a9980a7d91cf,session_4db90be275c2,2026-04-14T18:34:21,Cloud / Deployment Google Cloud Platform from Google Cloud for someone with background in Data Science,5
+rec_d1b2e9c7ad0e,session_7de9b13a7067,2026-04-14T18:36:16,Advanced Cloud / Deployment Microsoft Azure from Microsoft for someone with background in AI,1
+rec_3d03de7b1b86,session_3d5429edf0d2,2026-04-14T18:37:19,AI / Machine Learning Natural Language Processing for someone with background in AI,5
+rec_4b6d2f001207,session_2be5c9c34c3f,2026-04-14T18:38:41,Data Analysis / Visualization Data Visualization for someone with background in Creative,5
+rec_339a3046c445,session_da1adf7927a4,2026-04-14T18:39:18,AI / Machine Learning Retrieval-Augmented Generation from Packt for someone with background in AI,5
+rec_e2ea0cae06c9,session_a52d401ffa69,2026-04-14T18:40:47,Business / Analytics Customer Insights from Microsoft for someone with background in Marketing,5
+rec_468b26daa9ee,session_c24539d02c8d,2026-04-14T18:41:27,Business / Analytics Customer Insights for someone with background in AI,5
+rec_7e7a7a7d41c0,session_4e98c2ad50e3,2026-04-14T18:42:26,Advanced Data Analysis / Visualization Microsoft Excel from Coursera for someone with background in Finance,1
+rec_9ffa8af08280,session_040a1d20d63b,2026-04-14T18:45:35,Advanced AI / Machine Learning Retrieval-Augmented Generation from Coursera for someone with background in AI,1
+rec_26b2785b45cf,session_fafa9e63a6de,2026-04-14T18:46:26,Advanced Cloud / Deployment Application Programming Interface (API) from IBM for someone with background in AI,2
+rec_96778949deb4,session_4d6664afbd46,2026-04-14T18:48:16,AI / Machine Learning LLM Application for someone with background in Law,5
+rec_32880dd65f0f,session_3886dc2e432f,2026-04-14T18:48:47,Data Analysis / Visualization Data Visualization from Microsoft for someone with background in Law,5
+rec_5c7a02c60580,session_13169f65b6dc,2026-04-14T18:50:38,AI / Machine Learning Generative AI for someone with background in Law,5
+rec_2df081b3e71b,session_c1ceb5e7758d,2026-04-14T19:12:10,AI / Machine Learning Generative AI for someone with background in Law,5
+rec_f5e6b05b2d1e,session_18b2b09fc8ee,2026-04-14T19:13:22,AI / Machine Learning Generative AI for someone with background in AI,5
+rec_3901e71b818a,session_bd71707680c9,2026-04-14T21:15:33,AI / Machine Learning Generative AI for someone with background in Law,5
+rec_5e180554fde9,session_56999969af42,2026-04-14T21:16:39,AI / Machine Learning Generative AI for someone with background in Law,5
+rec_c013c93fa821,session_6a8973dd80fd,2026-04-14T23:42:28,Data Analysis / Visualization SQL for someone with background in Finance,5
+rec_14812d8cc74c,session_63eef653f761,2026-04-15T19:20:12,Data Analysis / Visualization Microsoft Excel for someone with background in Finance,5
+rec_8deb0f6f3d16,session_cf87f9338cc6,2026-04-16T18:06:23,Advanced AI / Machine Learning Deep Learning from IBM for someone with background in Computer Science,5
+rec_a545970f07c4,session_73a7fc4e8c58,2026-04-16T18:38:19,AI / Machine Learning Generative AI for someone with background in Music,5

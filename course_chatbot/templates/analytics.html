@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fordham AI Analytics Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="app-shell analytics-shell">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="fordham-mark">
+                    <div class="mark-circle">F</div>
+                    <div>
+                        <div class="brand-eyebrow">Fordham University</div>
+                        <h1>Analytics Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-card analytics-side-card analytics-side-card-compact">
+                <div class="side-card-footer analytics-side-card-footer-top">
+                    <a href="/" class="primary-button analytics-back-button">Back to Chatbot</a>
+                </div>
+            </div>
+
+            <div class="panel-card analytics-top-course-panel">
+                <div class="reco-panel-header analytics-reco-panel-header">
+                    <div class="reco-panel-title-wrap">
+                        <h3>Top Recommended</h3>
+                        <span id="analytics-reco-count" class="reco-count">0</span>
+                    </div>
+
+                    <div class="reco-nav">
+                        <button id="analytics-reco-prev" class="reco-nav-btn" type="button" aria-label="Previous top course">&#8249;</button>
+                        <button id="analytics-reco-next" class="reco-nav-btn" type="button" aria-label="Next top course">&#8250;</button>
+                    </div>
+                </div>
+
+                <div id="analytics-top-course-rail" class="recommendation-rail"></div>
+            </div>
+        </aside>
+
+        <main class="main-stage">
+            <section class="analytics-dashboard">
+                <div class="analytics-metric-grid analytics-metric-grid-top">
+                    <article class="analytics-metric-card analytics-metric-card-hero">
+                        <div class="metric-label metric-label-hero">Total Sessions</div>
+                        <div class="metric-value metric-value-hero">{{ summary.total_sessions or 0 }}</div>
+                        <div class="metric-subtext metric-subtext-hero">User chat sessions started</div>
+                    </article>
+
+                    <article class="analytics-metric-card analytics-metric-card-hero">
+                        <div class="metric-label metric-label-hero">Total Messages</div>
+                        <div class="metric-value metric-value-hero">{{ summary.total_messages or 0 }}</div>
+                        <div class="metric-subtext metric-subtext-hero">User + assistant interactions logged</div>
+                    </article>
+
+                    <article class="analytics-metric-card analytics-metric-card-hero">
+                        <div class="metric-label metric-label-hero">Recommendation Events</div>
+                        <div class="metric-value metric-value-hero">{{ summary.total_recommendation_events or 0 }}</div>
+                        <div class="metric-subtext metric-subtext-hero">Times recommendations were generated</div>
+                    </article>
+
+                    <article class="analytics-metric-card analytics-metric-card-hero">
+                        <div class="metric-label metric-label-hero">Recommended Courses</div>
+                        <div class="metric-value metric-value-hero">{{ summary.total_recommended_courses or 0 }}</div>
+                        <div class="metric-subtext metric-subtext-hero">Courses surfaced across all sessions</div>
+                    </article>
+                </div>
+
+                <div class="analytics-grid-two">
+                    <article class="panel-card analytics-card">
+                        <div class="analytics-card-header">
+                            <h3>Top Backgrounds</h3>
+                            <span class="analytics-badge">User Modeling</span>
+                        </div>
+
+                        {% if summary.top_backgrounds %}
+                            <div class="analytics-list">
+                                {% for item in summary.top_backgrounds %}
+                                    <div class="analytics-list-row">
+                                        <span class="analytics-list-key">{{ item.label }}</span>
+                                        <span class="analytics-list-value">{{ item.count }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="empty-analytics-state">No background data available yet.</div>
+                        {% endif %}
+                    </article>
+
+                    <article class="panel-card analytics-card">
+                        <div class="analytics-card-header">
+                            <h3>Top Interests</h3>
+                            <span class="analytics-badge">Preference Signals</span>
+                        </div>
+
+                        {% if summary.top_interests %}
+                            <div class="analytics-list">
+                                {% for item in summary.top_interests %}
+                                    <div class="analytics-list-row">
+                                        <span class="analytics-list-key">{{ item.label }}</span>
+                                        <span class="analytics-list-value">{{ item.count }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="empty-analytics-state">No interest data available yet.</div>
+                        {% endif %}
+                    </article>
+                </div>
+
+                <div class="analytics-grid-two">
+                    <article class="panel-card analytics-card">
+                        <div class="analytics-card-header">
+                            <h3>Top Providers</h3>
+                            <span class="analytics-badge">Course Preference</span>
+                        </div>
+
+                        {% if summary.top_providers %}
+                            <div class="analytics-list">
+                                {% for item in summary.top_providers %}
+                                    <div class="analytics-list-row">
+                                        <span class="analytics-list-key">{{ item.label }}</span>
+                                        <span class="analytics-list-value">{{ item.count }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="empty-analytics-state">No provider data available yet.</div>
+                        {% endif %}
+                    </article>
+
+                    <article class="panel-card analytics-card">
+                        <div class="analytics-card-header">
+                            <h3>Top Difficulty Levels</h3>
+                            <span class="analytics-badge">Preference Signals</span>
+                        </div>
+
+                        {% if summary.top_difficulties %}
+                            <div class="analytics-list">
+                                {% for item in summary.top_difficulties %}
+                                    <div class="analytics-list-row">
+                                        <span class="analytics-list-key">{{ item.label }}</span>
+                                        <span class="analytics-list-value">{{ item.count }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="empty-analytics-state">No difficulty data available yet.</div>
+                        {% endif %}
+                    </article>
+                </div>
+
+                <article class="panel-card analytics-card analytics-table-card">
+                    <div class="analytics-card-header">
+                        <h3>Recent Sessions</h3>
+                        <span class="analytics-badge">Latest Activity</span>
+                    </div>
+
+                    {% if summary.recent_sessions %}
+                        <div class="analytics-table-wrap">
+                            <table class="analytics-table">
+                                <thead>
+                                    <tr>
+                                        <th>Session ID</th>
+                                        <th>Started At</th>
+                                        <th>Background</th>
+                                        <th>Interest</th>
+                                        <th>Provider</th>
+                                        <th>Difficulty</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in summary.recent_sessions %}
+                                        <tr>
+                                            <td>{{ row.session_id }}</td>
+                                            <td>{{ row.started_at }}</td>
+                                            <td>{{ row.background or "—" }}</td>
+                                            <td>{{ row.interest or "—" }}</td>
+                                            <td>{{ row.provider or "—" }}</td>
+                                            <td>{{ row.difficulty or "—" }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="empty-analytics-state">No session records available yet.</div>
+                    {% endif %}
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const analyticsTopCourses = {{ summary.top_courses_overall | tojson }};
+        let analyticsRecoPage = 0;
+        const ANALYTICS_RECO_PER_PAGE = 1;
+
+        function escapeHtml(text) {
+            const div = document.createElement("div");
+            div.textContent = text ?? "";
+            return div.innerHTML;
+        }
+
+        function renderAnalyticsTopCourseRail(courses = analyticsTopCourses) {
+            const rail = document.getElementById("analytics-top-course-rail");
+            const count = document.getElementById("analytics-reco-count");
+            const prevBtn = document.getElementById("analytics-reco-prev");
+            const nextBtn = document.getElementById("analytics-reco-next");
+
+            if (!rail || !count) return;
+
+            rail.innerHTML = "";
+
+            if (!courses || !Array.isArray(courses) || !courses.length) {
+                analyticsRecoPage = 0;
+                count.textContent = "0";
+                rail.innerHTML = '<div class="empty-reco-state">Top recommended courses will appear here once recommendation history builds up.</div>';
+                if (prevBtn) prevBtn.disabled = true;
+                if (nextBtn) nextBtn.disabled = true;
+                return;
+            }
+
+            const totalPages = Math.ceil(courses.length / ANALYTICS_RECO_PER_PAGE);
+            if (analyticsRecoPage >= totalPages) {
+                analyticsRecoPage = 0;
+            }
+
+            count.textContent = String(analyticsRecoPage + 1);
+
+            const start = analyticsRecoPage * ANALYTICS_RECO_PER_PAGE;
+            const visibleCourses = courses.slice(start, start + ANALYTICS_RECO_PER_PAGE);
+
+            visibleCourses.forEach(course => {
+                const card = document.createElement("article");
+                card.className = "reco-flashcard analytics-reco-flashcard";
+
+                const media = document.createElement("div");
+                media.className = "reco-flashcard-media";
+
+                if (course.image_url) {
+                    const img = document.createElement("img");
+                    img.className = "reco-flashcard-image";
+                    img.src = course.image_url;
+                    img.alt = "Course image";
+                    img.loading = "lazy";
+                    img.onerror = function () {
+                        media.classList.add("no-image");
+                        media.innerHTML = `
+                            <div class="image-fallback">
+                                <span>Fordham AI</span>
+                            </div>
+                        `;
+                    };
+                    media.appendChild(img);
+                } else {
+                    media.classList.add("no-image");
+                    media.innerHTML = `
+                        <div class="image-fallback">
+                            <span>Fordham AI</span>
+                        </div>
+                    `;
+                }
+
+                const content = document.createElement("div");
+                content.className = "reco-flashcard-content";
+
+                const header = document.createElement("div");
+                header.className = "analytics-course-header";
+
+                const title = document.createElement("div");
+                title.className = "analytics-course-title";
+                title.textContent = course.course_name || "Untitled Course";
+
+                const shownPill = document.createElement("div");
+                shownPill.className = "analytics-course-count-pill";
+                shownPill.textContent = `Shown ${course.count || 0} times`;
+
+                header.appendChild(title);
+                header.appendChild(shownPill);
+
+                const metaGrid = document.createElement("div");
+                metaGrid.className = "reco-meta-grid";
+
+                const domainItem = document.createElement("div");
+                domainItem.className = "meta-chip";
+                domainItem.innerHTML = `<span class="meta-label">Domain</span><span class="meta-value">${escapeHtml(course.domain_partner || course.domain || "General")}</span>`;
+
+                const difficultyItem = document.createElement("div");
+                difficultyItem.className = "meta-chip";
+                difficultyItem.innerHTML = `<span class="meta-label">Difficulty</span><span class="meta-value">${escapeHtml(course.difficulty || "N/A")}</span>`;
+
+                metaGrid.appendChild(domainItem);
+                metaGrid.appendChild(difficultyItem);
+
+                const scoreWrap = document.createElement("div");
+                scoreWrap.className = "score-wrap";
+
+                const scoreList = document.createElement("div");
+                scoreList.className = "score-list analytics-score-list-single";
+
+                const countPill = document.createElement("div");
+                countPill.className = "score-pill";
+                countPill.textContent = "Top Overall Course";
+
+                scoreList.appendChild(countPill);
+                scoreWrap.appendChild(scoreList);
+
+                const footer = document.createElement("div");
+                footer.className = "reco-flashcard-footer";
+
+                if (course.url) {
+                    const link = document.createElement("a");
+                    link.className = "course-link-button";
+                    link.href = course.url;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    link.textContent = "View Course";
+                    footer.appendChild(link);
+                }
+
+                content.appendChild(header);
+                content.appendChild(metaGrid);
+                content.appendChild(scoreWrap);
+                content.appendChild(footer);
+
+                card.appendChild(media);
+                card.appendChild(content);
+                rail.appendChild(card);
+            });
+
+            if (prevBtn) prevBtn.disabled = analyticsRecoPage === 0;
+            if (nextBtn) nextBtn.disabled = analyticsRecoPage >= totalPages - 1;
+        }
+
+        function goToPreviousAnalyticsRecommendation() {
+            if (analyticsRecoPage > 0) {
+                analyticsRecoPage -= 1;
+                renderAnalyticsTopCourseRail(analyticsTopCourses);
+            }
+        }
+
+        function goToNextAnalyticsRecommendation() {
+            const totalPages = Math.ceil(analyticsTopCourses.length / ANALYTICS_RECO_PER_PAGE);
+            if (analyticsRecoPage < totalPages - 1) {
+                analyticsRecoPage += 1;
+                renderAnalyticsTopCourseRail(analyticsTopCourses);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const prevReco = document.getElementById("analytics-reco-prev");
+            const nextReco = document.getElementById("analytics-reco-next");
+
+            if (prevReco) prevReco.addEventListener("click", goToPreviousAnalyticsRecommendation);
+            if (nextReco) nextReco.addEventListener("click", goToNextAnalyticsRecommendation);
+
+            renderAnalyticsTopCourseRail(analyticsTopCourses);
+        });
+    </script>
+</body>
+</html>

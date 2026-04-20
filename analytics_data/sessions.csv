@@ -1,0 +1,48 @@
+session_id,started_at,ended_at,user_name,background_raw,background_cluster,topic,subskill,time_pref,provider_pref,level_pref,questionnaire_completed,recommendation_generated
+session_1cb02615d23e,2026-04-14T17:52:57,2026-04-14T17:53:15,,Finance,Finance,Data Analysis / Visualization,Microsoft Excel,10 to 20 hours,Coursera,No preference,TRUE,TRUE
+session_ea38485e0c61,2026-04-14T17:55:13,2026-04-14T17:55:35,,Finance,Finance,Business / Analytics,Business Strategy,5 to 10 hours,No preference,No preference,TRUE,TRUE
+session_c5a940762e65,2026-04-14T17:56:00,2026-04-14T17:56:17,,AI,Artificial Intelligence,Cloud / Deployment,Kubernetes,10 to 20 hours,Google Cloud,No preference,TRUE,TRUE
+session_e108c12b78eb,2026-04-14T17:56:28,2026-04-14T17:56:45,,AI,Artificial Intelligence,Cloud / Deployment,Kubernetes,20+ hours,No preference,No preference,TRUE,TRUE
+session_68219096e177,2026-04-14T17:56:59,2026-04-14T17:57:23,,Marketing,Marketing,Business / Analytics,Marketing Analytics,10 to 20 hours,No preference,No preference,TRUE,TRUE
+session_c4eef1812cad,2026-04-14T17:57:56,2026-04-14T17:58:17,,AI,Artificial Intelligence,AI / Machine Learning,Natural Language Processing,5 to 10 hours,No preference,Advanced,TRUE,TRUE
+session_dff041dda165,2026-04-14T17:58:35,,,,,,,,,,FALSE,FALSE
+session_4d5bbe69ed9f,2026-04-14T17:59:04,2026-04-14T17:59:22,,AI,Artificial Intelligence,Cloud / Deployment,Amazon Web Services,20+ hours,No preference,No preference,TRUE,TRUE
+session_6f1392641dfd,2026-04-14T17:59:47,2026-04-14T18:00:05,,Finance,Finance,Business / Analytics,Forecasting,10 to 20 hours,No preference,No preference,TRUE,TRUE
+session_d3003a5d2541,2026-04-14T18:00:21,2026-04-14T18:00:43,,Law,Law,AI / Machine Learning,Generative AI,20+ hours,No preference,No preference,TRUE,TRUE
+session_9e0b0408d924,2026-04-14T18:01:31,2026-04-14T18:01:54,,Analytics,Business,Data Analysis / Visualization,Data Visualization,10 to 20 hours,No preference,No preference,TRUE,TRUE
+session_8c85c306c7fd,2026-04-14T18:02:32,2026-04-14T18:02:53,,Finace,Other,Data Analysis / Visualization,Microsoft Excel,5 to 10 hours,No preference,No preference,TRUE,TRUE
+session_4ef3011d7315,2026-04-14T18:03:34,2026-04-14T18:03:54,,Computer Science,Software / Engineering,AI / Machine Learning,Deep Learning,20+ hours,No preference,No preference,TRUE,TRUE
+session_8dcb191cd452,2026-04-14T18:13:53,2026-04-14T18:14:16,,Accounting,Finance,Business / Analytics,Project Management,10 to 20 hours,No preference,Intermediate,TRUE,TRUE
+session_40d8435174ba,2026-04-14T18:15:27,2026-04-14T18:15:48,,AI,Artificial Intelligence,AI / Machine Learning,Model Evaluation,10 to 20 hours,IBM,Advanced,TRUE,TRUE
+session_ed0038138927,2026-04-14T18:16:59,2026-04-14T18:17:28,,Finance,Finance,Data Analysis / Visualization,Data Visualization,20+ hours,No preference,No preference,TRUE,TRUE
+session_39ead40638ad,2026-04-14T18:17:57,2026-04-14T18:18:22,,Marketing,Marketing,Cloud / Deployment,Amazon Web Services,20+ hours,No preference,No preference,TRUE,TRUE
+session_0f6a3273c2c7,2026-04-14T18:24:53,2026-04-14T18:25:13,,Finance,Finance,Data Analysis / Visualization,Microsoft Excel,20+ hours,No preference,No preference,TRUE,TRUE
+session_3ba1b84fd102,2026-04-14T18:26:26,2026-04-14T18:26:49,,AI,Artificial Intelligence,AI / Machine Learning,Deep Learning,20+ hours,No preference,No preference,TRUE,TRUE
+session_5861ad56b305,2026-04-14T18:27:34,2026-04-14T18:27:55,,Marketing,Marketing,Data Analysis / Visualization,Data Visualization,10 to 20 hours,Microsoft,No preference,TRUE,TRUE
+session_3f37fc200467,2026-04-14T18:28:50,2026-04-14T18:29:09,,AI,Artificial Intelligence,Cloud / Deployment,Kubernetes,20+ hours,No preference,Advanced,TRUE,TRUE
+session_564ac208dc07,2026-04-14T18:29:39,2026-04-14T18:29:59,,Finance,Finance,AI / Machine Learning,Prompt Engineering,5 to 10 hours,No preference,No preference,TRUE,TRUE
+session_9a2731ee2ad5,2026-04-14T18:30:43,2026-04-14T18:31:17,,Law,Law,AI / Machine Learning,Generative AI,10 to 20 hours,No preference,No preference,TRUE,TRUE
+session_c0516dea4abd,2026-04-14T18:33:09,,,,,,,,,,FALSE,FALSE
+session_5e87b5fb12be,2026-04-14T18:33:43,,,,,,,,,,FALSE,FALSE
+session_4db90be275c2,2026-04-14T18:33:56,2026-04-14T18:34:21,,Data Science,Artificial Intelligence,Cloud / Deployment,Google Cloud Platform,10 to 20 hours,Google Cloud,No preference,TRUE,TRUE
+session_7de9b13a7067,2026-04-14T18:35:57,2026-04-14T18:36:16,,AI,Artificial Intelligence,Cloud / Deployment,Microsoft Azure,5 to 10 hours,Microsoft,Advanced,TRUE,TRUE
+session_3d5429edf0d2,2026-04-14T18:37:00,2026-04-14T18:37:19,,AI,Artificial Intelligence,AI / Machine Learning,Natural Language Processing,10 to 20 hours,No preference,No preference,TRUE,TRUE
+session_2be5c9c34c3f,2026-04-14T18:38:10,2026-04-14T18:38:41,,Creative,Other,Data Analysis / Visualization,Data Visualization,5 to 10 hours,No preference,No preference,TRUE,TRUE
+session_da1adf7927a4,2026-04-14T18:38:57,2026-04-14T18:39:18,,AI,Artificial Intelligence,AI / Machine Learning,Retrieval-Augmented Generation,20+ hours,Packt,No preference,TRUE,TRUE
+session_a2ad960f83df,2026-04-14T18:39:53,,,,,,,,,,FALSE,FALSE
+session_a52d401ffa69,2026-04-14T18:40:25,2026-04-14T18:40:47,,Marketing,Marketing,Business / Analytics,Customer Insights,10 to 20 hours,Microsoft,No preference,TRUE,TRUE
+session_c24539d02c8d,2026-04-14T18:41:03,2026-04-14T18:41:27,,AI,Artificial Intelligence,Business / Analytics,Customer Insights,20+ hours,No preference,No preference,TRUE,TRUE
+session_4e98c2ad50e3,2026-04-14T18:42:03,2026-04-14T18:42:26,,Finance,Finance,Data Analysis / Visualization,Microsoft Excel,10 to 20 hours,Coursera,Advanced,TRUE,TRUE
+session_040a1d20d63b,2026-04-14T18:45:16,2026-04-14T18:45:35,,AI,Artificial Intelligence,AI / Machine Learning,Retrieval-Augmented Generation,10 to 20 hours,Coursera,Advanced,TRUE,TRUE
+session_fafa9e63a6de,2026-04-14T18:46:04,2026-04-14T18:46:26,,AI,Artificial Intelligence,Cloud / Deployment,Application Programming Interface (API),10 to 20 hours,IBM,Advanced,TRUE,TRUE
+session_4d6664afbd46,2026-04-14T18:47:53,2026-04-14T18:48:16,,Law,Law,AI / Machine Learning,LLM Application,20+ hours,No preference,No preference,TRUE,TRUE
+session_3886dc2e432f,2026-04-14T18:48:31,2026-04-14T18:48:47,,Law,Law,Data Analysis / Visualization,Data Visualization,20+ hours,Microsoft,No preference,TRUE,TRUE
+session_13169f65b6dc,2026-04-14T18:50:19,2026-04-14T18:50:38,,Law,Law,AI / Machine Learning,Generative AI,20+ hours,No preference,No preference,TRUE,TRUE
+session_c1ceb5e7758d,2026-04-14T19:11:52,2026-04-14T19:12:10,,Law,Law,AI / Machine Learning,Generative AI,20+ hours,No preference,No preference,TRUE,TRUE
+session_18b2b09fc8ee,2026-04-14T19:13:04,2026-04-14T19:13:22,,AI,Artificial Intelligence,AI / Machine Learning,Generative AI,20+ hours,No preference,No preference,TRUE,TRUE
+session_bd71707680c9,2026-04-14T21:15:14,2026-04-14T21:15:33,,Law,Law,AI / Machine Learning,Generative AI,20+ hours,No preference,No preference,true,true
+session_56999969af42,2026-04-14T21:16:05,2026-04-14T21:16:39,,Law,Law,AI / Machine Learning,Generative AI,20+ hours,No preference,No preference,true,true
+session_6a8973dd80fd,2026-04-14T23:42:00,2026-04-14T23:42:28,,Finance,Finance,Data Analysis / Visualization,SQL,10 to 20 hours,No preference,No preference,true,true
+session_63eef653f761,2026-04-15T19:19:28,2026-04-15T19:20:12,,Finance,Finance,Data Analysis / Visualization,Microsoft Excel,10 to 20 hours,No preference,No preference,true,true
+session_cf87f9338cc6,2026-04-16T18:05:54,2026-04-16T18:06:23,,Computer Science,Software / Engineering,AI / Machine Learning,Deep Learning,20+ hours,IBM,Advanced,true,true
+session_73a7fc4e8c58,2026-04-16T18:38:02,2026-04-16T18:38:19,,Music,Other,AI / Machine Learning,Generative AI,20+ hours,No preference,No preference,true,true
