@@ -6,3 +6,5 @@ venv/
 course_artifacts/
 *.ipynb_checkpoints
 .DS_Store
+course_chatbot/logs/
+docs/
