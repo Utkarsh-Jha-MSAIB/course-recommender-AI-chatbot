@@ -129,11 +129,27 @@
         }
 
         function buildMessageHtml(content) {
-            const cleaned = stripMarkers(content);
-            const escaped = escapeHtml(cleaned);
-            return escaped
+            // Extract [[TIPS]]...[[/TIPS]] blocks before any other processing
+            const tipsContents = [];
+            const withPlaceholders = (content || "").replace(/\[\[TIPS\]\]([\s\S]*?)\[\[\/TIPS\]\]/g, (_, inner) => {
+                tipsContents.push(inner.trim());
+                return "__TIPS_BLOCK__";
+            });
+
+            const cleaned = stripMarkers(withPlaceholders);
+            let html = escapeHtml(cleaned)
                 .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
                 .replace(/\n/g, "<br>");
+
+            // Render each tips block as a styled card
+            tipsContents.forEach(tips => {
+                const cardInner = escapeHtml(tips)
+                    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+                    .replace(/\n/g, "<br>");
+                html = html.replace("__TIPS_BLOCK__", `<div class="tips-card">${cardInner}</div>`);
+            });
+
+            return html;
         }
 
         function setInputMode(mode = "default") {

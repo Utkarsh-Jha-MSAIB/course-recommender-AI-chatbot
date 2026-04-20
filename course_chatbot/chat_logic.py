@@ -590,6 +590,14 @@ resume_extraction_model = genai.GenerativeModel(
     }
 )
 
+resume_tips_model = genai.GenerativeModel(
+    MODEL_NAME,
+    generation_config={
+        "temperature": 0.5,
+        "max_output_tokens": 2048,
+    }
+)
+
 
 def extract_resume_info(resume_text: str) -> Dict[str, str]:
     prompt = f"""Extract information from the resume below. Return ONLY a compact JSON object on a SINGLE LINE.
@@ -697,8 +705,8 @@ def suggest_career_directions(state: Dict[str, str]) -> List[Dict[str, str]]:
 
 
 def generate_resume_tips(state: Dict[str, str], career_label: str) -> str:
-    """Generate 2-3 actionable resume tips for the chosen career direction."""
-    prompt = f"""You are a career coach. Based on this person's resume profile and their chosen career direction, give exactly 2-3 specific and actionable tips to strengthen their resume for that career.
+    """Generate 5 numbered resume improvement tips for the chosen career direction."""
+    prompt = f"""You are a career coach. Based on this person's resume profile and their chosen career direction, give exactly 5 specific and actionable tips to strengthen their resume for that career.
 
 Profile:
 - Background: {state.get("resume_background", "")}
@@ -710,12 +718,12 @@ Profile:
 
 Rules:
 - Each tip must be specific to their profile and the chosen career — no generic advice
-- Keep each tip to 1-2 sentences
-- Format as bullet points starting with "- "
-- No intro sentence, just the tips"""
+- Keep each tip to 1-2 sentences, clear and direct
+- Number them 1. through 5.
+- No intro sentence, just the 5 numbered tips"""
 
     try:
-        response = resume_extraction_model.generate_content(prompt)
+        response = resume_tips_model.generate_content(prompt)
         return (response.text or "").strip()
     except Exception as e:
         err_str = str(e).lower()
@@ -1212,10 +1220,9 @@ def get_chatbot_response(message: str, chat_history: List[Dict]):
             if tips:
                 response_text = (
                     f"**{selected['label']}** — great direction!\n\n"
-                    f"Based on your resume, here are a few things you could strengthen for this path:\n\n"
-                    f"{tips}\n\n"
-                    "---\n\n"
-                    + attach_options("time", "Now, how much time can you spend on a course per week?")
+                    f"[[TIPS]]**Resume Feedback**\n\n{tips}[[/TIPS]]\n\n"
+                    "Now, how much time can you spend on a course per week?\n"
+                    + "[[OPTIONS:" + "||".join(QUESTION_OPTIONS["time"]) + "]]"
                     + build_state_markers(state)
                 )
             else:
