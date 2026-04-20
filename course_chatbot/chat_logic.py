@@ -512,6 +512,9 @@ def get_state(chat_history: List[Dict]) -> Dict[str, str]:
         "resume_level": "",
         "resume_interests": "",
         "resume_goal": "",
+        "resume_education": "",
+        "resume_experience": "",
+        "career_dirs": "",
     }
 
     for msg in chat_history:
@@ -531,6 +534,7 @@ def build_state_markers(state: Dict[str, str]) -> str:
         "awaiting_custom_skill", "step",
         "resume_status", "resume_background", "resume_skills",
         "resume_level", "resume_interests", "resume_goal",
+        "resume_education", "resume_experience", "career_dirs",
     ]
     return "".join([f"\n[[STATE:{k}={state.get(k, '')}]]" for k in allowed_keys])
 
@@ -565,6 +569,7 @@ def generate_intro_message(user_name: Optional[str]) -> str:
         "awaiting_custom_skill": "false", "step": "resume",
         "resume_status": "pending", "resume_background": "", "resume_skills": "",
         "resume_level": "", "resume_interests": "", "resume_goal": "",
+        "resume_education": "", "resume_experience": "", "career_dirs": "",
     }
 
     greeting = f"Hi {user_name}!" if user_name else "Hi!"
@@ -590,19 +595,21 @@ def extract_resume_info(resume_text: str) -> Dict[str, str]:
     prompt = f"""Extract information from the resume below. Return ONLY a compact JSON object on a SINGLE LINE.
 Use an empty string "" for any field you cannot find.
 Keep ALL values short (under 10 words each).
-For background: just the main academic major or field, NOT work experience (e.g. "Computer Science", "Artificial Intelligence").
+For background: just the main academic major or field (e.g. "Computer Science", "Artificial Intelligence").
 For skills: top 5 technical skills as a comma-separated STRING (not a list).
 For interests: 2-3 interest areas as a comma-separated STRING.
 For level, return exactly one of: "Beginner", "Intermediate", or "Advanced".
-For goal: one short phrase (e.g. "AI Product Manager", "Software Engineer").
+For goal: one short career goal phrase (e.g. "AI Product Manager", "Software Engineer").
+For education: highest degree only (e.g. "Master's", "Bachelor's", "PhD").
+For experience: work experience summary (e.g. "Student", "Internship experience", "1-2 years").
 
-Keys: background, skills, level, interests, goal
+Keys: background, skills, level, interests, goal, education, experience
 
 Resume:
 {resume_text[:2500]}
 
 Return only compact JSON on one line. Example:
-{{"background": "Computer Science", "skills": "Python, TensorFlow", "level": "Intermediate", "interests": "machine learning", "goal": "ML engineer"}}"""
+{{"background": "Computer Science", "skills": "Python, TensorFlow", "level": "Intermediate", "interests": "machine learning", "goal": "ML engineer", "education": "Master's", "experience": "Internship experience"}}"""
 
     try:
         response = resume_extraction_model.generate_content(prompt)
@@ -634,6 +641,104 @@ Return only compact JSON on one line. Example:
             return {"_rate_limited": True}
         print(f"[RESUME EXTRACTION ERROR] {e}")
         return {}
+
+
+def suggest_career_directions(state: Dict[str, str]) -> List[Dict[str, str]]:
+    """Return 3 career directions based on resume data, each mapping to a topic + subskill."""
+    goal = state.get("resume_goal", "").lower()
+    background = state.get("resume_background", "").lower()
+    skills = state.get("resume_skills", "").lower()
+    interests = state.get("resume_interests", "").lower()
+
+    # All possible paths: (label, topic, subskill, keywords_that_boost_score)
+    all_paths = [
+        ("AI Product Manager",   "Business / Analytics",          "AI Product Strategy",                  ["product", "ai", "manager", "management", "strategy"]),
+        ("ML Engineer",          "AI / Machine Learning",         "LLM Application",                      ["machine learning", "ml", "model", "nlp", "deep learning", "tensorflow", "pytorch"]),
+        ("Data Scientist",       "AI / Machine Learning",         "Deep Learning",                        ["data science", "statistics", "python", "analysis", "machine learning"]),
+        ("Data Analyst",         "Data Analysis / Visualization", "Data Analysis",                        ["data", "sql", "excel", "analytics", "visualization", "dashboard"]),
+        ("Cloud Engineer",       "Cloud / Deployment",            "Amazon Web Services",                  ["cloud", "aws", "azure", "gcp", "devops", "deployment", "kubernetes"]),
+        ("Business Analyst",     "Business / Analytics",          "Business Analytics",                   ["business", "analytics", "operations", "stakeholder", "requirements"]),
+        ("Product Manager",      "Business / Analytics",          "Project Management",                   ["product", "project", "roadmap", "agile", "scrum", "management"]),
+        ("AI Researcher",        "AI / Machine Learning",         "Natural Language Processing",          ["research", "nlp", "language", "ai", "neural", "academic"]),
+        ("BI Developer",         "Data Analysis / Visualization", "Business Intelligence",                ["bi", "tableau", "power bi", "dashboard", "reporting", "sql"]),
+        ("MLOps Engineer",       "Cloud / Deployment",            "MLOps (Machine Learning Operations)",  ["mlops", "deployment", "pipeline", "model", "cloud", "docker"]),
+    ]
+
+    blob = " ".join([goal, background, skills, interests])
+
+    scored = []
+    for label, topic, subskill, keywords in all_paths:
+        score = 0
+        for kw in keywords:
+            if kw in blob:
+                score += 1
+        scored.append((score, label, topic, subskill))
+
+    scored.sort(key=lambda x: -x[0])
+
+    # Always ensure 3 distinct results; pad with defaults if needed
+    seen_topics = set()
+    result = []
+    for score, label, topic, subskill in scored:
+        if topic not in seen_topics:
+            result.append({"label": label, "topic": topic, "subskill": subskill})
+            seen_topics.add(topic)
+        if len(result) == 3:
+            break
+
+    # If still < 3, fill remaining with any remaining paths
+    for score, label, topic, subskill in scored:
+        if len(result) >= 3:
+            break
+        if not any(d["label"] == label for d in result):
+            result.append({"label": label, "topic": topic, "subskill": subskill})
+
+    return result[:3]
+
+
+def generate_resume_tips(state: Dict[str, str], career_label: str) -> str:
+    """Generate 2-3 actionable resume tips for the chosen career direction."""
+    prompt = f"""You are a career coach. Based on this person's resume profile and their chosen career direction, give exactly 2-3 specific and actionable tips to strengthen their resume for that career.
+
+Profile:
+- Background: {state.get("resume_background", "")}
+- Education: {state.get("resume_education", "")}
+- Experience: {state.get("resume_experience", "")}
+- Skills: {state.get("resume_skills", "")}
+- Career goal: {state.get("resume_goal", "")}
+- Chosen career direction: {career_label}
+
+Rules:
+- Each tip must be specific to their profile and the chosen career — no generic advice
+- Keep each tip to 1-2 sentences
+- Format as bullet points starting with "- "
+- No intro sentence, just the tips"""
+
+    try:
+        response = resume_extraction_model.generate_content(prompt)
+        return (response.text or "").strip()
+    except Exception as e:
+        err_str = str(e).lower()
+        if "quota" in err_str or "resource_exhausted" in err_str or "429" in err_str:
+            print(f"[RESUME TIPS RATE LIMIT] {e}")
+        else:
+            print(f"[RESUME TIPS ERROR] {e}")
+        return ""
+
+
+def encode_career_dirs(directions: List[Dict[str, str]]) -> str:
+    return "|||".join(f"{d['label']};{d['topic']};{d['subskill']}" for d in directions)
+
+
+def parse_career_dirs(encoded: str) -> List[Dict[str, str]]:
+    if not encoded:
+        return []
+    result = []
+    for part in encoded.split("|||"):
+        parts = part.split(";")
+        if len(parts) == 3:
+            result.append({"label": parts[0], "topic": parts[1], "subskill": parts[2]})
+    return result
 
 
 def format_hours(hours_value) -> str:
@@ -1026,21 +1131,29 @@ def get_chatbot_response(message: str, chat_history: List[Dict]):
         state["resume_level"] = extracted.get("level", "")
         state["resume_interests"] = extracted.get("interests", "")
         state["resume_goal"] = extracted.get("goal", "")
+        state["resume_education"] = extracted.get("education", "")
+        state["resume_experience"] = extracted.get("experience", "")
 
         extracted_bg = state.get("resume_background", "").strip()
 
         if extracted_bg:
             state["step"] = "background_confirm"
             summary_lines = [f"**Background:** {extracted_bg}"]
+            if state.get("resume_education"):
+                summary_lines.append(f"**Education:** {state['resume_education']}")
+            if state.get("resume_experience"):
+                summary_lines.append(f"**Experience:** {state['resume_experience']}")
             if state.get("resume_skills"):
                 summary_lines.append(f"**Skills:** {state['resume_skills']}")
+            if state.get("resume_interests"):
+                summary_lines.append(f"**Interests:** {state['resume_interests']}")
             if state.get("resume_goal"):
                 summary_lines.append(f"**Career goal:** {state['resume_goal']}")
             summary = "\n".join(summary_lines)
             response_text = (
                 "Thanks for sharing your resume! Here's what I found:\n\n"
                 f"{summary}\n\n"
-                "Does your background look right? Type **Yes** to confirm, or type a correction."
+                "Does this look right? Type **Yes** to confirm, or type a correction."
                 + build_state_markers(state)
             )
         else:
@@ -1059,12 +1172,65 @@ def get_chatbot_response(message: str, chat_history: List[Dict]):
             state["background"] = state.get("resume_background", "")
         else:
             state["background"] = stripped
-        state["step"] = "topic"
-        response_text = (
-            "Got it.\n\n"
-            + attach_options("topic", "Which area are you most interested in right now?")
-            + build_state_markers(state)
-        )
+
+        directions = suggest_career_directions(state)
+        if directions:
+            state["career_dirs"] = encode_career_dirs(directions)
+            state["step"] = "career_direction"
+            labels = [d["label"] for d in directions]
+            options_marker = "[[OPTIONS:" + "||".join(labels) + "]]"
+            response_text = (
+                "Based on your profile, here are 3 career paths that match you well:\n\n"
+                + "\n".join(f"**{d['label']}**" for d in directions) + "\n\n"
+                "Which direction are you most interested in?\n"
+                + options_marker
+                + build_state_markers(state)
+            )
+        else:
+            state["step"] = "topic"
+            response_text = (
+                "Got it.\n\n"
+                + attach_options("topic", "Which area are you most interested in right now?")
+                + build_state_markers(state)
+            )
+        ensure_min_delay(start_time, MIN_TRANSITION_SECONDS)
+        return {"text": response_text, "courses": []}
+
+    # --- Career direction step ---
+    if state.get("step") == "career_direction":
+        directions = parse_career_dirs(state.get("career_dirs", ""))
+        selected = None
+        for d in directions:
+            if stripped.lower() == d["label"].lower() or d["label"].lower() in stripped.lower():
+                selected = d
+                break
+        if selected:
+            state["topic"] = selected["topic"]
+            state["subskill"] = selected["subskill"]
+            state["step"] = "time"
+            tips = generate_resume_tips(state, selected["label"])
+            if tips:
+                response_text = (
+                    f"**{selected['label']}** — great direction!\n\n"
+                    f"Based on your resume, here are a few things you could strengthen for this path:\n\n"
+                    f"{tips}\n\n"
+                    "---\n\n"
+                    + attach_options("time", "Now, how much time can you spend on a course per week?")
+                    + build_state_markers(state)
+                )
+            else:
+                response_text = (
+                    f"Great choice! I'll find courses to help you grow as a **{selected['label']}**.\n\n"
+                    + attach_options("time", "How much time can you realistically spend on this course per week?")
+                    + build_state_markers(state)
+                )
+        else:
+            state["step"] = "topic"
+            response_text = (
+                "Let me ask a bit more specifically.\n\n"
+                + attach_options("topic", "Which area are you most interested in right now?")
+                + build_state_markers(state)
+            )
         ensure_min_delay(start_time, MIN_TRANSITION_SECONDS)
         return {"text": response_text, "courses": []}
 
