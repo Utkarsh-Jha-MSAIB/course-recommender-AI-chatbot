@@ -73,12 +73,18 @@
                 </div>
 
                 <div class="input-container">
-                    <input
-                        type="text"
+                    <button id="attach-button" class="attach-button" title="Upload resume (PDF, DOCX, TXT)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66L9.41 17.41a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+                        </svg>
+                    </button>
+                    <input type="file" id="resume-file-input" accept=".pdf,.docx,.txt" style="display:none" />
+                    <textarea
                         id="user-input"
+                        rows="1"
                         placeholder="Start by saying hi or answer the current question..."
                         autocomplete="off"
-                    />
+                    ></textarea>
                     <button id="send-button" class="primary-button">Send</button>
                 </div>
             </section>
@@ -125,7 +131,9 @@
         function buildMessageHtml(content) {
             const cleaned = stripMarkers(content);
             const escaped = escapeHtml(cleaned);
-            return escaped.replace(/\n/g, "<br>");
+            return escaped
+                .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+                .replace(/\n/g, "<br>");
         }
 
         function setInputMode(mode = "default") {
@@ -440,6 +448,7 @@
 
             addMessage(message, true);
             input.value = "";
+            input.style.height = "auto";
             setInputMode("default");
             showTyping(true);
 
@@ -523,14 +532,93 @@
             if (sendButton) sendButton.addEventListener("click", () => sendMessage());
 
             if (userInput) {
-                userInput.addEventListener("keypress", function(event) {
-                    if (event.key === "Enter") sendMessage();
+                userInput.addEventListener("keydown", function(event) {
+                    if (event.key === "Enter" && !event.shiftKey) {
+                        event.preventDefault();
+                        sendMessage();
+                    }
+                });
+                userInput.addEventListener("input", function() {
+                    this.style.height = "auto";
+                    this.style.height = Math.min(this.scrollHeight, 180) + "px";
                 });
             }
 
             if (clearButton) clearButton.addEventListener("click", clearChat);
             if (prevReco) prevReco.addEventListener("click", goToPreviousRecommendations);
             if (nextReco) nextReco.addEventListener("click", goToNextRecommendations);
+
+            const attachButton = document.getElementById("attach-button");
+            const fileInput = document.getElementById("resume-file-input");
+
+            if (attachButton && fileInput) {
+                attachButton.addEventListener("click", () => fileInput.click());
+
+                fileInput.addEventListener("change", async function () {
+                    const file = this.files[0];
+                    if (!file) return;
+
+                    const allowedTypes = [".pdf", ".docx", ".txt"];
+                    const ext = "." + file.name.split(".").pop().toLowerCase();
+                    if (!allowedTypes.includes(ext)) {
+                        addMessage("Sorry, only PDF, DOCX, and TXT files are supported.", false);
+                        this.value = "";
+                        return;
+                    }
+
+                    attachButton.disabled = true;
+                    attachButton.style.opacity = "0.4";
+
+                    const formData = new FormData();
+                    formData.append("file", file);
+
+                    try {
+                        const res = await fetch("/upload_resume", { method: "POST", body: formData });
+                        const data = await res.json();
+
+                        if (data.error) {
+                            addMessage(`Could not read the file: ${data.error}`, false);
+                        } else {
+                            // Show only filename as user message, NOT the full resume text
+                            addMessage(`📎 ${file.name}`, true);
+                            showTyping(true);
+
+                            // Send resume text to backend silently
+                            try {
+                                const chatRes = await fetch("/chat", {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify({
+                                        message: data.text,
+                                        session_id: currentSessionId
+                                    })
+                                });
+                                const chatData = await chatRes.json();
+                                showTyping(false);
+
+                                if (chatData.session_id) currentSessionId = chatData.session_id;
+
+                                if (chatData.response) {
+                                    addMessage(chatData.response, false);
+                                }
+
+                                const returnedCourses = Array.isArray(chatData.courses) ? chatData.courses : [];
+                                recommendationPage = 0;
+                                renderRecommendationRail(returnedCourses);
+                            } catch (err) {
+                                showTyping(false);
+                                addMessage("Sorry, there was an error processing your resume.", false);
+                            }
+                        }
+                    } catch (err) {
+                        addMessage("Upload failed. Please try pasting your resume text instead.", false);
+                    } finally {
+                        attachButton.disabled = false;
+                        attachButton.style.opacity = "";
+                        this.value = "";
+                    }
+                });
+            }
 
             renderRecommendationRail([]);
             addWelcomeMessage();

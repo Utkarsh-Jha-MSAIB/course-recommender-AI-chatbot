@@ -695,25 +695,63 @@ body {
 .input-container {
     padding: 16px 18px 18px;
     display: flex;
-    align-items: center;
-    gap: 12px;
+    align-items: flex-end;
+    gap: 8px;
     background: white;
     border-top: 1px solid var(--border);
 }
 
-.input-container input {
+.input-container .attach-button {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #d7cdd0;
+    background: white;
+    color: #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 5px;
+    padding: 0;
+    box-shadow: none;
+}
+
+.input-container .attach-button:hover {
+    border-color: rgba(111, 29, 43, 0.45);
+    color: rgba(111, 29, 43, 0.8);
+    background: rgba(111, 29, 43, 0.04);
+    transform: none;
+    box-shadow: none;
+}
+
+.input-container .attach-button:disabled {
+    cursor: not-allowed;
+    transform: none;
+}
+
+.input-container textarea {
     flex: 1;
     min-width: 0;
     border: 1px solid #d7cdd0;
-    border-radius: 999px;
+    border-radius: 18px;
     padding: 14px 18px;
     font-size: 0.95rem;
+    font-family: inherit;
     outline: none;
     color: var(--text-main);
+    resize: none;
+    overflow-y: hidden;
+    min-height: 50px;
+    max-height: 180px;
+    overflow-y: auto;
+    line-height: 1.5;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.input-container input:focus {
+.input-container textarea:focus {
     border-color: rgba(111, 29, 43, 0.45);
     box-shadow: 0 0 0 4px rgba(111, 29, 43, 0.10);
 }

@@ -1,3 +1,4 @@
+import io
 from pathlib import Path
 from typing import Dict, List
 
@@ -6,6 +7,8 @@ from flask_cors import CORS
 
 from chat_logic import get_chatbot_response
 from utils import ensure_dir, generate_session_id, save_chat_log
+
+MAX_UPLOAD_BYTES = 5 * 1024 * 1024  # 5 MB
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -89,6 +92,47 @@ def chat():
     })
 
 
+@app.route("/upload_resume", methods=["POST"])
+def upload_resume():
+    if "file" not in request.files:
+        return jsonify({"error": "No file provided."}), 400
+
+    f = request.files["file"]
+    filename = (f.filename or "").lower()
+
+    raw = f.read(MAX_UPLOAD_BYTES)
+    if not raw:
+        return jsonify({"error": "File is empty."}), 400
+
+    try:
+        if filename.endswith(".pdf"):
+            import pdfplumber
+            with pdfplumber.open(io.BytesIO(raw)) as pdf:
+                text = "\n".join(
+                    page.extract_text() or "" for page in pdf.pages
+                ).strip()
+
+        elif filename.endswith(".docx"):
+            from docx import Document
+            doc = Document(io.BytesIO(raw))
+            text = "\n".join(p.text for p in doc.paragraphs if p.text.strip())
+
+        elif filename.endswith(".txt"):
+            text = raw.decode("utf-8", errors="ignore").strip()
+
+        else:
+            return jsonify({"error": "Unsupported file type. Please upload a PDF, DOCX, or TXT file."}), 400
+
+    except Exception as e:
+        print(f"[UPLOAD ERROR] {e}")
+        return jsonify({"error": "Could not read the file. Please try a different format."}), 500
+
+    if not text:
+        return jsonify({"error": "No readable text found in the file."}), 400
+
+    return jsonify({"text": text})
+
+
 @app.route("/clear_history", methods=["POST"])
 def clear_history():
     data = request.get_json(force=True)
@@ -101,4 +145,4 @@ def clear_history():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)
