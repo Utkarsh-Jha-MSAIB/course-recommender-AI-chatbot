@@ -9,17 +9,12 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 
 from recommender import CourseRecommender
-<<<<<<< HEAD
-from utils import format_course_block
-=======
 from utils import is_greeting, format_course_block
 from analytics_utils import (
     update_session_profile,
     save_recommendation_event,
     save_recommended_courses,
 )
->>>>>>> 23abb52 (analytics webpage)
-
 
 load_dotenv()
 
