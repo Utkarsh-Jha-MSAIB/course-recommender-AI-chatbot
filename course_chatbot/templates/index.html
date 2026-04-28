@@ -132,7 +132,31 @@
                 .trim();
         }
 
-        function buildMessageHtml(content) {
+        function escapeRegExp(text) {
+            return String(text || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        }
+
+        function linkRecommendedCourseNames(html, courses = []) {
+            if (!Array.isArray(courses) || !courses.length) return html;
+
+            courses.forEach(course => {
+                const name = course && course.course_name ? String(course.course_name).trim() : "";
+                const url = course && course.url ? String(course.url).trim() : "";
+                if (!name || !url) return;
+
+                const escapedName = escapeHtml(name);
+                const escapedUrl = escapeHtml(url);
+                const pattern = new RegExp(`<strong>${escapeRegExp(escapedName)}</strong>`, "g");
+                html = html.replace(
+                    pattern,
+                    `<a class="course-name-link" href="${escapedUrl}" target="_blank" rel="noopener noreferrer"><strong>${escapedName}</strong></a>`
+                );
+            });
+
+            return html;
+        }
+
+        function buildMessageHtml(content, courses = []) {
             // Extract [[TIPS]]...[[/TIPS]] blocks before any other processing
             const tipsContents = [];
             const withPlaceholders = (content || "").replace(/\[\[TIPS\]\]([\s\S]*?)\[\[\/TIPS\]\]/g, (_, inner) => {
@@ -153,7 +177,7 @@
                 html = html.replace("__TIPS_BLOCK__", `<div class="tips-card">${cardInner}</div>`);
             });
 
-            return html;
+            return linkRecommendedCourseNames(html, courses);
         }
 
         function setInputMode(mode = "default") {
@@ -170,7 +194,7 @@
             }
         }
 
-        function addMessage(content, isUser = false) {
+        function addMessage(content, isUser = false, courses = []) {
             const messagesDiv = document.getElementById("chat-messages");
             if (!messagesDiv) return;
 
@@ -182,7 +206,7 @@
 
             const bubble = document.createElement("div");
             bubble.className = `message-bubble ${isUser ? "user-message" : "bot-message"}`;
-            bubble.innerHTML = buildMessageHtml(content);
+            bubble.innerHTML = buildMessageHtml(content, courses);
 
             block.appendChild(bubble);
 
@@ -489,15 +513,16 @@
 
                 if (data.session_id) currentSessionId = data.session_id;
 
+                const returnedCourses = Array.isArray(data.courses) ? data.courses : [];
+
                 if (data.response) {
-                    addMessage(data.response, false);
+                    addMessage(data.response, false, returnedCourses);
                 } else if (data.text) {
-                    addMessage(data.text, false);
+                    addMessage(data.text, false, returnedCourses);
                 } else {
                     addMessage("Sorry, something went wrong. Please try again.", false);
                 }
 
-                const returnedCourses = Array.isArray(data.courses) ? data.courses : [];
                 recommendationPage = 0;
                 renderRecommendationRail(returnedCourses);
             } catch (error) {
@@ -618,11 +643,11 @@
 
                                 if (chatData.session_id) currentSessionId = chatData.session_id;
 
+                                const returnedCourses = Array.isArray(chatData.courses) ? chatData.courses : [];
                                 if (chatData.response) {
-                                    addMessage(chatData.response, false);
+                                    addMessage(chatData.response, false, returnedCourses);
                                 }
 
-                                const returnedCourses = Array.isArray(chatData.courses) ? chatData.courses : [];
                                 recommendationPage = 0;
                                 renderRecommendationRail(returnedCourses);
                             } catch (err) {

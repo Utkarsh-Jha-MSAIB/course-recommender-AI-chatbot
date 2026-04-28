@@ -568,6 +568,17 @@ body {
     box-shadow: 0 6px 16px rgba(41, 35, 33, 0.05);
 }
 
+.course-name-link {
+    color: var(--fordham-maroon);
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+}
+
+.course-name-link:hover {
+    color: var(--rams-maroon);
+}
+
 .tips-card {
     background: rgba(111, 29, 43, 0.04);
     border: 1px solid rgba(111, 29, 43, 0.12);

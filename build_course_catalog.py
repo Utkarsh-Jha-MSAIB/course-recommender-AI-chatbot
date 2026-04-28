@@ -382,6 +382,8 @@ metadata_cols = [
     "Sub-Domain_Clean",
     "Course Language_Clean",
     "Unified Skills Text",
+    "Course Description_Clean",
+    "course_text_for_embedding",
     "Course URL",
     "Course Image URL_Clean",
     "Course ID",

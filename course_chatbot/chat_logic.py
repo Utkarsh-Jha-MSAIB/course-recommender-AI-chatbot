@@ -872,6 +872,7 @@ def build_course_cards(courses: List[Dict]) -> List[Dict]:
             hours_rating = "N/A"
 
         cards.append({
+            "course_name": (course.get("course_name") or "").strip(),
             "domain_partner": domain_partner,
             "hours_rating": hours_rating,
             "skills": top_skills,
@@ -1008,7 +1009,7 @@ def recommend_from_profile(
 
     retrieved_courses = recommender.search_courses(
         query=combined_query,
-        top_k_retrieval=20,
+        top_k_retrieval=100,
         top_k_final=MAX_RECOMMENDATION_COUNT,
         allowed_difficulties=allowed_difficulties,
         max_hours=max_hours,
@@ -1068,10 +1069,11 @@ Requirements:
 - Start with 2 short sentences summarizing the overall match.
 - Then provide exactly {len(selected_courses)} bullets.
 - Each bullet must include:
-  1. why the course fits the user's selected topic/subskill,
-  2. whether the duration fits the user's time preference,
-  3. whether the level is a good fit,
-  4. one concrete tradeoff.
+  1. the exact course name in bold at the start,
+  2. why the course fits the user's selected topic/subskill,
+  3. whether the duration fits the user's time preference,
+  4. whether the level is a good fit,
+  5. one concrete tradeoff.
 - Tradeoffs should be varied. Do NOT repeat the same tradeoff wording across bullets.
 - Use natural, advisor-like language.
 - Keep the total response under 220 words.
