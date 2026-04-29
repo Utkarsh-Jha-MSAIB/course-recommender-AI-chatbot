@@ -1,10 +1,11 @@
 import io
+import uuid
 from pathlib import Path
 from typing import Dict, List
 
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
-
+Yilu.zhou@gmail.com
 from chat_logic import get_chatbot_response
 from utils import ensure_dir, save_chat_log
 from analytics_utils import (
@@ -13,6 +14,9 @@ from analytics_utils import (
     save_session_start,
     save_chat_message,
     load_analytics_summary,
+    save_recommendation_rating,
+    save_recommendation_feedback,
+    save_conversation_nlp_pair,
 )
 
 MAX_UPLOAD_BYTES = 5 * 1024 * 1024  # 5 MB
@@ -35,6 +39,19 @@ app = Flask(
 CORS(app)
 
 chat_histories: Dict[str, List[Dict]] = {}
+
+
+def attach_tracking_fields(session_id: str, courses: List[Dict]) -> List[Dict]:
+    enriched_courses = []
+
+    for idx, course in enumerate(courses, start=1):
+        course_copy = dict(course)
+        course_copy["recommendation_tracking_id"] = f"track_{session_id}_{uuid.uuid4().hex[:10]}"
+        course_copy["recommendation_rank"] = idx
+        course_copy["user_feedback_rating"] = 0
+        enriched_courses.append(course_copy)
+
+    return enriched_courses
 
 
 @app.route("/")
@@ -91,6 +108,8 @@ def chat():
         )
         recommended_courses = []
 
+    recommended_courses = attach_tracking_fields(session_id, recommended_courses)
+
     chat_histories[session_id].append({
         "role": "assistant",
         "content": assistant_response
@@ -120,11 +139,139 @@ def chat():
         message_text=assistant_response
     )
 
+    try:
+        save_conversation_nlp_pair(
+            session_id=session_id,
+            user_message=message,
+            assistant_message=assistant_response,
+            step="",
+        )
+    except Exception as e:
+        print(f"[NLP TRACKING ERROR] {e}")
+
     return jsonify({
         "session_id": session_id,
         "response": assistant_response,
         "courses": recommended_courses
     })
+
+
+@app.route("/recommendation/rate", methods=["POST"])
+def recommendation_rate():
+    try:
+        data = request.get_json(force=True)
+        print("[RATE REQUEST DATA]", data)
+
+        session_id = (data.get("session_id") or "").strip()
+        recommendation_tracking_id = (data.get("recommendation_tracking_id") or "").strip()
+        course_name = (data.get("course_name") or "Unknown Course").strip()
+        course_url = (data.get("course_url") or "").strip()
+        course_rank = data.get("course_rank", "")
+        rating_value = data.get("rating_value", 0)
+
+        if not session_id or not recommendation_tracking_id:
+            return jsonify({
+                "error": "Missing required rating fields.",
+                "debug": {
+                    "session_id": session_id,
+                    "recommendation_tracking_id": recommendation_tracking_id,
+                    "course_name": course_name,
+                }
+            }), 400
+
+        try:
+            rating_value = int(rating_value)
+        except Exception:
+            return jsonify({"error": "Invalid rating value."}), 400
+
+        if rating_value not in (-1, 0, 1):
+            return jsonify({"error": "Rating must be -1, 0, or 1."}), 400
+
+        rating_label = "ignored"
+        if rating_value == 1:
+            rating_label = "up"
+        elif rating_value == -1:
+            rating_label = "down"
+
+        save_recommendation_rating(
+            session_id=session_id,
+            recommendation_tracking_id=recommendation_tracking_id,
+            course_name=course_name,
+            course_rank=course_rank,
+            course_url=course_url,
+            rating_value=rating_value,
+            rating_label=rating_label,
+        )
+
+        print(
+            "[RATE SAVED]",
+            {
+                "session_id": session_id,
+                "recommendation_tracking_id": recommendation_tracking_id,
+                "course_name": course_name,
+                "course_rank": course_rank,
+                "rating_value": rating_value,
+                "rating_label": rating_label,
+            }
+        )
+
+        return jsonify({"status": "success"})
+
+    except Exception as e:
+        print("[RATE ERROR]", repr(e))
+        return jsonify({"error": f"Backend error while saving rating: {str(e)}"}), 500
+
+
+@app.route("/recommendation/feedback", methods=["POST"])
+def recommendation_feedback():
+    try:
+        data = request.get_json(force=True)
+        print("[FEEDBACK REQUEST DATA]", data)
+
+        session_id = (data.get("session_id") or "").strip()
+        recommendation_tracking_id = (data.get("recommendation_tracking_id") or "").strip()
+        course_name = (data.get("course_name") or "Unknown Course").strip()
+        course_url = (data.get("course_url") or "").strip()
+        course_rank = data.get("course_rank", "")
+        feedback_text = (data.get("feedback_text") or "").strip()
+
+        if not session_id or not recommendation_tracking_id:
+            return jsonify({
+                "error": "Missing required feedback fields.",
+                "debug": {
+                    "session_id": session_id,
+                    "recommendation_tracking_id": recommendation_tracking_id,
+                    "course_name": course_name,
+                }
+            }), 400
+
+        if not feedback_text:
+            return jsonify({"error": "Feedback cannot be empty."}), 400
+
+        save_recommendation_feedback(
+            session_id=session_id,
+            recommendation_tracking_id=recommendation_tracking_id,
+            course_name=course_name,
+            course_rank=course_rank,
+            course_url=course_url,
+            feedback_text=feedback_text,
+        )
+
+        print(
+            "[FEEDBACK SAVED]",
+            {
+                "session_id": session_id,
+                "recommendation_tracking_id": recommendation_tracking_id,
+                "course_name": course_name,
+                "course_rank": course_rank,
+            }
+        )
+
+        return jsonify({"status": "success"})
+
+    except Exception as e:
+        print("[FEEDBACK ERROR]", repr(e))
+        return jsonify({"error": f"Backend error while saving feedback: {str(e)}"}), 500
 
 
 @app.route("/upload_resume", methods=["POST"])

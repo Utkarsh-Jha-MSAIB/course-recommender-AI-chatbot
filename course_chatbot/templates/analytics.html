@@ -7,196 +7,509 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-    <div class="app-shell analytics-shell">
-        <aside class="sidebar">
-            <div class="sidebar-top">
-                <div class="fordham-mark">
-                    <div class="mark-circle">F</div>
-                    <div>
-                        <div class="brand-eyebrow">Fordham University</div>
-                        <h1>Analytics Dashboard</h1>
-                    </div>
+    <header class="site-header">
+        <div class="site-header-top">
+            <div class="site-header-inner site-header-row">
+                <div class="topbar-brand">
+                    <span>Fordham University</span>
                 </div>
+
+                <a href="/" class="top-analytics-link">Back to Chatbot</a>
             </div>
+        </div>
+    </header>
 
-            <div class="panel-card analytics-side-card analytics-side-card-compact">
-                <div class="side-card-footer analytics-side-card-footer-top">
-                    <a href="/" class="primary-button analytics-back-button">Back to Chatbot</a>
-                </div>
-            </div>
-
-            <div class="panel-card analytics-top-course-panel">
-                <div class="reco-panel-header analytics-reco-panel-header">
-                    <div class="reco-panel-title-wrap">
-                        <h3>Top Recommended</h3>
-                        <span id="analytics-reco-count" class="reco-count">0</span>
+    <main class="page-shell">
+        <div class="app-shell analytics-shell">
+            <aside class="sidebar analytics-sidebar">
+                <div class="panel-card analytics-sidebar-stack">
+                    <div class="analytics-brand-card">
+                        <div class="analytics-brand-left">
+                            <div class="analytics-brand-icon-wrap">
+                                <img
+                                    src="{{ url_for('static', filename='fordham_logo.png') }}"
+                                    alt="Fordham University"
+                                    class="analytics-brand-logo"
+                                />
+                            </div>
+                            <div class="analytics-brand-text">
+                                <!-- <div class="analytics-brand-eyebrow">Fordham University</div> -->
+                                <h2>Analytics Dashboard</h2>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="reco-nav">
-                        <button id="analytics-reco-prev" class="reco-nav-btn" type="button" aria-label="Previous top course">&#8249;</button>
-                        <button id="analytics-reco-next" class="reco-nav-btn" type="button" aria-label="Next top course">&#8250;</button>
+                    <div class="analytics-sidebar-body">
+                        <!-- <a href="/" class="primary-button analytics-back-button">Back to Chatbot</a> -->
+
+                        <div class="panel-card analytics-top-course-panel">
+                            <div class="analytics-top-course-header">
+                                <div class="analytics-top-course-title-wrap">
+                                    <h3>Top Recommended</h3>
+                                </div>
+
+                                <div class="analytics-top-course-controls">
+                                    <span id="analytics-reco-count" class="analytics-mini-count">1</span>
+                                    <div class="analytics-top-nav">
+                                        <button id="analytics-reco-prev" class="analytics-top-nav-btn" type="button" aria-label="Previous top course">&#8249;</button>
+                                        <button id="analytics-reco-next" class="analytics-top-nav-btn" type="button" aria-label="Next top course">&#8250;</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="analytics-top-course-rail" class="recommendation-rail analytics-top-course-rail"></div>
+                        </div>
                     </div>
                 </div>
+            </aside>
 
-                <div id="analytics-top-course-rail" class="recommendation-rail"></div>
-            </div>
-        </aside>
-
-        <main class="main-stage">
-            <section class="analytics-dashboard">
-                <div class="analytics-metric-grid analytics-metric-grid-top">
-                    <article class="analytics-metric-card analytics-metric-card-hero">
-                        <div class="metric-label metric-label-hero">Total Sessions</div>
-                        <div class="metric-value metric-value-hero">{{ summary.total_sessions or 0 }}</div>
-                        <div class="metric-subtext metric-subtext-hero">User chat sessions started</div>
-                    </article>
-
-                    <article class="analytics-metric-card analytics-metric-card-hero">
-                        <div class="metric-label metric-label-hero">Total Messages</div>
-                        <div class="metric-value metric-value-hero">{{ summary.total_messages or 0 }}</div>
-                        <div class="metric-subtext metric-subtext-hero">User + assistant interactions logged</div>
-                    </article>
-
-                    <article class="analytics-metric-card analytics-metric-card-hero">
-                        <div class="metric-label metric-label-hero">Recommendation Events</div>
-                        <div class="metric-value metric-value-hero">{{ summary.total_recommendation_events or 0 }}</div>
-                        <div class="metric-subtext metric-subtext-hero">Times recommendations were generated</div>
-                    </article>
-
-                    <article class="analytics-metric-card analytics-metric-card-hero">
-                        <div class="metric-label metric-label-hero">Recommended Courses</div>
-                        <div class="metric-value metric-value-hero">{{ summary.total_recommended_courses or 0 }}</div>
-                        <div class="metric-subtext metric-subtext-hero">Courses surfaced across all sessions</div>
-                    </article>
-                </div>
-
-                <div class="analytics-grid-two">
-                    <article class="panel-card analytics-card">
-                        <div class="analytics-card-header">
-                            <h3>Top Backgrounds</h3>
-                            <span class="analytics-badge">User Modeling</span>
-                        </div>
-
-                        {% if summary.top_backgrounds %}
-                            <div class="analytics-list">
-                                {% for item in summary.top_backgrounds %}
-                                    <div class="analytics-list-row">
-                                        <span class="analytics-list-key">{{ item.label }}</span>
-                                        <span class="analytics-list-value">{{ item.count }}</span>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            <div class="empty-analytics-state">No background data available yet.</div>
-                        {% endif %}
-                    </article>
-
-                    <article class="panel-card analytics-card">
-                        <div class="analytics-card-header">
-                            <h3>Top Interests</h3>
-                            <span class="analytics-badge">Preference Signals</span>
-                        </div>
-
-                        {% if summary.top_interests %}
-                            <div class="analytics-list">
-                                {% for item in summary.top_interests %}
-                                    <div class="analytics-list-row">
-                                        <span class="analytics-list-key">{{ item.label }}</span>
-                                        <span class="analytics-list-value">{{ item.count }}</span>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            <div class="empty-analytics-state">No interest data available yet.</div>
-                        {% endif %}
-                    </article>
-                </div>
-
-                <div class="analytics-grid-two">
-                    <article class="panel-card analytics-card">
-                        <div class="analytics-card-header">
-                            <h3>Top Providers</h3>
-                            <span class="analytics-badge">Course Preference</span>
-                        </div>
-
-                        {% if summary.top_providers %}
-                            <div class="analytics-list">
-                                {% for item in summary.top_providers %}
-                                    <div class="analytics-list-row">
-                                        <span class="analytics-list-key">{{ item.label }}</span>
-                                        <span class="analytics-list-value">{{ item.count }}</span>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            <div class="empty-analytics-state">No provider data available yet.</div>
-                        {% endif %}
-                    </article>
-
-                    <article class="panel-card analytics-card">
-                        <div class="analytics-card-header">
-                            <h3>Top Difficulty Levels</h3>
-                            <span class="analytics-badge">Preference Signals</span>
-                        </div>
-
-                        {% if summary.top_difficulties %}
-                            <div class="analytics-list">
-                                {% for item in summary.top_difficulties %}
-                                    <div class="analytics-list-row">
-                                        <span class="analytics-list-key">{{ item.label }}</span>
-                                        <span class="analytics-list-value">{{ item.count }}</span>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            <div class="empty-analytics-state">No difficulty data available yet.</div>
-                        {% endif %}
-                    </article>
-                </div>
-
-                <article class="panel-card analytics-card analytics-table-card">
-                    <div class="analytics-card-header">
-                        <h3>Recent Sessions</h3>
-                        <span class="analytics-badge">Latest Activity</span>
+            <section class="main-stage analytics-main-stage">
+                <section class="analytics-dashboard-shell">
+                    <div class="panel-card analytics-segment-bar">
+                        <button class="analytics-segment-btn active" data-segment="overview" type="button">Overview</button>
+                        <button class="analytics-segment-btn" data-segment="profiles" type="button">User Profiles</button>
+                        <button class="analytics-segment-btn" data-segment="feedback" type="button">Feedback & Ratings</button>
+                        <button class="analytics-segment-btn" data-segment="sessions" type="button">Sessions</button>
+                        <button class="analytics-segment-btn" data-segment="nlp" type="button">Conversation NLP</button>
                     </div>
 
-                    {% if summary.recent_sessions %}
-                        <div class="analytics-table-wrap">
-                            <table class="analytics-table">
-                                <thead>
-                                    <tr>
-                                        <th>Session ID</th>
-                                        <th>Started At</th>
-                                        <th>Background</th>
-                                        <th>Interest</th>
-                                        <th>Provider</th>
-                                        <th>Difficulty</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for row in summary.recent_sessions %}
-                                        <tr>
-                                            <td>{{ row.session_id }}</td>
-                                            <td>{{ row.started_at }}</td>
-                                            <td>{{ row.background or "—" }}</td>
-                                            <td>{{ row.interest or "—" }}</td>
-                                            <td>{{ row.provider or "—" }}</td>
-                                            <td>{{ row.difficulty or "—" }}</td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+                    <div class="analytics-content-scroll">
+                        <div class="analytics-segment-panel active" data-segment-panel="overview">
+                            <div class="analytics-metric-grid analytics-metric-grid-top">
+                                <article class="analytics-metric-card analytics-metric-card-hero">
+                                    <div class="metric-label metric-label-hero">Total Sessions</div>
+                                    <div class="metric-value metric-value-hero">{{ summary.total_sessions or 0 }}</div>
+                                    <div class="metric-subtext metric-subtext-hero">User chat sessions started</div>
+                                </article>
+
+                                <article class="analytics-metric-card analytics-metric-card-hero">
+                                    <div class="metric-label metric-label-hero">Total Messages</div>
+                                    <div class="metric-value metric-value-hero">{{ summary.total_messages or 0 }}</div>
+                                    <div class="metric-subtext metric-subtext-hero">User + assistant interactions logged</div>
+                                </article>
+
+                                <article class="analytics-metric-card analytics-metric-card-hero">
+                                    <div class="metric-label metric-label-hero">Recommendation Events</div>
+                                    <div class="metric-value metric-value-hero">{{ summary.total_recommendation_events or 0 }}</div>
+                                    <div class="metric-subtext metric-subtext-hero">Times recommendations were generated</div>
+                                </article>
+
+                                <article class="analytics-metric-card analytics-metric-card-hero">
+                                    <div class="metric-label metric-label-hero">Recommended Courses</div>
+                                    <div class="metric-value metric-value-hero">{{ summary.total_recommended_courses or 0 }}</div>
+                                    <div class="metric-subtext metric-subtext-hero">Courses surfaced across all sessions</div>
+                                </article>
+                            </div>
+
+                            <div class="analytics-metric-grid analytics-metric-grid-top">
+                                <article class="analytics-metric-card analytics-metric-card-hero">
+                                    <div class="metric-label metric-label-hero">Thumbs Up</div>
+                                    <div class="metric-value metric-value-hero">{{ summary.total_up_ratings or 0 }}</div>
+                                    <div class="metric-subtext metric-subtext-hero">Positive recommendation ratings</div>
+                                </article>
+
+                                <article class="analytics-metric-card analytics-metric-card-hero">
+                                    <div class="metric-label metric-label-hero">Thumbs Down</div>
+                                    <div class="metric-value metric-value-hero">{{ summary.total_down_ratings or 0 }}</div>
+                                    <div class="metric-subtext metric-subtext-hero">Negative recommendation ratings</div>
+                                </article>
+
+                                <article class="analytics-metric-card analytics-metric-card-hero">
+                                    <div class="metric-label metric-label-hero">Ignored</div>
+                                    <div class="metric-value metric-value-hero">{{ summary.total_ignored_ratings or 0 }}</div>
+                                    <div class="metric-subtext metric-subtext-hero">No feedback or neutral feedback</div>
+                                </article>
+
+                                <article class="analytics-metric-card analytics-metric-card-hero">
+                                    <div class="metric-label metric-label-hero">Net Rating Score</div>
+                                    <div class="metric-value metric-value-hero">{{ summary.net_rating_score or 0 }}</div>
+                                    <div class="metric-subtext metric-subtext-hero">Thumbs up minus thumbs down</div>
+                                </article>
+                            </div>
                         </div>
-                    {% else %}
-                        <div class="empty-analytics-state">No session records available yet.</div>
-                    {% endif %}
-                </article>
+
+                        <div class="analytics-segment-panel" data-segment-panel="profiles">
+                            <div class="analytics-grid-two">
+                                <article class="panel-card analytics-card">
+                                    <div class="analytics-card-header">
+                                        <h3>Top Backgrounds</h3>
+                                        <span class="analytics-badge">User Modeling</span>
+                                    </div>
+
+                                    {% if summary.top_backgrounds %}
+                                        <div class="analytics-list">
+                                            {% for item in summary.top_backgrounds %}
+                                                <div class="analytics-list-row">
+                                                    <span class="analytics-list-key">{{ item.label }}</span>
+                                                    <span class="analytics-list-value">{{ item.count }}</span>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        <div class="empty-analytics-state">No background data available yet.</div>
+                                    {% endif %}
+                                </article>
+
+                                <article class="panel-card analytics-card">
+                                    <div class="analytics-card-header">
+                                        <h3>Top Interests</h3>
+                                        <span class="analytics-badge">Preference Signals</span>
+                                    </div>
+
+                                    {% if summary.top_interests %}
+                                        <div class="analytics-list">
+                                            {% for item in summary.top_interests %}
+                                                <div class="analytics-list-row">
+                                                    <span class="analytics-list-key">{{ item.label }}</span>
+                                                    <span class="analytics-list-value">{{ item.count }}</span>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        <div class="empty-analytics-state">No interest data available yet.</div>
+                                    {% endif %}
+                                </article>
+                            </div>
+
+                            <div class="analytics-grid-two">
+                                <article class="panel-card analytics-card">
+                                    <div class="analytics-card-header">
+                                        <h3>Top Providers</h3>
+                                        <span class="analytics-badge">Course Preference</span>
+                                    </div>
+
+                                    {% if summary.top_providers %}
+                                        <div class="analytics-list">
+                                            {% for item in summary.top_providers %}
+                                                <div class="analytics-list-row">
+                                                    <span class="analytics-list-key">{{ item.label }}</span>
+                                                    <span class="analytics-list-value">{{ item.count }}</span>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        <div class="empty-analytics-state">No provider data available yet.</div>
+                                    {% endif %}
+                                </article>
+
+                                <article class="panel-card analytics-card">
+                                    <div class="analytics-card-header">
+                                        <h3>Top Difficulty Levels</h3>
+                                        <span class="analytics-badge">Preference Signals</span>
+                                    </div>
+
+                                    {% if summary.top_difficulties %}
+                                        <div class="analytics-list">
+                                            {% for item in summary.top_difficulties %}
+                                                <div class="analytics-list-row">
+                                                    <span class="analytics-list-key">{{ item.label }}</span>
+                                                    <span class="analytics-list-value">{{ item.count }}</span>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        <div class="empty-analytics-state">No difficulty data available yet.</div>
+                                    {% endif %}
+                                </article>
+                            </div>
+                        </div>
+
+                        <div class="analytics-segment-panel" data-segment-panel="feedback">
+                            <div class="analytics-grid-two">
+                                <article class="panel-card analytics-card">
+                                    <div class="analytics-card-header">
+                                        <h3>Feedback Rating Breakdown</h3>
+                                        <span class="analytics-badge">Reco Quality</span>
+                                    </div>
+
+                                    {% if summary.feedback_rating_breakdown %}
+                                        <div class="analytics-list">
+                                            {% for item in summary.feedback_rating_breakdown %}
+                                                <div class="analytics-list-row">
+                                                    <span class="analytics-list-key">{{ item.label }}</span>
+                                                    <span class="analytics-list-value">{{ item.count }}</span>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        <div class="empty-analytics-state">No rating feedback available yet.</div>
+                                    {% endif %}
+                                </article>
+
+                                <article class="panel-card analytics-card">
+                                    <div class="analytics-card-header">
+                                        <h3>Feedback Submissions</h3>
+                                        <span class="analytics-badge">User Comments</span>
+                                    </div>
+
+                                    <div class="analytics-list">
+                                        <div class="analytics-list-row">
+                                            <span class="analytics-list-key">Total Submitted</span>
+                                            <span class="analytics-list-value">{{ summary.total_feedback_submissions or 0 }}</span>
+                                        </div>
+                                        <div class="analytics-list-row">
+                                            <span class="analytics-list-key">Positive Signals</span>
+                                            <span class="analytics-list-value">{{ summary.total_up_ratings or 0 }}</span>
+                                        </div>
+                                        <div class="analytics-list-row">
+                                            <span class="analytics-list-key">Negative Signals</span>
+                                            <span class="analytics-list-value">{{ summary.total_down_ratings or 0 }}</span>
+                                        </div>
+                                        <div class="analytics-list-row">
+                                            <span class="analytics-list-key">Net Score</span>
+                                            <span class="analytics-list-value">{{ summary.net_rating_score or 0 }}</span>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <article class="panel-card analytics-card analytics-table-card">
+                                <div class="analytics-card-header">
+                                    <h3>Recent User Feedback</h3>
+                                    <span class="analytics-badge">Recommendation Comments</span>
+                                </div>
+
+                                {% if summary.recent_feedback %}
+                                    <div class="analytics-table-wrap">
+                                        <table class="analytics-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Timestamp</th>
+                                                    <th>Course</th>
+                                                    <th>Feedback</th>
+                                                    <th>Session ID</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for row in summary.recent_feedback %}
+                                                    <tr>
+                                                        <td>{{ row.timestamp or "—" }}</td>
+                                                        <td>{{ row.course_name or "—" }}</td>
+                                                        <td>{{ row.feedback_text or "—" }}</td>
+                                                        <td>{{ row.session_id or "—" }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                {% else %}
+                                    <div class="empty-analytics-state">No written feedback available yet.</div>
+                                {% endif %}
+                            </article>
+                        </div>
+
+                        <div class="analytics-segment-panel" data-segment-panel="sessions">
+                            <article class="panel-card analytics-card analytics-table-card">
+                                <div class="analytics-card-header">
+                                    <h3>Recent Sessions</h3>
+                                    <span class="analytics-badge">Latest Activity</span>
+                                </div>
+
+                                {% if summary.recent_sessions %}
+                                    <div class="analytics-table-wrap">
+                                        <table class="analytics-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Session ID</th>
+                                                    <th>Started At</th>
+                                                    <th>Background</th>
+                                                    <th>Interest</th>
+                                                    <th>Provider</th>
+                                                    <th>Difficulty</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for row in summary.recent_sessions %}
+                                                    <tr>
+                                                        <td>{{ row.session_id }}</td>
+                                                        <td>{{ row.started_at }}</td>
+                                                        <td>{{ row.background or "—" }}</td>
+                                                        <td>{{ row.interest or "—" }}</td>
+                                                        <td>{{ row.provider or "—" }}</td>
+                                                        <td>{{ row.difficulty or "—" }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                {% else %}
+                                    <div class="empty-analytics-state">No session records available yet.</div>
+                                {% endif %}
+                            </article>
+                        </div>
+
+                        <div class="analytics-segment-panel" data-segment-panel="nlp">
+                            <div class="analytics-metric-grid analytics-metric-grid-top">
+                                <article class="analytics-metric-card analytics-metric-card-hero">
+                                    <div class="metric-label metric-label-hero">Avg User Sentiment</div>
+                                    <div class="metric-value metric-value-hero">{{ summary.avg_user_sentiment or 0 }}</div>
+                                    <div class="metric-subtext metric-subtext-hero">Average VADER compound score for user messages</div>
+                                </article>
+
+                                <article class="analytics-metric-card analytics-metric-card-hero">
+                                    <div class="metric-label metric-label-hero">Avg Assistant Sentiment</div>
+                                    <div class="metric-value metric-value-hero">{{ summary.avg_assistant_sentiment or 0 }}</div>
+                                    <div class="metric-subtext metric-subtext-hero">Average VADER compound score for assistant responses</div>
+                                </article>
+
+                                <article class="analytics-metric-card analytics-metric-card-hero">
+                                    <div class="metric-label metric-label-hero">Avg Sentiment Alignment</div>
+                                    <div class="metric-value metric-value-hero">{{ summary.avg_sentiment_alignment or 0 }}</div>
+                                    <div class="metric-subtext metric-subtext-hero">Higher values mean user and assistant tone are closer</div>
+                                </article>
+
+                                <article class="analytics-metric-card analytics-metric-card-hero">
+                                    <div class="metric-label metric-label-hero">Low Alignment Sessions</div>
+                                    <div class="metric-value metric-value-hero">{{ summary.low_alignment_sessions or 0 }}</div>
+                                    <div class="metric-subtext metric-subtext-hero">Sessions with average alignment below 0.55</div>
+                                </article>
+                            </div>
+
+                            <div class="analytics-grid-two">
+                                <article class="panel-card analytics-card">
+                                    <div class="analytics-card-header">
+                                        <h3>Conversation Sentiment Visualization</h3>
+                                        <span class="analytics-badge">VADER Overview</span>
+                                    </div>
+                                    <div class="analytics-chart-wrap">
+                                        <canvas id="sentiment-distribution-chart" height="180"></canvas>
+                                    </div>
+                                </article>
+
+                                <article class="panel-card analytics-card">
+                                    <div class="analytics-card-header">
+                                        <h3>Session Sentiment Summary</h3>
+                                        <span class="analytics-badge">Deep Dive Selector</span>
+                                    </div>
+
+                                    {% if summary.session_sentiment_rows %}
+                                        <div class="analytics-list analytics-session-selector-wrap">
+                                            <div class="analytics-list-row">
+                                                <span class="analytics-list-key">Choose Session</span>
+                                                <select id="session-detail-select" class="analytics-session-select">
+                                                    {% for row in summary.session_sentiment_rows %}
+                                                        <option value="{{ row.session_id }}">{{ row.session_id }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="analytics-list">
+                                            <div class="analytics-list-row">
+                                                <span class="analytics-list-key">Avg User Sentiment</span>
+                                                <span id="selected-avg-user-sentiment" class="analytics-list-value">0</span>
+                                            </div>
+                                            <div class="analytics-list-row">
+                                                <span class="analytics-list-key">Avg Assistant Sentiment</span>
+                                                <span id="selected-avg-assistant-sentiment" class="analytics-list-value">0</span>
+                                            </div>
+                                            <div class="analytics-list-row">
+                                                <span class="analytics-list-key">Avg Alignment</span>
+                                                <span id="selected-avg-alignment" class="analytics-list-value">0</span>
+                                            </div>
+                                            <div class="analytics-list-row">
+                                                <span class="analytics-list-key">Turns Logged</span>
+                                                <span id="selected-turn-count" class="analytics-list-value">0</span>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="empty-analytics-state">No NLP conversation tracking available yet.</div>
+                                    {% endif %}
+                                </article>
+                            </div>
+
+                            <article class="panel-card analytics-card analytics-table-card">
+                                <div class="analytics-card-header">
+                                    <h3>Session-Level Sentiment Overview</h3>
+                                    <span class="analytics-badge">Conversation Quality</span>
+                                </div>
+
+                                {% if summary.session_sentiment_rows %}
+                                    <div class="analytics-table-wrap">
+                                        <table class="analytics-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Session ID</th>
+                                                    <th>Avg User Sentiment</th>
+                                                    <th>Avg Assistant Sentiment</th>
+                                                    <th>Avg Alignment</th>
+                                                    <th>Turns</th>
+                                                    <th>Last Seen</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for row in summary.session_sentiment_rows %}
+                                                    <tr>
+                                                        <td>{{ row.session_id }}</td>
+                                                        <td>{{ row.avg_user_sentiment }}</td>
+                                                        <td>{{ row.avg_assistant_sentiment }}</td>
+                                                        <td>{{ row.avg_sentiment_alignment }}</td>
+                                                        <td>{{ row.turn_count }}</td>
+                                                        <td>{{ row.last_seen }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                {% else %}
+                                    <div class="empty-analytics-state">No conversation sentiment data available yet.</div>
+                                {% endif %}
+                            </article>
+
+                            <article class="panel-card analytics-card analytics-table-card">
+                                <div class="analytics-card-header">
+                                    <h3>Question-Level Sentiment Deep Dive</h3>
+                                    <span class="analytics-badge">Selected Session</span>
+                                </div>
+
+                                <div id="session-turn-detail-wrap">
+                                    <div class="empty-analytics-state">Select a session above to view detailed turn-level sentiment.</div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
             </section>
-        </main>
-    </div>
+        </div>
+    </main>
+
+    <script id="analytics-top-courses-data" type="application/json">
+        {{ summary.top_courses_overall | default([], true) | tojson | safe }}
+    </script>
+
+    <script id="session-sentiment-rows-data" type="application/json">
+        {{ summary.session_sentiment_rows | default([], true) | tojson | safe }}
+    </script>
+
+    <script id="session-turn-details-data" type="application/json">
+        {{ summary.session_turn_details | default({}, true) | tojson | safe }}
+    </script>
+
+    <script id="user-sentiment-distribution-data" type="application/json">
+        {{ summary.user_sentiment_distribution | default([], true) | tojson | safe }}
+    </script>
+
+    <script id="assistant-sentiment-distribution-data" type="application/json">
+        {{ summary.assistant_sentiment_distribution | default([], true) | tojson | safe }}
+    </script>
 
     <script>
-        const analyticsTopCourses = {{ summary.top_courses_overall | tojson }};
+        const analyticsTopCourses = JSON.parse(
+            document.getElementById("analytics-top-courses-data").textContent || "[]"
+        );
+        const sessionSentimentRows = JSON.parse(
+            document.getElementById("session-sentiment-rows-data").textContent || "[]"
+        );
+        const sessionTurnDetails = JSON.parse(
+            document.getElementById("session-turn-details-data").textContent || "{}"
+        );
+        const userSentimentDistribution = JSON.parse(
+            document.getElementById("user-sentiment-distribution-data").textContent || "[]"
+        );
+        const assistantSentimentDistribution = JSON.parse(
+            document.getElementById("assistant-sentiment-distribution-data").textContent || "[]"
+        );
+
         let analyticsRecoPage = 0;
         const ANALYTICS_RECO_PER_PAGE = 1;
 
@@ -226,9 +539,7 @@
             }
 
             const totalPages = Math.ceil(courses.length / ANALYTICS_RECO_PER_PAGE);
-            if (analyticsRecoPage >= totalPages) {
-                analyticsRecoPage = 0;
-            }
+            if (analyticsRecoPage >= totalPages) analyticsRecoPage = 0;
 
             count.textContent = String(analyticsRecoPage + 1);
 
@@ -269,19 +580,13 @@
                 const content = document.createElement("div");
                 content.className = "reco-flashcard-content";
 
-                const header = document.createElement("div");
-                header.className = "analytics-course-header";
-
                 const title = document.createElement("div");
-                title.className = "analytics-course-title";
-                title.textContent = course.course_name || "Untitled Course";
+                // title.className = "analytics-course-title";
+                // title.textContent = course.course_name || "Untitled Course";
 
                 const shownPill = document.createElement("div");
                 shownPill.className = "analytics-course-count-pill";
-                shownPill.textContent = `Shown ${course.count || 0} times`;
-
-                header.appendChild(title);
-                header.appendChild(shownPill);
+                shownPill.textContent = `Fordham Favorite — appeared ${course.count || 0} times`;
 
                 const metaGrid = document.createElement("div");
                 metaGrid.className = "reco-meta-grid";
@@ -305,7 +610,7 @@
 
                 const countPill = document.createElement("div");
                 countPill.className = "score-pill";
-                countPill.textContent = "Top Overall Course";
+                countPill.textContent = "🏆 Top Overall Course";
 
                 scoreList.appendChild(countPill);
                 scoreWrap.appendChild(scoreList);
@@ -323,7 +628,8 @@
                     footer.appendChild(link);
                 }
 
-                content.appendChild(header);
+                content.appendChild(title);
+                content.appendChild(shownPill);
                 content.appendChild(metaGrid);
                 content.appendChild(scoreWrap);
                 content.appendChild(footer);
@@ -352,14 +658,217 @@
             }
         }
 
+        function renderSentimentDistributionChart() {
+            const canvas = document.getElementById("sentiment-distribution-chart");
+            if (!canvas) return;
+
+            const ctx = canvas.getContext("2d");
+            const width = canvas.width = canvas.offsetWidth;
+            const height = canvas.height = 180;
+
+            ctx.clearRect(0, 0, width, height);
+
+            const labels = ["Positive", "Neutral", "Negative"];
+            const userMap = {};
+            const assistantMap = {};
+
+            userSentimentDistribution.forEach(item => {
+                userMap[item.label] = item.count;
+            });
+
+            assistantSentimentDistribution.forEach(item => {
+                assistantMap[item.label] = item.count;
+            });
+
+            const userValues = labels.map(label => Number(userMap[label] || 0));
+            const assistantValues = labels.map(label => Number(assistantMap[label] || 0));
+            const maxValue = Math.max(...userValues, ...assistantValues, 1);
+
+            const userColor = "#860028";       // Fordham maroon
+            const assistantColor = "#5A6675";  // Fordham grey
+            const axisColor = "#7a8596";
+            const gridColor = "#ebe3e6";
+
+            const chartLeft = 42;
+            const chartRight = width - 26;
+            const chartTop = 34;
+            const chartBottom = height - 34;
+            const chartWidth = chartRight - chartLeft;
+            const chartHeight = chartBottom - chartTop;
+
+            const groupGap = 20;
+            const groupWidth = (chartWidth - groupGap * (labels.length - 1)) / labels.length;
+            const barGap = 8;
+            const barWidth = Math.min(22, (groupWidth - barGap) / 2);
+
+            ctx.font = "12px Segoe UI";
+            ctx.textBaseline = "middle";
+
+            // Grid lines
+            ctx.strokeStyle = gridColor;
+            ctx.lineWidth = 1;
+            for (let i = 0; i < 4; i++) {
+                const y = chartTop + (chartHeight / 3) * i;
+                ctx.beginPath();
+                ctx.moveTo(chartLeft, y);
+                ctx.lineTo(chartRight, y);
+                ctx.stroke();
+            }
+
+            // Legend at top-right
+            let legendX = width - 145;
+            let legendY = 8;
+
+            ctx.textAlign = "left";
+            ctx.fillStyle = userColor;
+            ctx.fillRect(legendX, legendY, 11, 11);
+            ctx.fillStyle = "#292321";
+            ctx.font = "600 12px Inter, Segoe UI, sans-serif";
+            ctx.fillText("User", legendX + 18, legendY + 6);
+
+            legendX += 72;
+            ctx.fillStyle = assistantColor;
+            ctx.fillRect(legendX, legendY, 11, 11);
+            ctx.fillStyle = "#292321";
+            ctx.fillText("Assistant", legendX + 18, legendY + 6);
+
+            labels.forEach((label, index) => {
+                const groupX = chartLeft + index * (groupWidth + groupGap);
+                const userX = groupX + (groupWidth / 2) - barWidth - (barGap / 2);
+                const assistantX = groupX + (groupWidth / 2) + (barGap / 2);
+
+                const userHeight = (userValues[index] / maxValue) * (chartHeight - 8);
+                const assistantHeight = (assistantValues[index] / maxValue) * (chartHeight - 8);
+
+                const userY = chartBottom - userHeight;
+                const assistantY = chartBottom - assistantHeight;
+
+                // Bars
+                ctx.fillStyle = userColor;
+                ctx.fillRect(userX, userY, barWidth, userHeight);
+
+                ctx.fillStyle = assistantColor;
+                ctx.fillRect(assistantX, assistantY, barWidth, assistantHeight);
+
+                // Value labels
+                ctx.font = "600 11px Inter, Segoe UI, sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillStyle = "#292321"; // black
+
+                ctx.fillText(String(userValues[index]), userX + barWidth / 2, userY - 8);
+                ctx.fillText(String(assistantValues[index]), assistantX + barWidth / 2, assistantY - 8);
+
+                // Category label
+                ctx.fillStyle = "#292321";
+                ctx.font = "600 12px Inter, Segoe UI, sans-serif";
+                ctx.fillText(label, groupX + groupWidth / 2, chartBottom + 18);
+            });
+        }
+
+        function updateSessionSummary(sessionId) {
+            const row = sessionSentimentRows.find(item => item.session_id === sessionId);
+            if (!row) return;
+
+            const userEl = document.getElementById("selected-avg-user-sentiment");
+            const assistantEl = document.getElementById("selected-avg-assistant-sentiment");
+            const alignmentEl = document.getElementById("selected-avg-alignment");
+            const turnsEl = document.getElementById("selected-turn-count");
+
+            if (userEl) userEl.textContent = row.avg_user_sentiment;
+            if (assistantEl) assistantEl.textContent = row.avg_assistant_sentiment;
+            if (alignmentEl) alignmentEl.textContent = row.avg_sentiment_alignment;
+            if (turnsEl) turnsEl.textContent = row.turn_count;
+        }
+
+        function renderSessionTurnDetails(sessionId) {
+            const wrap = document.getElementById("session-turn-detail-wrap");
+            if (!wrap) return;
+
+            const turns = sessionTurnDetails[sessionId] || [];
+
+            if (!turns.length) {
+                wrap.innerHTML = '<div class="empty-analytics-state">No turn-level data available for this session.</div>';
+                return;
+            }
+
+            const rows = turns.map(turn => `
+                <tr>
+                    <td>${turn.turn_number}</td>
+                    <td>${escapeHtml(turn.timestamp || "—")}</td>
+                    <td>${escapeHtml(turn.user_sentiment_label || "—")} (${turn.user_sentiment})</td>
+                    <td>${escapeHtml(turn.assistant_sentiment_label || "—")} (${turn.assistant_sentiment})</td>
+                    <td>${turn.sentiment_alignment}</td>
+                    <td>${escapeHtml(turn.user_message || "—")}</td>
+                    <td>${escapeHtml(turn.assistant_message || "—")}</td>
+                </tr>
+            `).join("");
+
+            wrap.innerHTML = `
+                <div class="analytics-table-wrap">
+                    <table class="analytics-table">
+                        <thead>
+                            <tr>
+                                <th>Turn</th>
+                                <th>Timestamp</th>
+                                <th>User Sentiment</th>
+                                <th>Assistant Sentiment</th>
+                                <th>Alignment</th>
+                                <th>User Message</th>
+                                <th>Assistant Response</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${rows}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function setupAnalyticsSegments() {
+            const buttons = document.querySelectorAll(".analytics-segment-btn");
+            const panels = document.querySelectorAll(".analytics-segment-panel");
+
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const target = this.dataset.segment;
+
+                    buttons.forEach(btn => btn.classList.remove("active"));
+                    panels.forEach(panel => panel.classList.remove("active"));
+
+                    this.classList.add("active");
+                    const targetPanel = document.querySelector(`.analytics-segment-panel[data-segment-panel="${target}"]`);
+                    if (targetPanel) targetPanel.classList.add("active");
+
+                    if (target === "nlp") {
+                        setTimeout(() => {
+                            renderSentimentDistributionChart();
+                        }, 50);
+                    }
+                });
+            });
+        }
+
         document.addEventListener("DOMContentLoaded", function () {
             const prevReco = document.getElementById("analytics-reco-prev");
             const nextReco = document.getElementById("analytics-reco-next");
+            const sessionSelect = document.getElementById("session-detail-select");
 
             if (prevReco) prevReco.addEventListener("click", goToPreviousAnalyticsRecommendation);
             if (nextReco) nextReco.addEventListener("click", goToNextAnalyticsRecommendation);
 
             renderAnalyticsTopCourseRail(analyticsTopCourses);
+            setupAnalyticsSegments();
+
+            if (sessionSelect && sessionSentimentRows.length) {
+                updateSessionSummary(sessionSelect.value);
+                renderSessionTurnDetails(sessionSelect.value);
+
+                sessionSelect.addEventListener("change", function () {
+                    updateSessionSummary(this.value);
+                    renderSessionTurnDetails(this.value);
+                });
+            }
         });
     </script>
 </body>

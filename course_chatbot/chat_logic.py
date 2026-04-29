@@ -9,6 +9,10 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 
 from recommender import CourseRecommender
+<<<<<<< HEAD
+=======
+
+>>>>>>> aa7c3b2 (Initial commit for main-fresh project)
 from utils import is_greeting, format_course_block
 from analytics_utils import (
     update_session_profile,
@@ -618,7 +622,7 @@ For experience: work experience summary (e.g. "Student", "Internship experience"
 Keys: background, skills, level, interests, goal, education, experience
 
 Resume:
-{resume_text[:2500]}
+{resume_text[:500]}
 
 Return only compact JSON on one line. Example:
 {{"background": "Computer Science", "skills": "Python, TensorFlow", "level": "Intermediate", "interests": "machine learning", "goal": "ML engineer", "education": "Master's", "experience": "Internship experience"}}"""
@@ -872,6 +876,13 @@ def build_course_cards(courses: List[Dict]) -> List[Dict]:
             hours_rating = "N/A"
 
         cards.append({
+            "course_name": (course.get("course_name") or "").strip(),
+            "partner": partner,
+            "domain": domain,
+            "sub_domain": (course.get("sub_domain") or "").strip(),
+            "difficulty": (course.get("difficulty") or "").strip(),
+            "hours": course.get("hours", ""),
+            "rating": course.get("rating", ""),
             "domain_partner": domain_partner,
             "hours_rating": hours_rating,
             "skills": top_skills,

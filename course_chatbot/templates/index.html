@@ -5,94 +5,291 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fordham AI Course Recommender</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <style>
+        .reco-action-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .feedback-icon-button {
+            border: 1px solid #ddd7da;
+            background: #fff;
+            border-radius: 10px;
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 15px;
+            line-height: 1;
+            transition: all 0.2s ease;
+        }
+
+        .feedback-icon-button:hover {
+            transform: translateY(-1px);
+            border-color: #c7b8be;
+            box-shadow: 0 6px 14px rgba(41, 35, 33, 0.08);
+        }
+
+        .feedback-icon-button.active-up {
+            background: #e9f8ef;
+            border-color: #4caf50;
+        }
+
+        .feedback-icon-button.active-down {
+            background: #fdecec;
+            border-color: #d9534f;
+        }
+
+        .reco-feedback-card {
+            margin-top: 10px;
+            border: 1px solid #ece3e6;
+            border-radius: 12px;
+            padding: 10px;
+            background: #fcfafb;
+        }
+
+        .reco-feedback-title {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 7px;
+            color: var(--fordham-black);
+        }
+
+        .reco-feedback-textarea {
+            width: 100%;
+            min-height: 60px;
+            resize: vertical;
+            border: 1px solid #d9d9d9;
+            border-radius: 10px;
+            padding: 9px 11px;
+            font: inherit;
+            font-size: 0.85rem;
+            box-sizing: border-box;
+            background: #fff;
+        }
+
+        .reco-feedback-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 8px;
+        }
+
+        .reco-feedback-submit {
+            border: none;
+            border-radius: 999px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font: inherit;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .reco-feedback-status {
+            margin-top: 7px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .user-file-bubble {
+            max-width: 360px;
+            background: var(--fordham-maroon);
+            color: #fff;
+            border-radius: 18px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            box-shadow: 0 12px 28px rgba(134, 0, 40, 0.24);
+            transition: all 0.2s ease;
+        }
+
+        .user-file-bubble:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 34px rgba(134, 0, 40, 0.32);
+        }
+
+        .user-file-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.16);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .user-file-info {
+            min-width: 0;
+        }
+
+        .user-file-name {
+            font-weight: 800;
+            font-size: 15px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user-file-meta {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+
+        .file-preview-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 8, 14, 0.72);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+        }
+
+        .file-preview-modal.hidden {
+            display: none;
+        }
+
+        .file-preview-shell {
+            width: min(960px, 92vw);
+            height: min(860px, 92vh);
+            background: #fff;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .file-preview-header {
+            height: 58px;
+            background: var(--fordham-maroon);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 18px 0 22px;
+            font-weight: 800;
+        }
+
+        .file-preview-header button {
+            width: 36px;
+            height: 36px;
+            border-radius: 999px;
+            border: none;
+            background: rgba(255, 255, 255, 0.16);
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .file-preview-frame {
+            flex: 1;
+            width: 100%;
+            border: none;
+            background: #f7f3f5;
+        }
+    </style>
 </head>
 <body>
-    <div class="app-shell">
-        <aside class="sidebar">
-            <div class="sidebar-top">
-                <div class="fordham-mark">
-                    <div class="mark-circle">F</div>
-                    <div>
-                        <div class="brand-eyebrow">Fordham University</div>
-                        <h1>AI Course Recommender</h1>
-                    </div>
+    <header class="site-header">
+        <div class="site-header-top">
+            <div class="site-header-inner site-header-row">
+                <div class="topbar-brand">
+                    <span>Fordham University</span>
                 </div>
+
+                <a href="/analytics" class="top-analytics-link">Analytics</a>
             </div>
+        </div>
+    </header>
 
-            <div class="panel-card reco-panel">
-                <div class="reco-panel-header">
-                    <div class="reco-panel-title-wrap">
-                        <h3>Recommended for You</h3>
-                        <span id="reco-count" class="reco-count">0</span>
-                    </div>
+    <main class="page-shell">
+        <div class="app-shell">
+            <aside class="sidebar">
+                <div class="panel-card reco-panel">
+                    <div class="section-header premium-header sidebar-header">
+                        <div class="section-header-left">
+                            <div class="section-header-icon-wrap">
+                                <img
+                                    src="{{ url_for('static', filename='fordham_logo.png') }}"
+                                    alt="Fordham University"
+                                    class="section-header-logo"
+                                />
+                            </div>
 
-                    <div class="reco-nav">
-                        <button id="reco-prev" class="reco-nav-btn" type="button" aria-label="Previous recommendation">&#8249;</button>
-                        <button id="reco-next" class="reco-nav-btn" type="button" aria-label="Next recommendation">&#8250;</button>
-                    </div>
-                </div>
-
-                <div id="recommendation-rail" class="recommendation-rail">
-                    <div class="empty-reco-state">
-                        Your recommendations will appear here after the questionnaire.
-                    </div>
-                </div>
-            </div>
-        </aside>
-
-        <main class="main-stage">
-            <section class="hero-banner">
-                <div class="hero-overlay"></div>
-                <div class="hero-content">
-                    <div class="hero-text">
-                        <span class="hero-tag">Fordham AI Assistant</span>
-                        <h2>Find the right courses for your goals</h2>
-                        <p>
-                            Get course recommendations tailored to your background,
-                            interests, and time commitment.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="chat-window">
-                <div class="chat-header">
-                    <div class="chat-title-wrap">
-                        <div class="chat-avatar">AI</div>
-                        <div>
-                            <h2>Course Assistant</h2>
+                            <div class="section-header-text">
+                                <h2>AI Course Recommender</h2>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="header-actions">
-                        <a href="/analytics" class="secondary-button nav-link-button">View Analytics</a>
-                        <button id="clear-button" class="secondary-button">Clear Chat</button>
+                    <div id="recommendation-rail" class="recommendation-rail">
+                        <div class="empty-reco-state">
+                            Your recommendations will appear here after the questionnaire.
+                        </div>
                     </div>
                 </div>
+            </aside>
 
-                <div id="chat-messages" class="chat-messages"></div>
+            <section class="main-stage">
+                <div class="chat-hero-banner">
+                    <div class="chat-hero-top-row">
+                        <div class="chat-hero-left">
+                            <div class="chat-hero-pill">Fordham AI Assistant</div>
+                        </div>
+                        <button id="clear-button" class="chat-hero-clear-button">Clear Chat</button>
+                    </div>
 
-                <div id="typing-indicator" class="typing-indicator">
-                    <span></span><span></span><span></span>
+                    <h1>Find the right courses for your goals</h1>
+                    <p>Get course recommendations tailored to your background, interests, and time commitment.</p>
                 </div>
 
-                <div class="input-container">
-                    <button id="attach-button" class="attach-button" title="Upload resume (PDF, DOCX, TXT)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66L9.41 17.41a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
-                        </svg>
-                    </button>
-                    <input type="file" id="resume-file-input" accept=".pdf,.docx,.txt" style="display:none" />
-                    <textarea
-                        id="user-input"
-                        rows="1"
-                        placeholder="Start by saying hi or answer the current question..."
-                        autocomplete="off"
-                    ></textarea>
-                    <button id="send-button" class="primary-button">Send</button>
-                </div>
+                <section class="chat-window">
+                    <div id="chat-messages" class="chat-messages"></div>
+
+                    <div id="typing-indicator" class="typing-indicator">
+                        <span></span><span></span><span></span>
+                    </div>
+
+                    <div class="input-container">
+                        <button id="attach-button" class="attach-button" title="Upload resume (PDF, DOCX, TXT)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66L9.41 17.41a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+                            </svg>
+                        </button>
+
+                        <input type="file" id="resume-file-input" accept=".pdf,.docx,.txt" style="display:none" />
+
+                        <textarea
+                            id="user-input"
+                            rows="1"
+                            placeholder="Start by saying hi or answer the current question..."
+                            autocomplete="off"
+                        ></textarea>
+
+                        <button id="send-button" class="primary-button send-button">
+                            <span class="send-button-label">Send</span>
+                        </button>
+                    </div>
+                </section>
             </section>
-        </main>
+        </div>
+    </main>
+
+    <div id="filePreviewModal" class="file-preview-modal hidden">
+        <div class="file-preview-shell">
+            <div class="file-preview-header">
+                <span id="filePreviewTitle">Resume Preview</span>
+                <button onclick="closeFilePreview()">✕</button>
+            </div>
+
+            <iframe id="filePreviewFrame" class="file-preview-frame"></iframe>
+        </div>
     </div>
 
     <script>
@@ -133,7 +330,6 @@
         }
 
         function buildMessageHtml(content) {
-            // Extract [[TIPS]]...[[/TIPS]] blocks before any other processing
             const tipsContents = [];
             const withPlaceholders = (content || "").replace(/\[\[TIPS\]\]([\s\S]*?)\[\[\/TIPS\]\]/g, (_, inner) => {
                 tipsContents.push(inner.trim());
@@ -145,7 +341,6 @@
                 .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
                 .replace(/\n/g, "<br>");
 
-            // Render each tips block as a styled card
             tipsContents.forEach(tips => {
                 const cardInner = escapeHtml(tips)
                     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
@@ -263,6 +458,53 @@
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
 
+        function addUserFileMessage(fileName, fileUrl) {
+            const messagesDiv = document.getElementById("chat-messages");
+            if (!messagesDiv) return;
+
+            const wrapper = document.createElement("div");
+            wrapper.className = "message-row user-row";
+
+            const block = document.createElement("div");
+            block.className = "message-block";
+
+            const bubble = document.createElement("div");
+            bubble.className = "user-file-bubble";
+
+            bubble.innerHTML = `
+                <div class="user-file-icon">📎</div>
+                <div class="user-file-info">
+                    <div class="user-file-name">${escapeHtml(fileName)}</div>
+                    <div class="user-file-meta">Click to preview</div>
+                </div>
+            `;
+
+            bubble.onclick = () => openFilePreview(fileUrl, fileName);
+
+            block.appendChild(bubble);
+            wrapper.appendChild(block);
+            messagesDiv.appendChild(wrapper);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function openFilePreview(fileUrl, fileName) {
+            const title = document.getElementById("filePreviewTitle");
+            const frame = document.getElementById("filePreviewFrame");
+            const modal = document.getElementById("filePreviewModal");
+
+            if (title) title.textContent = fileName;
+            if (frame) frame.src = fileUrl;
+            if (modal) modal.classList.remove("hidden");
+        }
+
+        function closeFilePreview() {
+            const frame = document.getElementById("filePreviewFrame");
+            const modal = document.getElementById("filePreviewModal");
+
+            if (frame) frame.src = "";
+            if (modal) modal.classList.add("hidden");
+        }
+
         function disableOptionGroup(optionGroup, selectedButton = null) {
             const buttons = optionGroup.querySelectorAll("button");
             buttons.forEach(btn => {
@@ -299,41 +541,90 @@
             return Number.isFinite(num) ? num.toFixed(2) : String(value);
         }
 
+        async function postRecommendationRating(course, ratingValue) {
+            const response = await fetch("/recommendation/rate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    session_id: currentSessionId,
+                    recommendation_tracking_id: course.recommendation_tracking_id,
+                    course_name: course.course_name || "",
+                    course_rank: course.recommendation_rank || "",
+                    course_url: course.url || "",
+                    rating_value: ratingValue
+                })
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || "Unable to save rating.");
+            return data;
+        }
+
+        async function postRecommendationFeedback(course, feedbackText) {
+            const response = await fetch("/recommendation/feedback", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    session_id: currentSessionId,
+                    recommendation_tracking_id: course.recommendation_tracking_id,
+                    course_name: course.course_name || "",
+                    course_rank: course.recommendation_rank || "",
+                    course_url: course.url || "",
+                    feedback_text: feedbackText
+                })
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || "Unable to save feedback.");
+            return data;
+        }
+
         function renderRecommendationRail(courses = allRecommendations) {
             const rail = document.getElementById("recommendation-rail");
-            const count = document.getElementById("reco-count");
-            const prevBtn = document.getElementById("reco-prev");
-            const nextBtn = document.getElementById("reco-next");
-
-            if (!rail || !count) return;
+            if (!rail) return;
 
             rail.innerHTML = "";
 
             if (!courses || !Array.isArray(courses) || !courses.length) {
                 allRecommendations = [];
                 recommendationPage = 0;
-                count.textContent = "0";
                 rail.innerHTML = '<div class="empty-reco-state">Your recommendations will appear here after the questionnaire.</div>';
-                if (prevBtn) prevBtn.disabled = true;
-                if (nextBtn) nextBtn.disabled = true;
                 return;
             }
 
             allRecommendations = courses;
 
             const totalPages = Math.ceil(courses.length / RECO_PER_PAGE);
-            if (recommendationPage >= totalPages) {
-                recommendationPage = 0;
-            }
-
-            count.textContent = String(recommendationPage + 1);
+            if (recommendationPage >= totalPages) recommendationPage = 0;
 
             const start = recommendationPage * RECO_PER_PAGE;
             const visibleCourses = courses.slice(start, start + RECO_PER_PAGE);
 
-            visibleCourses.forEach(course => {
+            visibleCourses.forEach((course, idx) => {
+                const courseNumber = start + idx + 1;
+
                 const card = document.createElement("article");
                 card.className = "reco-flashcard";
+
+                const countBadge = document.createElement("div");
+                countBadge.className = "reco-floating-count";
+                countBadge.textContent = String(courseNumber);
+
+                const prevBtn = document.createElement("button");
+                prevBtn.type = "button";
+                prevBtn.className = "reco-side-nav reco-side-nav-left";
+                prevBtn.setAttribute("aria-label", "Previous recommendation");
+                prevBtn.innerHTML = "&#8249;";
+                prevBtn.disabled = recommendationPage === 0;
+                prevBtn.onclick = goToPreviousRecommendations;
+
+                const nextBtn = document.createElement("button");
+                nextBtn.type = "button";
+                nextBtn.className = "reco-side-nav reco-side-nav-right";
+                nextBtn.setAttribute("aria-label", "Next recommendation");
+                nextBtn.innerHTML = "&#8250;";
+                nextBtn.disabled = recommendationPage >= totalPages - 1;
+                nextBtn.onclick = goToNextRecommendations;
 
                 const media = document.createElement("div");
                 media.className = "reco-flashcard-media";
@@ -430,18 +721,128 @@
                     footer.appendChild(link);
                 }
 
+                const actionGroup = document.createElement("div");
+                actionGroup.className = "reco-action-group";
+
+                const currentRating = Number(course.user_feedback_rating || 0);
+
+                const thumbsUpBtn = document.createElement("button");
+                thumbsUpBtn.type = "button";
+                thumbsUpBtn.className = `feedback-icon-button ${currentRating === 1 ? "active-up" : ""}`;
+                thumbsUpBtn.setAttribute("aria-label", "Thumbs up");
+                thumbsUpBtn.textContent = "👍";
+
+                thumbsUpBtn.onclick = async () => {
+                    const nextValue = Number(course.user_feedback_rating || 0) === 1 ? 0 : 1;
+                    thumbsUpBtn.disabled = true;
+                    thumbsUpBtn.style.opacity = "0.6";
+                    try {
+                        await postRecommendationRating(course, nextValue);
+                        course.user_feedback_rating = nextValue;
+                        renderRecommendationRail(allRecommendations);
+                    } catch (error) {
+                        console.error("RATING ERROR FULL:", error);
+                        alert("DEBUG: " + (error.message || JSON.stringify(error) || "unknown"));
+                    } finally {
+                        thumbsUpBtn.disabled = false;
+                        thumbsUpBtn.style.opacity = "";
+                    }
+                };
+
+                const thumbsDownBtn = document.createElement("button");
+                thumbsDownBtn.type = "button";
+                thumbsDownBtn.className = `feedback-icon-button ${currentRating === -1 ? "active-down" : ""}`;
+                thumbsDownBtn.setAttribute("aria-label", "Thumbs down");
+                thumbsDownBtn.textContent = "👎";
+
+                thumbsDownBtn.onclick = async () => {
+                    const nextValue = Number(course.user_feedback_rating || 0) === -1 ? 0 : -1;
+                    thumbsDownBtn.disabled = true;
+                    thumbsDownBtn.style.opacity = "0.6";
+                    try {
+                        await postRecommendationRating(course, nextValue);
+                        course.user_feedback_rating = nextValue;
+                        renderRecommendationRail(allRecommendations);
+                    } catch (error) {
+                        console.error("RATING ERROR FULL:", error);
+                        alert("DEBUG: " + (error.message || JSON.stringify(error) || "unknown"));
+                    } finally {
+                        thumbsDownBtn.disabled = false;
+                        thumbsDownBtn.style.opacity = "";
+                    }
+                };
+
+                actionGroup.appendChild(thumbsUpBtn);
+                actionGroup.appendChild(thumbsDownBtn);
+                footer.appendChild(actionGroup);
+
+                const feedbackCard = document.createElement("div");
+                feedbackCard.className = "reco-feedback-card";
+
+                const feedbackTitle = document.createElement("div");
+                feedbackTitle.className = "reco-feedback-title";
+                feedbackTitle.textContent = "Have feedback?";
+
+                const feedbackTextarea = document.createElement("textarea");
+                feedbackTextarea.className = "reco-feedback-textarea";
+                feedbackTextarea.placeholder = "Tell us why this recommendation was helpful or not relevant...";
+
+                const feedbackActions = document.createElement("div");
+                feedbackActions.className = "reco-feedback-actions";
+
+                const feedbackSubmit = document.createElement("button");
+                feedbackSubmit.type = "button";
+                feedbackSubmit.className = "primary-button reco-feedback-submit";
+                feedbackSubmit.textContent = "Submit Feedback";
+
+                const feedbackStatus = document.createElement("div");
+                feedbackStatus.className = "reco-feedback-status";
+
+                feedbackSubmit.onclick = async () => {
+                    const feedbackText = feedbackTextarea.value.trim();
+                    if (!feedbackText) {
+                        feedbackStatus.textContent = "Please enter feedback before submitting.";
+                        return;
+                    }
+
+                    feedbackSubmit.disabled = true;
+                    feedbackTextarea.disabled = true;
+                    feedbackStatus.textContent = "Saving feedback...";
+
+                    try {
+                        await postRecommendationFeedback(course, feedbackText);
+                        feedbackStatus.textContent = "Thanks! Your feedback was saved.";
+                        feedbackTextarea.value = "";
+                    } catch (error) {
+                        console.error("FEEDBACK ERROR FULL:", error);
+                        feedbackStatus.textContent = error.message || "Could not save feedback right now.";
+                    } finally {
+                        feedbackSubmit.disabled = false;
+                        feedbackTextarea.disabled = false;
+                    }
+                };
+
+                feedbackActions.appendChild(feedbackSubmit);
+
                 content.appendChild(metaGrid);
                 content.appendChild(skillsWrap);
                 content.appendChild(scoreWrap);
                 content.appendChild(footer);
 
+                feedbackCard.appendChild(feedbackTitle);
+                feedbackCard.appendChild(feedbackTextarea);
+                feedbackCard.appendChild(feedbackActions);
+                feedbackCard.appendChild(feedbackStatus);
+
+                content.appendChild(feedbackCard);
+
+                card.appendChild(countBadge);
+                card.appendChild(prevBtn);
+                card.appendChild(nextBtn);
                 card.appendChild(media);
                 card.appendChild(content);
                 rail.appendChild(card);
             });
-
-            if (prevBtn) prevBtn.disabled = recommendationPage === 0;
-            if (nextBtn) nextBtn.disabled = recommendationPage >= totalPages - 1;
         }
 
         function goToPreviousRecommendations() {
@@ -475,9 +876,7 @@
             try {
                 const response = await fetch("/chat", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         message: message,
                         session_id: currentSessionId
@@ -511,9 +910,7 @@
             try {
                 await fetch("/clear_history", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         session_id: currentSessionId
                     })
@@ -546,8 +943,6 @@
             const sendButton = document.getElementById("send-button");
             const userInput = document.getElementById("user-input");
             const clearButton = document.getElementById("clear-button");
-            const prevReco = document.getElementById("reco-prev");
-            const nextReco = document.getElementById("reco-next");
 
             if (sendButton) sendButton.addEventListener("click", () => sendMessage());
 
@@ -565,8 +960,6 @@
             }
 
             if (clearButton) clearButton.addEventListener("click", clearChat);
-            if (prevReco) prevReco.addEventListener("click", goToPreviousRecommendations);
-            if (nextReco) nextReco.addEventListener("click", goToNextRecommendations);
 
             const attachButton = document.getElementById("attach-button");
             const fileInput = document.getElementById("resume-file-input");
@@ -599,11 +992,10 @@
                         if (data.error) {
                             addMessage(`Could not read the file: ${data.error}`, false);
                         } else {
-                            // Show only filename as user message, NOT the full resume text
-                            addMessage(`📎 ${file.name}`, true);
+                            const fileUrl = URL.createObjectURL(file);
+                            addUserFileMessage(file.name, fileUrl);
                             showTyping(true);
 
-                            // Send resume text to backend silently
                             try {
                                 const chatRes = await fetch("/chat", {
                                     method: "POST",
@@ -618,9 +1010,7 @@
 
                                 if (chatData.session_id) currentSessionId = chatData.session_id;
 
-                                if (chatData.response) {
-                                    addMessage(chatData.response, false);
-                                }
+                                if (chatData.response) addMessage(chatData.response, false);
 
                                 const returnedCourses = Array.isArray(chatData.courses) ? chatData.courses : [];
                                 recommendationPage = 0;

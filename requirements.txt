@@ -12,3 +12,5 @@ flask-cors
 python-dotenv
 google-generativeai
 transformers
+pdfplumber
+vaderSentiment
